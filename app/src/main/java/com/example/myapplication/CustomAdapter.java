@@ -33,7 +33,7 @@ class CustomAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.textView = convertView.findViewById(R.id.txtArea1);
-            holder.switch1 = convertView.findViewById(R.id.switch2);
+            holder.switch1 = convertView.findViewById(R.id.repeat);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -44,7 +44,7 @@ class CustomAdapter extends BaseAdapter {
         holder.switch1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((ListView) parent).performItemClick(view, position, R.id.switch2);
+                ((ListView) parent).performItemClick(view, position, R.id.repeat);
             }
         });
 

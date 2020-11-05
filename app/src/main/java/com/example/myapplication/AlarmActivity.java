@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,7 +35,7 @@ public class AlarmActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (view.getId()) {
-                    case R.id.switch2:
+                    case R.id.repeat:
                         Toast.makeText(AlarmActivity.this, countries[position] + "の編集ボタンが押されました", Toast.LENGTH_SHORT).show();
                         break;
                 }

@@ -17,21 +17,25 @@ import java.util.Calendar;
 public class AlarmSettingActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
-    boolean switch1 = false;
+    boolean repeat = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_setting);
-        Switch s = (Switch) findViewById(R.id.switch2);
+
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+
+        Switch s = (Switch) findViewById(R.id.repeat);
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    switch1 = true;
+                    repeat = true;
                 } else {
-                    switch1 = false;
+                    repeat = false;
                 }
             }
         });
@@ -39,15 +43,23 @@ public class AlarmSettingActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-        dbm = new DBManager(this);
-        sqlDB = dbm.getWritableDatabase();
 
         Button buttonInsert = (Button) findViewById(R.id.buttonInsert);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button data = findViewById(R.id.time);
-                if (data != null) dbm.insertAlarm(sqlDB, data,switch1);
+                int repeat;
+
+                //平日繰り返しのスイッチボタンがONであればrepeatを１に
+                if (AlarmSettingActivity.this.repeat =true){
+                    repeat = 1;
+                }else{
+                    repeat = 2;
+                }
+
+                Button time = findViewById(R.id.time);
+                String data = time.getText().toString();
+                if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
                 Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
             }
         });
