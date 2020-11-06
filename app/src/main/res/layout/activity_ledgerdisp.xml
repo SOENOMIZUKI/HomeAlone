@@ -8,7 +8,9 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="252dp"
+        android:layout_height="260dp"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="134dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
