@@ -1,8 +1,21 @@
 <resources>
     <string name="app_name">My Application</string>
+<<<<<<< Updated upstream
     <string name="時刻">時刻</string>
     <string name="平日繰り返し">平日繰り返し</string>
     <string name="戻る">戻る</string>
     <string name="登録">登録</string>
     <string name="時刻選択">時刻選択</string>
+=======
+    <string name="userName">ユーザー名</string>
+    <string name="passwordBox1">パスワード</string>
+    <string name="passwordBox2">パスワード（確認用）</string>
+    <string name="userNameBox">ユーザー名</string>
+    <string name="password1">パスワード</string>
+    <string name="password2">パスワード（確認用）</string>
+    <string name="inputButton">登録</string>
+    <string name="address">住所</string>
+    <string name="addressBox">住所</string>
+    <string name="accountcreate">アカウント作成</string>
+>>>>>>> Stashed changes
 </resources>
