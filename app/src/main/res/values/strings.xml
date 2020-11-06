@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="時刻">時刻</string>
+    <string name="平日繰り返し">平日繰り返し</string>
+    <string name="戻る">戻る</string>
+    <string name="登録">登録</string>
+    <string name="時刻選択">時刻選択</string>
 </resources>
