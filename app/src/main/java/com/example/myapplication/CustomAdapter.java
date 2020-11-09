@@ -9,17 +9,19 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.List;
+
 class CustomAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int resourcedId;
-    private String[] items;
+    private List<Alarm> items;
 
     static class ViewHolder {
         Switch switch1;
         TextView textView;
     }
 
-    CustomAdapter(Context context, int resourcedId, String[] items) {
+    CustomAdapter(Context context, int resourcedId, List<Alarm> items) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.resourcedId = resourcedId;
         this.items = items;
@@ -38,8 +40,8 @@ class CustomAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-        holder.textView.setText(items[position]);
+        Alarm alarm = items.get(position);
+        holder.textView.setText(alarm.getTime());
 
         holder.switch1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +55,7 @@ class CustomAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return items.length;
+        return items.size();
     }
 
     @Override
