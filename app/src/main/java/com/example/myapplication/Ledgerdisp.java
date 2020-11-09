@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.ListView;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Ledgerdisp extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class Ledgerdisp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledgerdisp);
 
+        //プルダウンメニュー
         setupPieChart();
         textView = findViewById(R.id.text_view);
 
@@ -70,9 +73,11 @@ public class Ledgerdisp extends AppCompatActivity {
                 //
             }
         });
+
+        //リスト
     }
 
-
+    //円グラフ
     private void setupPieChart() {
         //PieEntriesのリストを作成する:
         List<PieEntry> pieEntries = new ArrayList<>();
