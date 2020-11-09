@@ -41,6 +41,24 @@ public class Ledgerdisp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledgerdisp);
 
+        //リスト
+        // ListViewに表示するリスト項目をArrayListで準備する
+        ArrayList data = new ArrayList<>();
+        data.add("家賃");
+        data.add("食費");
+        data.add("趣味");
+        data.add("水道代");
+        data.add("光熱費");
+        data.add("通信費");
+        data.add("その他");
+
+        // リスト項目とListViewを対応付けるArrayAdapterを用意する
+        ArrayAdapter Aadapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+
+        // ListViewにArrayAdapterを設定する
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(Aadapter);
+
         //プルダウンメニュー
         setupPieChart();
         textView = findViewById(R.id.text_view);
