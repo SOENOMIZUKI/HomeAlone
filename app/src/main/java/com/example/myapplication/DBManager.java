@@ -13,8 +13,6 @@ import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper {
 
-    private static final String TAG = "****************";
-
     public DBManager(Context context){
         super(context,"Alarm.sqlite3",null,3);
     }
@@ -52,10 +50,6 @@ public class DBManager extends SQLiteOpenHelper {
             alarm.setTime(cursor.getString(cursor.getColumnIndex("data")));
             alarm.setRepeat(cursor.getInt(cursor.getColumnIndex("repeat")));
             alarm.setSwitch1(cursor.getInt(cursor.getColumnIndex("switch")));
-            Log.d(TAG, "selectAlarmList: alarm.setAlarm_id="+alarm.getAlarm_id());
-            Log.d(TAG, "selectAlarmList: alarm.setTime="+alarm.getTime());
-            Log.d(TAG, "selectAlarmList: alarm.setRepeat="+alarm.getRepeat());
-            Log.d(TAG, "selectAlarmList: alarm.setSwitch1="+alarm.getSwitch1());
             AlarmList.add(alarm);
         }
         return AlarmList;
