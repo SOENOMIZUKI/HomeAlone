@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = false;
+
 
 
     @Override
@@ -41,6 +43,12 @@ public class AlarmSettingActivity extends AppCompatActivity {
         });
     }
 
+    //戻るボタン押下時の処理
+    public void onClickSendAlarm(View v) {
+        Intent intent = new Intent(getApplication(),AlarmActivity.class);
+        startActivity(intent);
+    }
+
     protected void onResume() {
         super.onResume();
 
@@ -61,6 +69,8 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 String data = time.getText().toString();
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
                 Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplication(),AlarmActivity.class);
+                startActivity(intent);
             }
         });
     }
