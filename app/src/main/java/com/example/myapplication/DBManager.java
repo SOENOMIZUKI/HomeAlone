@@ -32,13 +32,17 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "INSERT INTO Alarm(data,repeat,switch) VALUES(?,?,1)";
         sqLiteDatabase.execSQL(sql,new Object[]{data,repeat});
     }
-    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, String data){
-        String sql = "DELETE from Alarm where data = ?";
-        sqLiteDatabase.execSQL(sql,new String[]{data});
+    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, Integer alarm_id){
+        String sql = "DELETE from Alarm where alarm_id = ?";
+        sqLiteDatabase.execSQL(sql,new Integer[]{alarm_id});
     }
-    public void changeAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat, Integer switch1){
-        String sql = "UPDATE Alarm set data=?,repeat=?,switch=?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data,repeat,switch1});
+    public void changeAlarm(SQLiteDatabase sqLiteDatabase,String data1, String data2, Integer repeat, Integer switch1){
+        String sql = "UPDATE Alarm set data=?,repeat=?,switch=? WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{data2,repeat,switch1,data1});
+    }
+    public void onoffAlarm(SQLiteDatabase sqLiteDatabase, String data,Integer switch1){
+        String sql = "UPDATE Alarm set switch=? WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{switch1,data});
     }
     public List<Alarm> selectAlarmList(SQLiteDatabase sqLiteDatabase){
         List<Alarm> AlarmList = new ArrayList<>();

@@ -23,10 +23,13 @@ public class AlarmActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     List<Alarm> AlarmList = new ArrayList<>();
+    Alarm alarm = new Alarm();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //アダプターのリストビューの処理
         setContentView(R.layout.activity_alarm);
         dbm = new DBManager(this);
         sqlDB = dbm.getWritableDatabase();
@@ -37,6 +40,7 @@ public class AlarmActivity extends AppCompatActivity {
         CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.list_alarm, AlarmList);
         listView.setAdapter(adapter);
 
+        //アラームの ON OFF が押された時
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,15 +59,16 @@ public class AlarmActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    txtArea1.setOnClickListener(this);
-    txtArea1.setOnLongClickListener(this);
+    //txtArea1.setOnClickListener(this);
+    //txtArea1.setOnLongClickListener(this);
 
-    public boolean onLongClick(View v) {
+    //アラームを長押しした時のアラーム削除部分
+    public boolean onLongClick(AdapterView<?> parent, View view,
+                               int position, long id) {
 
         //押されたlistの情報を取得する
-        ListView list = (ListView)lstvAlarm;
-        Alarm alarm = (Alarm)list.getItemAtPosition(position);
-        String data = alarm.getTime();
+        Cursor items = (Cursor)parent.getItemAtPosition(position);
+        alarm.setAlarm_id(items.getInt(1));
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("本当に削除しますか？");
@@ -78,7 +83,7 @@ public class AlarmActivity extends AppCompatActivity {
                 //Yesボタンが押された時の処理
                 long scheduleId = getIntent().getLongExtra("schedule_id", -1);
                 if (scheduleId != -1) {
-                    dbm.deleteAlarm(sqlDB, data);
+                    dbm.deleteAlarm(sqlDB,alarm.getAlarm_id());
                     Toast.makeText(AlarmActivity.this, "削除しました", Toast.LENGTH_SHORT).show();
                 }
             }
