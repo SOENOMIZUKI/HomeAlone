@@ -43,6 +43,12 @@ public class AlarmSettingActivity extends AppCompatActivity {
         });
     }
 
+    //戻るボタン押下時の処理
+    public void onClickSendAlarm(View v) {
+        Intent intent = new Intent(getApplication(),AlarmActivity.class);
+        startActivity(intent);
+    }
+
     protected void onResume() {
         super.onResume();
 
