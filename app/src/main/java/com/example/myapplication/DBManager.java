@@ -32,9 +32,9 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "INSERT INTO Alarm(data,repeat,switch) VALUES(?,?,1)";
         sqLiteDatabase.execSQL(sql,new Object[]{data,repeat});
     }
-    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, Integer alarm_id){
-        String sql = "DELETE from Alarm where alarm_id = ?";
-        sqLiteDatabase.execSQL(sql,new Integer[]{alarm_id});
+    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, String date){
+        String sql = "DELETE from Alarm where date = ?";
+        sqLiteDatabase.execSQL(sql,new String[]{date});
     }
     public void changeAlarm(SQLiteDatabase sqLiteDatabase,String data1, String data2, Integer repeat, Integer switch1){
         String sql = "UPDATE Alarm set data=?,repeat=?,switch=? WHERE data = ?";
