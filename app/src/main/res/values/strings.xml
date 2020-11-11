@@ -14,4 +14,5 @@
     <string name="inputButton">登録</string>
     <string name="address">住所</string>
     <string name="addressBox">住所</string>
+    <string name="hint">半角英数字8文字以上で入力してください</string>
 </resources>
