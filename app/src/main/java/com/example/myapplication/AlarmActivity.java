@@ -2,31 +2,24 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class AlarmActivity extends AppCompatActivity {
 
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     List<Alarm> AlarmList = new ArrayList<>();
-    Alarm alarm = new Alarm();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +53,7 @@ public class AlarmActivity extends AppCompatActivity {
                         //押されたlistの日付を取得する
                         final String date = ((TextView)view).getText().toString();
 
-                        AlertDialog.Builder alert = new AlertDialog.Builder(getBaseContext());
+                        AlertDialog.Builder alert = new AlertDialog.Builder(AlarmActivity.this);
                         alert.setMessage("本当に削除しますか？");
                         alert.setPositiveButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -71,13 +64,13 @@ public class AlarmActivity extends AppCompatActivity {
                         alert.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //Yesボタンが押された時の処理
-                                long scheduleId = getIntent().getLongExtra("schedule_id", -1);
-                                if (scheduleId != -1) {
                                     dbm.deleteAlarm(sqlDB, date);
                                     Toast.makeText(AlarmActivity.this, "削除しました", Toast.LENGTH_SHORT).show();
-                                }
+                                    Intent intent = new Intent(getApplication(),AlarmActivity.class);
+                                    startActivity(intent);
                             }
                         });
+                        alert.show();
                         break;
                 }
             }
