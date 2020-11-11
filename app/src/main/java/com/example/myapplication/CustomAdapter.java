@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,6 @@ class CustomAdapter extends BaseAdapter {
         holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Log.v("1234567890", "onItemLongClick: ");
                 ((ListView) parent).performItemClick(view, position, R.id.txtArea1);
                 return true;
             }
