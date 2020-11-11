@@ -16,7 +16,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.app.ListActivity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,8 +50,92 @@ public class Ledgerdisp extends AppCompatActivity {
         setContentView(R.layout.activity_ledgerdisp);
 
         //リスト
+//        class MainActivity extends ListActivity {
+//
+//            // itemのアイコンと名前を保持するクラス
+//            class CellData {
+//                String imageComment;
+//                int imageDrawableId;
+//
+//                CellData(String imageComment, int imageDrawableId) {
+//                    this.imageComment = imageComment;
+//                    this.imageDrawableId = imageDrawableId;
+//                }
+//            }
+//
+//            // Android が持っているシステムアイコン
+//            private Integer[] imageDrawables = {
+//                    android.R.drawable.ic_menu_close_clear_cancel,
+//                    android.R.drawable.ic_menu_compass,
+//                    android.R.drawable.ic_menu_crop,
+//                    android.R.drawable.ic_menu_delete,
+//                    android.R.drawable.ic_menu_directions,
+//                    android.R.drawable.ic_menu_gallery,
+//                    android.R.drawable.ic_menu_edit,
+//            };
+//
+//            private String[] imageComments = {
+//                    "家賃", "食費", "趣味", "水道代", "光熱費",
+//                    "通信費", "その他"
+//            };
+//
+//            @Override
+//            protected void onCreate(Bundle savedInstanceState) {
+//                super.onCreate(savedInstanceState);
+//                setContentView(R.layout.activity_main);
+//
+//                List<CellData> list = new ArrayList<>();
+//
+//                for (int i = 0; i < imageDrawables.length ; i++){
+//                    CellData data = new CellData(imageComments[i], imageDrawables[i]);
+//                    list.add(data);
+//                }
+//
+//                setListAdapter(new ListViewAdapter(this, R.layout.list, list));
+//            }
+//
+//            class ViewHolder {
+//                TextView textView;
+//                ImageView imageView;
+//            }
+//
+//            // ArrayAdapterを継承したカスタムのアダプタークラス
+//          class ListViewAdapter extends ArrayAdapter<CellData> {
+//                private LayoutInflater inflater;
+//                private int itemLayout;
+//                CellData data;
+//
+//                ListViewAdapter(Context context, int itemLayout, List<CellData> list) {
+//                    super(context, 0, list);
+//                    this.inflater =
+//                            (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                    this.itemLayout = itemLayout;
+//                }
+//
+//                @Override
+//                public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
+//                    ViewHolder holder;
+//                    if (convertView == null) {
+//                        convertView = inflater.inflate(itemLayout, parent, false);
+//                        holder = new ViewHolder();
+//                        holder.textView = convertView.findViewById(R.id.textView);
+//                        holder.imageView = convertView.findViewById(R.id.imageView);
+//                        convertView.setTag(holder);
+//                    } else {
+//                        holder = (ViewHolder) convertView.getTag();
+//                    }
+//
+//                    data = getItem(position);
+//                    if(data != null){
+//                        holder.textView.setText(data.imageComment);
+//                        holder.imageView.setImageResource(data.imageDrawableId);
+//                    }
+//                    return convertView;
+//                }
+//            }
+//        }
         // ListViewに表示するリスト項目をArrayListで準備する
-        ArrayList data = new ArrayList<>();
+       ArrayList data = new ArrayList<>();
         data.add("家賃");
         data.add("食費");
         data.add("趣味");
@@ -92,7 +184,6 @@ public class Ledgerdisp extends AppCompatActivity {
             }
         });
 
-        //リスト
     }
 
     //円グラフ
