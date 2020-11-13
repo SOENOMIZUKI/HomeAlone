@@ -4,10 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import androidx.annotation.IntegerRes;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +28,9 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "INSERT INTO Alarm(data,repeat,switch) VALUES(?,?,1)";
         sqLiteDatabase.execSQL(sql,new Object[]{data,repeat});
     }
-    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, Integer alarm_id){
-        String sql = "DELETE from Alarm where alarm_id = ?";
-        sqLiteDatabase.execSQL(sql,new Integer[]{alarm_id});
+    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, String data){
+        String sql = "DELETE from Alarm where data = ?";
+        sqLiteDatabase.execSQL(sql,new String[]{data});
     }
     public void changeAlarm(SQLiteDatabase sqLiteDatabase,String data1, String data2, Integer repeat, Integer switch1){
         String sql = "UPDATE Alarm set data=?,repeat=?,switch=? WHERE data = ?";

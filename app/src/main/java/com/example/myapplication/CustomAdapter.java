@@ -50,6 +50,14 @@ class CustomAdapter extends BaseAdapter {
             }
         });
 
+        holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ((ListView) parent).performItemClick(view, position, R.id.txtArea1);
+                return true;
+            }
+        });
+
         return convertView;
     }
 
