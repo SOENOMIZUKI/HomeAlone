@@ -32,13 +32,21 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "DELETE from Alarm where data = ?";
         sqLiteDatabase.execSQL(sql,new String[]{data});
     }
-    public void changeAlarm(SQLiteDatabase sqLiteDatabase,String data1, String data2, Integer repeat, Integer switch1){
-        String sql = "UPDATE Alarm set data=?,repeat=?,switch=? WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data2,repeat,switch1,data1});
+    public void onAlarm(SQLiteDatabase sqLiteDatabase, String data){
+        String sql = "UPDATE Alarm set switch=1 WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{data});
     }
-    public void onoffAlarm(SQLiteDatabase sqLiteDatabase, String data,Integer switch1){
-        String sql = "UPDATE Alarm set switch=? WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{switch1,data});
+    public void offAlarm(SQLiteDatabase sqLiteDatabase, String data){
+        String sql = "UPDATE Alarm set switch=2 WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{data});
+    }
+    public void onRepeat(SQLiteDatabase sqLiteDatabase, String data){
+        String sql = "UPDATE Alarm set repeat=1 WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{data});
+    }
+    public void offRepeat(SQLiteDatabase sqLiteDatabase, String data){
+        String sql = "UPDATE Alarm set repeat=2 WHERE data = ?";
+        sqLiteDatabase.execSQL(sql,new Object[]{data});
     }
     public List<Alarm> selectAlarmList(SQLiteDatabase sqLiteDatabase){
         List<Alarm> AlarmList = new ArrayList<>();
@@ -53,5 +61,16 @@ public class DBManager extends SQLiteOpenHelper {
             AlarmList.add(alarm);
         }
         return AlarmList;
+    }
+    public Alarm selectAlarm(SQLiteDatabase sqLiteDatabase,String data) {
+        String selectSql = "SELECT * FROM Alarm WHERE data = ?";
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,new String[]{data},null);
+        cursor.moveToNext();
+        Alarm alarm = new Alarm();
+        alarm.setAlarm_id(cursor.getInt(cursor.getColumnIndex("alarm_id")));
+        alarm.setTime(cursor.getString(cursor.getColumnIndex("data")));
+        alarm.setRepeat(cursor.getInt(cursor.getColumnIndex("repeat")));
+        alarm.setSwitch1(cursor.getInt(cursor.getColumnIndex("switch")));
+        return alarm;
     }
 }

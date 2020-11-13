@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class AlarmActivity extends AppCompatActivity {
         AlarmList = dbm.selectAlarmList(sqlDB);
 
         ListView listView = (ListView) findViewById(R.id.lstvAlarm);
-        CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.list_alarm, AlarmList);
+        CustomAdapter adapter = new CustomAdapter(getApplicationContext(), R.layout.list_alarm, AlarmList,this);
         listView.setAdapter(adapter);
 
 
@@ -43,34 +44,67 @@ public class AlarmActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (view.getId()) {
 
-                    //押されたボタンがswitchボタンの時の処理
+                    //switchボタンが押された時の処理
                     case R.id.repeat:
                         Toast.makeText(AlarmActivity.this, "スイッチボタンが押されました", Toast.LENGTH_SHORT).show();
+                        Switch sw = (Switch)view;
+
+                        if (String.valueOf(sw.isChecked()) == "true"){
+                            dbm.onAlarm(sqlDB, AlarmList.get(position).getTime());
+                        }else {
+                            dbm.offAlarm(sqlDB, AlarmList.get(position).getTime());
+                        }
+
                         break;
 
-                    //日付が長押しされた時の処理
+                    //日付が押された時の処理
                     case R.id.txtArea1:
-                        //押されたlistの日付を取得する
+                        //押されたlistの時間を取得する
                         final String date = ((TextView)view).getText().toString();
-
-                        AlertDialog.Builder alert = new AlertDialog.Builder(AlarmActivity.this);
-                        alert.setMessage("本当に削除しますか？");
-                        alert.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Noボタンが押された時の処理
-                                Toast.makeText(AlarmActivity.this, "削除をキャンセルしました", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        alert.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Yesボタンが押された時の処理
-                                    dbm.deleteAlarm(sqlDB, date);
-                                    Toast.makeText(AlarmActivity.this, "削除しました", Toast.LENGTH_SHORT).show();
+                        //押された時間のアラーム情報をSQLiteから取得
+                        Alarm alarm = dbm.selectAlarm(sqlDB, date);
+                        //平日繰り返しがONの時の処理
+                        if (alarm.getRepeat()==1){
+                            AlertDialog.Builder alert = new AlertDialog.Builder(AlarmActivity.this);
+                            alert.setMessage("平日繰り返しをOFFにしますか？");
+                            alert.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Noボタンが押された時の処理
+                                    Toast.makeText(AlarmActivity.this, "キャンセルしました", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            alert.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Yesボタンが押された時の処理
+                                    dbm.offRepeat(sqlDB, date);
+                                    Toast.makeText(AlarmActivity.this, "変更しました", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplication(),AlarmActivity.class);
                                     startActivity(intent);
-                            }
-                        });
-                        alert.show();
+                                }
+                            });
+                            alert.show();
+
+                            //平日繰り返しがOFFの時の処理
+                        }else {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(AlarmActivity.this);
+                            alert.setMessage("平日繰り返しをONにしますか？");
+                            alert.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Noボタンが押された時の処理
+                                    Toast.makeText(AlarmActivity.this, "キャンセルしました", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            alert.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Yesボタンが押された時の処理
+                                    dbm.onRepeat(sqlDB, date);
+                                    Toast.makeText(AlarmActivity.this, "変更しました", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplication(),AlarmActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            alert.show();
+                        }
                         break;
                 }
             }

@@ -6,4 +6,7 @@
     <string name="登録">登録</string>
     <string name="時刻選択">時刻選択</string>
     <string name="アラーム追加">アラーム追加</string>
+    <string name="time">time</string>
+    <string name="onoff">onoff</string>
+    <string name="repeat">repeat</string>
 </resources>
