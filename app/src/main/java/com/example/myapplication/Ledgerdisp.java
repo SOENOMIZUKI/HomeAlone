@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.Bundle;
@@ -24,17 +25,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Ledgerdisp extends AppCompatActivity {
+    ListView lv;
+    SimpleAdapter sAdapter;
+    ArrayList<HashMap<String, String>> listData;
 
     // 選択肢
     private String[] spinnerItems = {"2020年10月 ▼", "2020年11月 ▼"};
@@ -44,147 +51,99 @@ public class Ledgerdisp extends AppCompatActivity {
     String monthNames[] = {"家賃", "食費", "趣味", "水道代", "光熱費", "通信費", "その他"};
 
 
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_ledgerdisp);
+
+    private static final String[] names = {
+            "家賃",
+            "食費",
+            "趣味",
+            "水道代",
+            "光熱費",
+            "通信費",
+            "その他",
+    };
+    private static final String[] price = {
+            "30000",
+            "10000",
+            "4000",
+            "2000",
+            "1000",
+            "3000",
+            "10000",
+    };
+
+    // drawableに画像を入れる、R.id.xxx はint型
+    private static final int[] photos = {
+            R.drawable.yatinn,
+            R.drawable.sixyokuhi,
+            R.drawable.sixyumi,
+            R.drawable.suidoudai,
+            R.drawable.kounetuhi,
+            R.drawable.tuusinhi,
+            R.drawable.sonota,
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledgerdisp);
 
-        //リスト
-//        class MainActivity extends ListActivity {
-//
-//            // itemのアイコンと名前を保持するクラス
-//            class CellData {
-//                String imageComment;
-//                int imageDrawableId;
-//
-//                CellData(String imageComment, int imageDrawableId) {
-//                    this.imageComment = imageComment;
-//                    this.imageDrawableId = imageDrawableId;
-//                }
-//            }
-//
-//            // Android が持っているシステムアイコン
-//            private Integer[] imageDrawables = {
-//                    android.R.drawable.ic_menu_close_clear_cancel,
-//                    android.R.drawable.ic_menu_compass,
-//                    android.R.drawable.ic_menu_crop,
-//                    android.R.drawable.ic_menu_delete,
-//                    android.R.drawable.ic_menu_directions,
-//                    android.R.drawable.ic_menu_gallery,
-//                    android.R.drawable.ic_menu_edit,
-//            };
-//
-//            private String[] imageComments = {
-//                    "家賃", "食費", "趣味", "水道代", "光熱費",
-//                    "通信費", "その他"
-//            };
-//
-//            @Override
-//            protected void onCreate(Bundle savedInstanceState) {
-//                super.onCreate(savedInstanceState);
-//                setContentView(R.layout.activity_main);
-//
-//                List<CellData> list = new ArrayList<>();
-//
-//                for (int i = 0; i < imageDrawables.length ; i++){
-//                    CellData data = new CellData(imageComments[i], imageDrawables[i]);
-//                    list.add(data);
-//                }
-//
-//                setListAdapter(new ListViewAdapter(this, R.layout.list, list));
-//            }
-//
-//            class ViewHolder {
-//                TextView textView;
-//                ImageView imageView;
-//            }
-//
-//            // ArrayAdapterを継承したカスタムのアダプタークラス
-//          class ListViewAdapter extends ArrayAdapter<CellData> {
-//                private LayoutInflater inflater;
-//                private int itemLayout;
-//                CellData data;
-//
-//                ListViewAdapter(Context context, int itemLayout, List<CellData> list) {
-//                    super(context, 0, list);
-//                    this.inflater =
-//                            (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                    this.itemLayout = itemLayout;
-//                }
-//
-//                @Override
-//                public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
-//                    ViewHolder holder;
-//                    if (convertView == null) {
-//                        convertView = inflater.inflate(itemLayout, parent, false);
-//                        holder = new ViewHolder();
-//                        holder.textView = convertView.findViewById(R.id.textView);
-//                        holder.imageView = convertView.findViewById(R.id.imageView);
-//                        convertView.setTag(holder);
-//                    } else {
-//                        holder = (ViewHolder) convertView.getTag();
-//                    }
-//
-//                    data = getItem(position);
-//                    if(data != null){
-//                        holder.textView.setText(data.imageComment);
-//                        holder.imageView.setImageResource(data.imageDrawableId);
-//                    }
-//                    return convertView;
-//                }
-//            }
-//        }
-        // ListViewに表示するリスト項目をArrayListで準備する
-       ArrayList data = new ArrayList<>();
-        data.add("家賃");
-        data.add("食費");
-        data.add("趣味");
-        data.add("水道代");
-        data.add("光熱費");
-        data.add("通信費");
-        data.add("その他");
+        // ListViewのインスタンスを生成
+        ListView listView = findViewById(R.id.listView);
 
-        // リスト項目とListViewを対応付けるArrayAdapterを用意する
-        ArrayAdapter Aadapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+        // BaseAdapter を継承したadapterのインスタンスを生成
+        // レイアウトファイル list_items.xml を
+        // activity_main.xml に inflate するためにKadapterに引数として渡す
+        BaseAdapter Kadapter = new kakeiboAdapter(this.getApplicationContext(),
+                R.layout.kakeibo_list, names, price, photos);
 
-        // ListViewにArrayAdapterを設定する
-        ListView listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(Aadapter);
+        // ListViewにadapterをセット
+        listView.setAdapter(Kadapter);
 
-        //プルダウンメニュー
-        setupPieChart();
-        textView = findViewById(R.id.text_view);
 
-        Spinner spinner = findViewById(R.id.spinner);
 
-        // ArrayAdapter
-        ArrayAdapter<String> adapter
-                = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, spinnerItems);
+    //プルダウンメニュー
+    setupPieChart();
+
+    textView =
+
+    findViewById(R.id.text_view);
+
+    Spinner spinner = findViewById(R.id.spinner);
+
+    // ArrayAdapter
+    ArrayAdapter<String> adapter
+            = new ArrayAdapter<>(this,
+            android.R.layout.simple_spinner_item, spinnerItems);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // spinner に adapter をセット
+    // spinner に adapter をセット
         spinner.setAdapter(adapter);
 
-        // リスナーを登録
-        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            //　アイテムが選択された時
-            @Override
-            public void onItemSelected(AdapterView<?> parent,
-                                       View view, int position, long id) {
-                Spinner spinner = (Spinner)parent;
-                String item = (String)spinner.getSelectedItem();
-                textView.setText(item);
-            }
+    // リスナーを登録
+        spinner.setOnItemSelectedListener(new
 
-            //　アイテムが選択されなかった
-            public void onNothingSelected(AdapterView<?> parent) {
-                //
-            }
-        });
+    OnItemSelectedListener() {
+        //　アイテムが選択された時
+        @Override
+        public void onItemSelected (AdapterView < ? > parent,
+                View view,int position, long id){
+            Spinner spinner = (Spinner) parent;
+            String item = (String) spinner.getSelectedItem();
+            textView.setText(item);
+        }
 
-    }
+        //　アイテムが選択されなかった
+        public void onNothingSelected (AdapterView < ? > parent){
+        }
+    });
+}
+
+
 
     //円グラフ
     private void setupPieChart() {
@@ -195,7 +154,16 @@ public class Ledgerdisp extends AppCompatActivity {
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "Rainfall for Vancouver");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(
+                Color.rgb(0,0,0),
+                Color.rgb(255,0,0),
+                Color.rgb(0,255,0),
+                Color.rgb(0,0,255),
+                Color.rgb(0,255,0),
+                Color.rgb(0,255,0),
+                Color.rgb(0,255,0)
+                );
         PieData data = new PieData(dataSet);
 
         //PieChartを取得する:
@@ -204,3 +172,5 @@ public class Ledgerdisp extends AppCompatActivity {
         piechart.invalidate();
     }
 }
+
+
