@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,7 +16,10 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AlarmSettingActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
@@ -57,6 +63,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int repeat;
+                Date datedata = null;
 
                 //平日繰り返しのスイッチボタンがONであればrepeatを１に
                 if (AlarmSettingActivity.this.repeat =true){
@@ -66,11 +73,39 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 }
 
                 Button time = findViewById(R.id.time);
+
+                //アラーム時刻をString型で取得
                 String data = time.getText().toString();
+
+                //アラーム時刻をString型からDate型に変換
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM時dd分");
+                try {
+                    datedata = dateFormat.parse(data);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                //アラーム時刻をDate型からCalendar型に変換
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(datedata);
+
+                //アラームをSQLiteに登録
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
+
+                //アラームセット
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                Context ct = getApplication();
+                PendingIntent pendingintent = PendingIntent.getService(ct, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager Alarmmanager;
+                Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                Alarmmanager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
+
+                //アラーム登録完了のトースト表示
                 Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplication(),AlarmActivity.class);
-                startActivity(intent);
+
+                //アラーム一覧画面へ遷移
+                Intent intent1 = new Intent(getApplication(),AlarmActivity.class);
+                startActivity(intent1);
             }
         });
     }
