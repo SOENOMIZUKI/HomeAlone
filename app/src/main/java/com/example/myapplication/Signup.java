@@ -2,30 +2,38 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Signup extends AppCompatActivity {
+
+    private SQLiteDatabase sqlDB;
+    DBManager dbm;
     boolean repeat = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+
         Button button = (Button)findViewById(R.id.user_insert_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +77,15 @@ public class Signup extends AppCompatActivity {
                     repeat = false;
                 }
                 if(repeat){
-                    
+                     dbm.signUp(sqlDB, user_name, user_email, user_password1, user_address);
+                     Toast.makeText(CalendarActivity.this, "登録しました", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Signup.class, CalendarActivity.class);
+                    startActivity(intent);
                 }
             }
         });
     }
+
     //メールアドレス判定
     public static boolean emailValidator(final String mailAddress) {
 
@@ -87,6 +99,7 @@ public class Signup extends AppCompatActivity {
         return matcher.matches();
 
     }
+
     //半角英数字判定
     public static boolean checkLogic(String target) {
         boolean result = true;
