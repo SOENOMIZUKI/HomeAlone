@@ -5,4 +5,23 @@
     <string name="戻る">戻る</string>
     <string name="登録">登録</string>
     <string name="時刻選択">時刻選択</string>
+    <string name="アラーム追加">アラーム追加</string>
+    <string name="time">time</string>
+    <string name="onoff">onoff</string>
+    <string name="repeat">repeat</string>
+    <string name="customize">customize</string>
+    <string name="show_dialog">show_dialog</string>
+    <string name="undo">custumizetion</string>
+    <string name="userName">ユーザー名</string>
+    <string name="passwordBox1">パスワード</string>
+    <string name="passwordBox2">パスワード（確認用）</string>
+    <string name="userNameBox">ユーザー名</string>
+    <string name="password1">パスワード</string>
+    <string name="password2">パスワード（確認用）</string>
+    <string name="inputButton">登録</string>
+    <string name="address">住所</string>
+    <string name="addressBox">住所</string>
+    <string name="hint">半角英数字8文字以上で入力してください</string>
+    <string name="email">メールアドレス</string>
+    <string name="email_box">メールアドレス</string>
 </resources>
