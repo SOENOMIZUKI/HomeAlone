@@ -71,15 +71,16 @@ public class Signup extends AppCompatActivity {
                     pw2.setError("上のパスワードと一致しません");
                     repeat = false;
                 }
-                if(user_stree_address.equals("")){
+                if(user_street_address.equals("")){
                     address.setError("入力してください");
                     repeat = false;
                 }
                 if(repeat){
                      dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
-                     Toast.makeText(CalendarActivity.this, "登録しました", Toast.LENGTH_SHORT).show();
+                     /*Toast.makeText(CalendarActivity.this, "登録しました", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Signup.class, CalendarActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);*/
+                    
                 }
             }
         });
