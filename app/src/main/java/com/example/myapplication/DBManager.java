@@ -16,11 +16,11 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
 
-        sqLiteDatabase.execSQL("CREATE TABLE " +
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
-
         //アバターの外部キーを書いてない
-        sqLiteDatabase.execSQL("CREATE TABLE  User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +  
+                " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
