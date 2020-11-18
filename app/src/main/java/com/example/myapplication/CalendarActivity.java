@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-/*
+
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
-*/
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    /*private boolean undo = false;
+    private boolean undo = false;
     private CaldroidSampleCustomFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
 
@@ -46,12 +46,12 @@ public class CalendarActivity extends AppCompatActivity {
             caldroidFragment.setTextColorForDate(R.color.white, greenDate);
         }
     }
-*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-/*
+
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
@@ -260,7 +260,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     /**
      * Save current states of the Caldroid here
-     *//*
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // TODO Auto-generated method stub
@@ -274,5 +274,5 @@ public class CalendarActivity extends AppCompatActivity {
             dialogCaldroidFragment.saveStatesToKey(outState,
                     "DIALOG_CALDROID_SAVED_STATE");
         }
-    */}
+    }
 }
