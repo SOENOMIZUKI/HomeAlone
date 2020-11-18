@@ -10,12 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".WeatherActivity" >
-        </activity>
-        <activity android:name=".CalendarActivity" >
-        </activity>
-        <activity android:name=".AlarmActivity" >
-        android:theme="@style/AppTheme">
         <activity
             android:name=".Signup"
             android:label="アカウント作成">
@@ -27,6 +21,12 @@
         </activity>
         <activity android:name=".MainActivity">
 
+        </activity>
+        <activity android:name=".WeatherActivity" >
+        </activity>
+        <activity android:name=".CalendarActivity" >
+        </activity>
+        <activity android:name=".AlarmActivity" >
         </activity>
         <activity android:name=".AlarmSettingActivity" />
     </application>
