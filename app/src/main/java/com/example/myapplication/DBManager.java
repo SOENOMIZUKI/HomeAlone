@@ -18,6 +18,8 @@ public class DBManager extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("CREATE TABLE " +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
+
+        //アバターの外部キーを書いてない
         sqLiteDatabase.execSQL("CREATE TABLE  User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
     }
     @Override

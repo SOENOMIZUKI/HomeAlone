@@ -77,6 +77,8 @@ public class Signup extends AppCompatActivity {
                 }
                 if(repeat){
                      dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
+
+                     //機能するかわからない
                      /*Toast.makeText(CalendarActivity.this, "登録しました", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Signup.class, CalendarActivity.class);
                     startActivity(intent);*/
