@@ -51,10 +51,11 @@ public class kakeiboAdapter extends BaseAdapter {
             holder.text = convertView.findViewById(R.id.text_view);
             holder.price = convertView.findViewById(R.id.price);
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+//        convertView.setMinimumHeight(20);
         holder.img.setImageBitmap(photolist[position]);
 
 

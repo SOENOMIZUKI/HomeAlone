@@ -2,12 +2,14 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -26,6 +28,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -51,11 +54,7 @@ public class Ledgerdisp extends AppCompatActivity {
     String monthNames[] = {"家賃", "食費", "趣味", "水道代", "光熱費", "通信費", "その他"};
 
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_ledgerdisp);
-
+    //リスト
     private static final String[] names = {
             "家賃",
             "食費",
@@ -91,6 +90,14 @@ public class Ledgerdisp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledgerdisp);
 
+//        listData = new ArrayList<HashMap<String, String>>();
+//        //リストのカテゴリ
+//        HashMap<String,String> data1 = new HashMap<String,String>();
+//        data1.put("色", "色");
+//        data1.put("カテゴリ", "カテゴリ");
+//        data1.put("金額", "金額");
+//        listData.add(data1);
+
         // ListViewのインスタンスを生成
         ListView listView = findViewById(R.id.listView);
 
@@ -104,44 +111,65 @@ public class Ledgerdisp extends AppCompatActivity {
         listView.setAdapter(Kadapter);
 
 
+        //プルダウンメニュー
+        setupPieChart();
 
-    //プルダウンメニュー
-    setupPieChart();
+        textView =
 
-    textView =
+                findViewById(R.id.text_view);
 
-    findViewById(R.id.text_view);
+        Spinner spinner = findViewById(R.id.spinner);
 
-    Spinner spinner = findViewById(R.id.spinner);
-
-    // ArrayAdapter
-    ArrayAdapter<String> adapter
-            = new ArrayAdapter<>(this,
-            android.R.layout.simple_spinner_item, spinnerItems);
+        // ArrayAdapter
+        ArrayAdapter<String> adapter
+                = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, spinnerItems);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-    // spinner に adapter をセット
+        // spinner に adapter をセット
         spinner.setAdapter(adapter);
 
-    // リスナーを登録
+        // リスナーを登録
         spinner.setOnItemSelectedListener(new
 
-    OnItemSelectedListener() {
-        //　アイテムが選択された時
-        @Override
-        public void onItemSelected (AdapterView < ? > parent,
-                View view,int position, long id){
-            Spinner spinner = (Spinner) parent;
-            String item = (String) spinner.getSelectedItem();
-            textView.setText(item);
-        }
+          OnItemSelectedListener() {
+              //　アイテムが選択された時
+              @Override
+              public void onItemSelected(AdapterView<?> parent,
+                                         View view, int position, long id) {
+                  Spinner spinner = (Spinner) parent;
+                  String item = (String) spinner.getSelectedItem();
+                  textView.setText(item);
+              }
 
-        //　アイテムが選択されなかった
-        public void onNothingSelected (AdapterView < ? > parent){
-        }
-    });
-}
+              //　アイテムが選択されなかった
+              public void onNothingSelected(AdapterView<?> parent) {
+              }
+          });
+        //家計簿変更画面遷移
+        Button changeButton = findViewById(R.id.changebottom);
+        changeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),Ledgerchange.class);
+                startActivity(intent);
+            }
+        });
+        //家計簿追加画面遷移
+        Button inputButton = findViewById(R.id.inputbottom);
+        inputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),Ledgerinput.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+    }
 
 
 
@@ -156,21 +184,26 @@ public class Ledgerdisp extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(pieEntries, "Rainfall for Vancouver");
         //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setColors(
-                Color.rgb(0,0,0),
-                Color.rgb(255,0,0),
-                Color.rgb(0,255,0),
-                Color.rgb(0,0,255),
-                Color.rgb(0,255,0),
-                Color.rgb(0,255,0),
-                Color.rgb(0,255,0)
+                Color.rgb(24,127,196),
+                Color.rgb(0,169,95),
+                Color.rgb(84,195,241),
+                Color.rgb(210,131,0),
+                Color.rgb(243,152,0),
+                Color.rgb(238,135,180),
+                Color.rgb(153,153,153)
                 );
         PieData data = new PieData(dataSet);
 
         //PieChartを取得する:
         PieChart piechart = (PieChart) findViewById(R.id.chart);
+        Description description = new Description();
+        description.setText("");
+        piechart.setDescription(description);
+        piechart.getLegend().setEnabled(false);
         piechart.setData(data);
         piechart.invalidate();
     }
 }
+
 
 
