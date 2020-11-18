@@ -11,16 +11,14 @@ public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
         super(context,"Alarm.sqlite3",null,3);
-        //super(context,"User.sqlite3",null,3);
     }
-
+    // テーブル作成
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
 
         sqLiteDatabase.execSQL("CREATE TABLE " +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
-        // テーブル作成 avatar_id INTEGER
-        sqLiteDatabase.execSQL("CREATE TABLE  User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,streetaddress TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE  User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
@@ -44,11 +42,11 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new Integer[]{switch1});
     }
     //ユーザー登録
-    public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String streetaddress){
-        String sql = "INSERT INTO User(user_name,mailaddress,password,streetaddress) VALUES(?,?,?,?)";
+    public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
+        String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
         sqLiteDatabase.execSQL(sql,new String[]{user_name});
         sqLiteDatabase.execSQL(sql,new String[]{mailaddress});
         sqLiteDatabase.execSQL(sql,new String[]{password});
-        sqLiteDatabase.execSQL(sql,new String[]{streetaddress});
+        sqLiteDatabase.execSQL(sql,new String[]{street_address});
     }
 }

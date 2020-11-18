@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,46 +37,46 @@ public class Signup extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = (EditText) findViewById(R.id.name_box) ;
-                EditText email = (EditText) findViewById(R.id.editTextTextEmailAddress);
-                EditText password1 = (EditText) findViewById(R.id.editTextTextPassword);
-                EditText password2 = (EditText) findViewById(R.id.editTextTextPassword2);
-                EditText address = (EditText) findViewById(R.id.address_box) ;
+                EditText name = (EditText) findViewById(R.id.user_name) ;
+                EditText mail = (EditText) findViewById(R.id.mailaddress);
+                EditText pw1 = (EditText) findViewById(R.id.password1);
+                EditText pw2 = (EditText) findViewById(R.id.password2);
+                EditText address = (EditText) findViewById(R.id.street_address) ;
                 String user_name = name.getText().toString();
-                String user_email = email.getText().toString();
-                String user_password1 = password1.getText().toString();
-                String user_password2 = password2.getText().toString();
-                String user_address = address.getText().toString();
+                String user_mailaddress = mail.getText().toString();
+                String user_password1 = pw1.getText().toString();
+                String user_password2 = pw2.getText().toString();
+                String user_street_address = address.getText().toString();
                 if(user_name.equals("")){
                     name.setError("入力してください");
                     repeat = false;
                 }
-                if(user_email.equals("")){
-                    email.setError("入力してください");
+                if(user_mailaddress.equals("")){
+                    mail.setError("入力してください");
                     repeat = false;
                 }
-                if(!emailValidator(user_email)){
-                    email.setError("正しいメールアドレスではありません");
+                if(!emailValidator(user_mailaddress)){
+                    mail.setError("正しいメールアドレスではありません");
                     repeat = false;
                 }
                 if(!checkLogic(user_password1)){
-                    password1.setError("半角英数字で入力してください");
+                    pw1.setError("半角英数字で入力してください");
                     repeat = false;
                 }
                 if(user_password1.length() < 8){
-                    password1.setError("8文字以上で入力してください");
+                    pw1.setError("8文字以上で入力してください");
                     repeat = false;
                 }
                 if(!user_password2.equals(user_password1)){
-                    password2.setError("上のパスワードと一致しません");
+                    pw2.setError("上のパスワードと一致しません");
                     repeat = false;
                 }
-                if(user_address.equals("")){
+                if(user_stree_address.equals("")){
                     address.setError("入力してください");
                     repeat = false;
                 }
                 if(repeat){
-                     dbm.signUp(sqlDB, user_name, user_email, user_password1, user_address);
+                     dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
                      Toast.makeText(CalendarActivity.this, "登録しました", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Signup.class, CalendarActivity.class);
                     startActivity(intent);
