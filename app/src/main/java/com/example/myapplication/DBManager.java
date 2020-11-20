@@ -19,12 +19,13 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
 
-//        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
-//                " Moneybook(month INTEGER PRIMARY KEY AUTOINCREMENT,rent INTEGER,food_expenses INTEGER,water_costs INTEGER,utility_costs INTEGER,communication_costs INTEGER,hobby INTEGER,other INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
+                " Moneybook(month INTEGER PRIMARY KEY AUTOINCREMENT,rent INTEGER,food_expenses INTEGER,water_costs INTEGER,utility_costs INTEGER,communication_costs INTEGER,hobby INTEGER,other INTEGER)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
+        sqLiteDatabase.execSQL("DROP TABLE Moneybook");
         onCreate(sqLiteDatabase);
     }
     public void insertAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat){
@@ -42,28 +43,13 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new Integer[]{repeat});
         sqLiteDatabase.execSQL(sql,new Integer[]{switch1});
     }
-//    public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
-//        sqLiteDatabase.execSQL("DROP TABLE Moneybook");
-//        onCreate(sqLiteDatabase);
-//    }
-//    public void insertMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses,Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
-//        String sql = "INSERT INTO Moneybook(rent,food_expenses,water_costs,communication_costs,hobby,other) VALUES(?,?,?,?,?,?,?)";
-//        sqLiteDatabase.execSQL(sql,new Integer[]{rent});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{food_expenses});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{water_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{utility_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{communication_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{hobby});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{other});
-//    }
-//    public void changeMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses,Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
-//        String sql = "UPDATE Moneybook set rent=?,food_expenses=?,water_costs=?,communication_costs=?,hobby=?,other=?";
-//        sqLiteDatabase.execSQL(sql,new Integer[]{rent});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{food_expenses});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{water_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{utility_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{communication_costs});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{hobby});
-//        sqLiteDatabase.execSQL(sql,new Integer[]{other});
-//    }
+    public void insertMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses,Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
+        String sql = "UPDATE Moneybook(rent,food_expenses,water_costs,communication_costs,hobby,other) VALUES(?,?,?,?,?,?,?)";
+        sqLiteDatabase.execSQL(sql,new Integer[]{rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other});
+    }
+    public void changeMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses,Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
+        String sql = "UPDATE Moneybook set rent=?,food_expenses=?,water_costs=?,communication_costs=?,hobby=?,other=?";
+        sqLiteDatabase.execSQL(sql,new Integer[]{rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other});
+    }
+
 }

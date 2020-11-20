@@ -90,14 +90,6 @@ public class Ledgerdisp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledgerdisp);
 
-//        listData = new ArrayList<HashMap<String, String>>();
-//        //リストのカテゴリ
-//        HashMap<String,String> data1 = new HashMap<String,String>();
-//        data1.put("色", "色");
-//        data1.put("カテゴリ", "カテゴリ");
-//        data1.put("金額", "金額");
-//        listData.add(data1);
-
         // ListViewのインスタンスを生成
         ListView listView = findViewById(R.id.listView);
 

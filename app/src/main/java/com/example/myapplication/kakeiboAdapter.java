@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ public class kakeiboAdapter extends BaseAdapter {
     private String[] namelist;
     private String[] pricelist;
     private Bitmap[] photolist;
+    private int selectPos;
 
     static class ViewHolder {
         TextView text;
@@ -37,12 +39,14 @@ public class kakeiboAdapter extends BaseAdapter {
         for( int i = 0; i< photos.length; i++){
             photolist[i] = BitmapFactory.decodeResource(context.getResources(), photos[i]);
         }
+        selectPos=-1;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
+
 
         if (convertView == null) {
             convertView = inflater.inflate(layoutID, null);

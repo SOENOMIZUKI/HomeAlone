@@ -50,8 +50,8 @@ public class Ledgerinput extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
 
         // BaseAdapter を継承したadapterのインスタンスを生成
-        // レイアウトファイル list_items.xml を
-        // activity_main.xml に inflate するためにKadapterに引数として渡す
+        // レイアウトファイル kakeibo_list.xml を
+        // activity_legerinput.xml に inflate するためにKadapterに引数として渡す
         BaseAdapter Kadapter = new kakeiboAdapter(this.getApplicationContext(),
                 R.layout.kakeibo_list, names, price, photos);
 

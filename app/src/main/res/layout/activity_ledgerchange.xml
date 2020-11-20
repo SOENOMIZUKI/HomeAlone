@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@android:color/transparent"
+            android:listSelector="@drawable/listitem_selector"
             android:dividerHeight="4dp" />
 
     </RelativeLayout>
@@ -78,6 +79,5 @@
         app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.951"
-        android:onClick="test" />
+        app:layout_constraintVertical_bias="0.951" />
 </androidx.constraintlayout.widget.ConstraintLayout>

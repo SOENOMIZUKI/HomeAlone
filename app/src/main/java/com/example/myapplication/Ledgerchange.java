@@ -72,13 +72,13 @@ public class Ledgerchange extends AppCompatActivity {
 //
   //              }
 
-                Log.i("listView","parent.getChildCount():"+parent.getChildCount());
+                Log.i("listView","parent.getFirstVisiblePosition():"+parent.getFirstVisiblePosition());
                 for( int i = 0; i < 5;i++ ){
                     Log.i("listView","i:"+i);
                     //parent.getItemAtPosition(i).setBackgroundColor(0);
-                    parent.getChildAt(i).setBackgroundColor(0);
+                    //((View)parent.getItemAtPosition(i)).setBackgroundColor(0);
                 }
-                view.setBackgroundColor(getResources().getColor(R.color.BLACK));
+                //view.setBackgroundColor(getResources().getColor(R.color.BLACK));
                 //lastPosiotion = position;
                 //selectedID = id;
             }
