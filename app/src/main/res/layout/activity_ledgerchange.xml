@@ -10,7 +10,6 @@
         android:id="@+id/relativeLayout"
         android:layout_width="411dp"
         android:layout_height="335dp"
-        android:background="@color/kakeibo_list"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/inputbottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +33,7 @@
         android:id="@+id/back_bottom"
         android:layout_width="96dp"
         android:layout_height="36dp"
-        android:text="Button"
+        android:text="戻る"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.161"
@@ -60,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number|text"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,5 +78,6 @@
         app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.951"
+        android:onClick="test" />
 </androidx.constraintlayout.widget.ConstraintLayout>
