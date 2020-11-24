@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -26,8 +25,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = false;
-    AlarmManager Alarmmanager;
-    PendingIntent pendingintent;
 
 
 
@@ -88,47 +85,20 @@ public class AlarmSettingActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                // 検索文字より前の文字列取り出し
-                // 時間の部分を取得
-                int index1 = data.indexOf("時");
-                String stringhour = (data.substring(0,index1));
-                int hour = Integer.parseInt(stringhour);
-
-                // 指定した文字より後ろの文字取り出し
-                // 分の部分を取得
-                int index2 = data.indexOf("時");
-                String stringminute1 = (data.substring(index2+1));
-                String stringminute2 = "";
-                if (stringminute1.contains("分"))
-                {
-                    stringminute2 = (stringminute1.substring(0,2));
-                }
-                int minute = Integer.parseInt(stringminute2);
-
                 //アラーム時刻をDate型からCalendar型に変換
                 Calendar calendar = Calendar.getInstance();
-                /*
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                if(calendar.getTimeInMillis() < System.currentTimeMillis()){
-                    calendar.add(Calendar.DAY_OF_YEAR, 1);
-                }
-                calendar.set(Calendar.HOUR_OF_DAY, hour);
-                calendar.set(Calendar.MINUTE, minute);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-
-                Log.e("1111111111111111", calendar.toString());
+                calendar.setTime(datedata);
 
                 //アラームをSQLiteに登録
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
-                 */
+
                 //アラームセット
-                calendar.add(Calendar.SECOND,10);
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                 Context ct = getApplication();
-                pendingintent = PendingIntent.getService(ct, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent pendingintent = PendingIntent.getService(ct, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager Alarmmanager;
                 Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
+                Alarmmanager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
 
                 //アラーム登録完了のトースト表示
                 Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
