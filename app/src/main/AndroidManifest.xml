@@ -12,44 +12,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-<<<<<<< HEAD
+
         <activity
             android:name=".Signup"
             android:label="アカウント作成">
-<<<<<<< Updated upstream
-=======
+        </activity>
+
         <activity android:name=".WeatherActivity" >
->>>>>>> weather
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
->>>>>>> Stashed changes
         </activity>
-<<<<<<< HEAD
+
         <activity android:name=".MainActivity">
+        </activity>
 
-        </activity>
-        <activity android:name=".WeatherActivity" >
-        </activity>
         <activity android:name=".CalendarActivity" >
-=======
-        <activity android:name=".CalendarActivity" >
+        </activity>
 
->>>>>>> weather
-        </activity>
         <activity android:name=".AlarmActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".AlarmSettingActivity" />
+
+        <activity android:name=".AlarmSettingActivity" >
+        </activity>
+
         <receiver android:name=".AlarmReceiver"
             android:process=":remote" />
+
     </application>
 
 </manifest>
