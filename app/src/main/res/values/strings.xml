@@ -24,7 +24,10 @@
     <string name="hint">半角英数字8文字以上で入力してください</string>
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
+<<<<<<< HEAD
     <string name="kensaku">search</string>
+=======
+>>>>>>> alarm
     <string name="menu_item1">家計簿</string>
     <string name="menu_item2">アラーム</string>
     <string name="menu_item3">周辺マップ</string>
