@@ -3,9 +3,11 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -88,20 +90,24 @@ public class AlarmSettingActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                // 検索文字より前の文字列取り出し
+                // 検索文字（時）より前の文字列取り出し
                 // 時間の部分を取得
                 int index1 = data.indexOf("時");
                 String stringhour = (data.substring(0,index1));
                 int hour = Integer.parseInt(stringhour);
 
-                // 指定した文字より後ろの文字取り出し
+                // 指定した文字（時）より後ろの文字取り出し
                 // 分の部分を取得
                 int index2 = data.indexOf("時");
                 String stringminute1 = (data.substring(index2+1));
+                //　例:16分の場合,分を取り除き16だけにしてstringminute2に保存する処理
                 String stringminute2 = "";
-                if (stringminute1.contains("分"))
-                {
+                if (stringminute1.contains("分")) {
                     stringminute2 = (stringminute1.substring(0,2));
+                }
+                //　例:6分など1桁の場合,分が取り除けていないので取り除く処理
+                if (stringminute2.length()==2 && stringminute2.contains("分")){
+                    stringminute2 = (stringminute1.substring(0,1));
                 }
                 int minute = Integer.parseInt(stringminute2);
 
@@ -116,16 +122,15 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
 
-                Log.e("1111111111111111", calendar.toString());
-
                 //アラームをSQLiteに登録
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
 
                 //アラームセット
                 calendar.add(Calendar.SECOND,10);
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                intent.setAction(Intent.ACTION_SEND);
                 Context ct = getApplication();
-                pendingintent = PendingIntent.getService(ct, 0, intent, PendingIntent.FLAG_ONE_SHOT);
                 Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
 
