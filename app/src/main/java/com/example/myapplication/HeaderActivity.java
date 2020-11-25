@@ -36,23 +36,21 @@ public class HeaderActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item3:
-                Intent intent3 = new Intent(getApplication(), MapActivity.class);
+                Intent intent3 = new Intent(getApplication(), Signup.class);
                 startActivity(intent3);
 
                 return true;
             case R.id.item4:
-                Intent intent4 = new Intent(getApplication(), AvatarActivity.class);
+                Intent intent4 = new Intent(getApplication(), AlarmSettingActivity.class);
                 startActivity(intent4);
 
                 return true;
             case R.id.item5:
-                Intent intent5 = new Intent(getApplication(), CalenderActivity.class);
+                Intent intent5 = new Intent(getApplication(), CalendarActivity.class);
                 startActivity(intent5);
 
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-}
-
 }
