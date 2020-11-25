@@ -6,4 +6,10 @@
     <string name="登録">登録</string>
     <string name="時刻選択">時刻選択</string>
     <string name="アラーム追加">アラーム追加</string>
+    <string name="menu_item1">家計簿</string>
+    <string name="menu_item2">アラーム</string>
+    <string name="menu_item3">周辺マップ</string>
+    <string name="menu_item4">アバター</string>
+    <string name="menu_item5">カレンダー</string>
+
 </resources>
