@@ -24,4 +24,5 @@
     <string name="hint">半角英数字8文字以上で入力してください</string>
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
+    <string name="kensaku">search</string>
 </resources>

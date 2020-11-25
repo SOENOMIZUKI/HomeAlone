@@ -13,6 +13,8 @@
         <activity
             android:name=".Signup"
             android:label="アカウント作成">
+
+        <activity android:name=".WeatherActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +30,21 @@
         </activity>
         <activity android:name=".AlarmActivity" >
         </activity>
+
         <activity android:name=".AlarmSettingActivity" />
+
+        <receiver android:name=".AlarmReceiver"
+            android:process=":remote" />
+        <activity android:name=".AlarmSettingActivity" >
+        </activity>
+        <activity android:name=".MapActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
