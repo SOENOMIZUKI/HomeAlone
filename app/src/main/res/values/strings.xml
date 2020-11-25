@@ -25,4 +25,9 @@
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
     <string name="kensaku">search</string>
+    <string name="menu_item1">家計簿</string>
+    <string name="menu_item2">アラーム</string>
+    <string name="menu_item3">周辺マップ</string>
+    <string name="menu_item4">アバター</string>
+    <string name="menu_item5">カレンダー</string>
 </resources>
