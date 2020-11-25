@@ -13,28 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".alarm_wakeupActivity">
-        </activity>
-
-
-        <activity android:name=".Signup" android:label="アカウント作成">
-        </activity>
-
-
-        <activity android:name=".WeatherActivity">
-        </activity>
-
-
-        <activity android:name=".MainActivity">
-        </activity>
-
-
-        <activity android:name=".CalendarActivity">
-        </activity>
-
-
+        <activity android:name=".HeaderActivity"></activity>
         <activity android:name=".AlarmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,14 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity android:name=".AlarmSettingActivity">
         </activity>
-
-
-        <receiver android:name=".AlarmReceiver" android:process=":remote" />
-
     </application>
 
 </manifest>
