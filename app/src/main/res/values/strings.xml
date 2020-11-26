@@ -5,9 +5,7 @@
     <string name="戻る">戻る</string>
     <string name="登録">登録</string>
     <string name="時刻選択">時刻選択</string>
-<<<<<<< HEAD
     <string name="description">pictures</string>
-=======
     <string name="アラーム追加">アラーム追加</string>
     <string name="time">time</string>
     <string name="onoff">onoff</string>
@@ -27,5 +25,4 @@
     <string name="hint">半角英数字8文字以上で入力してください</string>
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
->>>>>>> main
 </resources>

@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +14,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import static android.nfc.NfcAdapter.EXTRA_DATA;
+
 public class Ledgerchange extends AppCompatActivity {
 
+
+    private SQLiteDatabase sqlDB;
+    DBManager dbm;
     private long selectedID = -1;
     private int lastPosiotion = -1;
-
+    private int count = 0;
+    private String month ;
     private static final String[] names = {
             "家賃",
             "食費",
@@ -50,6 +58,8 @@ public class Ledgerchange extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        month = intent.getStringExtra("Month");
         setContentView(R.layout.activity_ledgerchange);
 
         ListView listView = findViewById(R.id.listView);
@@ -63,18 +73,19 @@ public class Ledgerchange extends AppCompatActivity {
         // ListViewにadapterをセット
         listView.setAdapter(Kadapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //if(selectedID != -1){
-                 //   Log.i("listView","lastposition:"+lastPosiotion+"parent.SIZE:"+parent.getCount());
-                 //   parent.getChildAt(lastPosiotion).setBackgroundColor(0);
+                //   Log.i("listView","lastposition:"+lastPosiotion+"parent.SIZE:"+parent.getCount());
+                //   parent.getChildAt(lastPosiotion).setBackgroundColor(0);
 //
-  //              }
+                //              }
+                count = position;
 
-                Log.i("listView","parent.getFirstVisiblePosition():"+parent.getFirstVisiblePosition());
-                for( int i = 0; i < 5;i++ ){
-                    Log.i("listView","i:"+i);
+                Log.i("listView", "parent.getFirstVisiblePosition():" + parent.getFirstVisiblePosition());
+                for (int i = 0; i < 5; i++) {
+                    Log.i("listView", "i:" + i);
                     //parent.getItemAtPosition(i).setBackgroundColor(0);
                     //((View)parent.getItemAtPosition(i)).setBackgroundColor(0);
                 }
@@ -84,6 +95,7 @@ public class Ledgerchange extends AppCompatActivity {
             }
         });
 
+
         //エラーチェック
         //入力チェック
         final EditText editText = findViewById(R.id.editTextTextPersonName3);
@@ -91,10 +103,10 @@ public class Ledgerchange extends AppCompatActivity {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean flag) {
-                if(!flag){
+                if (!flag) {
                     String str = editText.getText().toString().trim();
-                    if(str.matches("")){
-                        Toast toast = Toast.makeText(Ledgerchange.this,"入力されていません",Toast.LENGTH_LONG);
+                    if (str.matches("")) {
+                        Toast toast = Toast.makeText(Ledgerchange.this, "入力されていません", Toast.LENGTH_LONG);
                         toast.show();
                     }
                 }
@@ -118,5 +130,31 @@ public class Ledgerchange extends AppCompatActivity {
                 finish();
             }
         });
+        EditText money = (EditText) findViewById(R.id.editTextTextPersonName3);
+        String updatemoney = money.getText().toString();
+        int price = Integer.parseInt(updatemoney);
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+//        if (count == 0) {
+//            dbm.onMoneybookRent(sqlDB, month, price);
+//        }
+//        else if(count == 1) {
+//            dbm.onMoneybookFood(sqlDB, month, price);
+//        }
+//        else if(count == 2) {
+//            dbm.onMoneybookWater(sqlDB, month, price);
+//        }
+//        else if(count == 3) {
+//            dbm.onMoneybookUtility(sqlDB, month, price);
+//        }
+//        else if(count == 4) {
+//            dbm.onMoneybookCommunication(sqlDB, month, price);
+//        }
+//        else if(count == 5) {
+//            dbm.onMoneybookHobby(sqlDB, month, price);
+//        }
+//        else if(count == 6) {
+//            dbm.onMoneybookOther(sqlDB, month, price);
+//        }
     }
 }
