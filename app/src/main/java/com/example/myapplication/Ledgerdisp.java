@@ -85,13 +85,13 @@ public class Ledgerdisp extends AppCompatActivity {
             "その他",
     };
     private static final String[] price = {
-            "30000",
-            "10000",
-            "4000",
-            "2000",
-            "1000",
-            "3000",
-            "10000",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
     };
 
     // drawableに画像を入れる、R.id.xxx はint型
@@ -119,9 +119,7 @@ public class Ledgerdisp extends AppCompatActivity {
 
 
 
-                //押された時間のアラーム情報をSQLiteから取得
-                Kakeibo kakeibo = dbm.selectMoneybook(sqlDB, date.getMonth());
-                //平日繰り返しがONの時の処理
+            Kakeibo kakeibo = dbm.selectMoneybook(sqlDB, date.getMonth());
             price[0] = kakeibo.getRent().toString();
             price[1] = kakeibo.getFood_expenses().toString();
             price[2] = kakeibo.getWater_costs().toString();
@@ -203,11 +201,17 @@ public class Ledgerdisp extends AppCompatActivity {
             changeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//                int idx = spinner.getSelectedItemPosition();
-//                String month = (String)spinner.getSelectedItem();
-                    Intent intent = new Intent(getApplication(),Ledgerchange.class);
-//                intent.putExtra("Month",month);
+                    Intent intent = new Intent(getApplication(), Ledgerchange.class);
+                    try {
+                        Spinner spinner = findViewById(R.id.spinner);
+                        String item = (String) spinner.getSelectedItem();
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
+                        Date date = sdFormat.parse(item);
+                        intent.putExtra("Month", date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     startActivity(intent);
                 }
             });
@@ -216,7 +220,17 @@ public class Ledgerdisp extends AppCompatActivity {
             inputButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplication(),Ledgerinput.class);
+                    Intent intent = new Intent(getApplication(), Ledgerinput.class);
+                    try {
+                        Spinner spinner = findViewById(R.id.spinner);
+                        String item = (String) spinner.getSelectedItem();
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
+                        Date date = sdFormat.parse(item);
+                        intent.putExtra("Month", date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     startActivity(intent);
                 }
             });

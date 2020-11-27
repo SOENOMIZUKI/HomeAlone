@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,3);
+        super(context,"Alarm.sqlite3",null,4);
     }
     // テーブル作成
     @Override
@@ -23,6 +25,30 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Moneybook(month INTEGER PRIMARY KEY AUTOINCREMENT,rent INTEGER,food_expenses INTEGER,water_costs INTEGER,utility_costs INTEGER,communication_costs INTEGER,hobby INTEGER,other INTEGER)");
 
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(0,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(1,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(2,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(3,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(4,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(5,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(6,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(7,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(8,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(9,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(10,0,0,0,0,0,0,0)");
+        sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
+                "values(11,0,0,0,0,0,0,0)");
         //アバターの外部キーを書いてない
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +  
                 " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
@@ -94,8 +120,10 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new String[]{password});
         sqLiteDatabase.execSQL(sql,new String[]{street_address});
     }
+    //家計簿
     public void onMoneybookRent(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
         String sql = "UPDATE Moneybook set rent = ?   WHERE month = ?";
+        Log.i("bbbbbbbbb","month="+month+" price="+  price);
         sqLiteDatabase.execSQL(sql, new Object[]{price,month});
     }
     public void onMoneybookFood(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
@@ -137,5 +165,15 @@ public class DBManager extends SQLiteOpenHelper {
             kakeibo.setOther(cursor.getInt(cursor.getColumnIndex("other")));
         }
             return kakeibo;
+    }
+    public void insertMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses, Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
+        String sql = "INSERT INTO Price(rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) VALUES(?,?,?,?,?,?,?)";
+        sqLiteDatabase.execSQL(sql,new Integer[]{rent});
+        sqLiteDatabase.execSQL(sql,new Integer[]{food_expenses});
+        sqLiteDatabase.execSQL(sql,new Integer[]{water_costs});
+        sqLiteDatabase.execSQL(sql,new Integer[]{utility_costs});
+        sqLiteDatabase.execSQL(sql,new Integer[]{communication_costs});
+        sqLiteDatabase.execSQL(sql,new Integer[]{hobby});
+        sqLiteDatabase.execSQL(sql,new Integer[]{other});
     }
 }
