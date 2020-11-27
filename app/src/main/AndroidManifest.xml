@@ -14,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AccountDispActivity">
-        android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".Signup"
@@ -40,23 +45,10 @@
         </activity>
 
         <activity android:name=".AlarmActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".Signup"
-            android:label="アカウント作成">
 
         <activity android:name=".AlarmSettingActivity">
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".WeatherActivity"></activity>
-        <activity android:name=".CalendarActivity"></activity>
-        <activity android:name=".AlarmActivity"></activity>
-        <activity android:name=".AlarmSettingActivity" />
 
         <activity android:name=".AlarmSettingChangeActivity">
         </activity>
