@@ -68,7 +68,7 @@ public class AlarmActivity extends AppCompatActivity {
                             String data = AlarmList.get(position).getTime();
 
                             //アラーム時刻をString型からDate型に変換
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("MM時dd分");
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
                             try {
                                 datedata = dateFormat.parse(data);
                             } catch (ParseException e) {
@@ -106,12 +106,29 @@ public class AlarmActivity extends AppCompatActivity {
                             calendar.set(Calendar.MINUTE, minute);
                             calendar.set(Calendar.SECOND, 0);
                             calendar.set(Calendar.MILLISECOND, 0);
+
+                            //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
+                            Date date1 = new Date();
+                            String data2 = new SimpleDateFormat("HH時mm分").format(date1);
+                            SimpleDateFormat sdFormat = new SimpleDateFormat("HH時mm分");
+                            Date date3 = null;
+                            try {
+                                date3 = sdFormat.parse(data2);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if (datedata.before(date3)==true){
+                                calendar.add(Calendar.DAY_OF_MONTH,1);
+                            }
+
+                            //アラームセット
                             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
                             intent.setAction(Intent.ACTION_SEND);
                             Context ct = getApplication();
                             Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                             Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
+
                         }else {
                             dbm.offAlarm(sqlDB, AlarmList.get(position).getTime());
                             Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

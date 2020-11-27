@@ -83,7 +83,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 String data = time.getText().toString();
 
                 //アラーム時刻をString型からDate型に変換
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MM時dd分");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
                 try {
                     datedata = dateFormat.parse(data);
                 } catch (ParseException e) {
@@ -124,12 +124,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
 
                 //アラームをSQLiteに登録
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
-
-                //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
-                Date date1 = new Date();
-                if (datedata.before(date1)==true){
-                    calendar.add(Calendar.DAY_OF_MONTH,1);
-                }
 
                 //アラームセット
                 calendar.add(Calendar.SECOND,10);

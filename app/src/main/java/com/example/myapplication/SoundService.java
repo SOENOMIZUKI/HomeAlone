@@ -18,12 +18,10 @@ public class SoundService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("11111111", "さうんど！");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e("22222222", "さうんど！!");
         mediaPlayer = MediaPlayer.create(this, R.raw.alerm1);
         mediaPlayer.setOnCompletionListener(this);
         play();
