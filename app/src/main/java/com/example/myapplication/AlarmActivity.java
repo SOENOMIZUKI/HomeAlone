@@ -120,9 +120,10 @@ public class AlarmActivity extends HeaderActivity {
                             if (datedata.before(date3)==true){
                                 calendar.add(Calendar.DAY_OF_MONTH,1);
                             }
-
+                            Log.e("9876543", "date3="+date3.toString());
+                            Log.e("12345678", "datedata="+datedata.toString());
                             //アラームセット
-                            Log.e("12345678", calendar.toString());
+                            Log.e("33333333", calendar.toString());
 
                             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             intent.setType(data);
