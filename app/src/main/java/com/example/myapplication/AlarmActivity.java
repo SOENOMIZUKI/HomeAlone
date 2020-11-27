@@ -123,6 +123,7 @@ public class AlarmActivity extends HeaderActivity {
 
                             //アラームセット
                             Log.e("12345678", calendar.toString());
+
                             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             intent.setType(data);
                             pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -251,15 +252,6 @@ public class AlarmActivity extends HeaderActivity {
                                     pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     pendingintent.cancel();
                                     Alarmmanager.cancel(pendingintent);
-
-
-                                    //アラーム時刻をString型からDate型に変換
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
-                                    try {
-                                        datedata = dateFormat.parse(date);
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
 
                                     // 検索文字（時）より前の文字列取り出し
                                     // 時間の部分を取得

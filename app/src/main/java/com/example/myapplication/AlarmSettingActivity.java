@@ -68,7 +68,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int repeat;
-                Date datedata = null;
 
                 //平日繰り返しのスイッチボタンがONであればrepeatを１に
                 if (AlarmSettingActivity.this.repeat =true){
@@ -81,14 +80,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
 
                 //アラーム時刻をString型で取得
                 String data = time.getText().toString();
-
-                //アラーム時刻をString型からDate型に変換
-                SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
-                try {
-                    datedata = dateFormat.parse(data);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
                 // 検索文字（時）より前の文字列取り出し
                 // 時間の部分を取得
@@ -149,7 +140,9 @@ public class AlarmSettingActivity extends AppCompatActivity {
                     intent.setType(data);
                     pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     intent.setAction(Intent.ACTION_SEND);
+
                     Log.e("12345678", calendar.toString());
+
                     Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     //DAY_OF_WEEK, 1で月曜日のアラーム登録
                     calendar.set(Calendar.DAY_OF_WEEK, 1);
