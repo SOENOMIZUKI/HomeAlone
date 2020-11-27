@@ -70,7 +70,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 int repeat;
 
                 //平日繰り返しのスイッチボタンがONであればrepeatを１に
-                if (AlarmSettingActivity.this.repeat =true){
+                if (AlarmSettingActivity.this.repeat =false){
                     repeat = 1;
                 }else{
                     repeat = 2;
