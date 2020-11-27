@@ -123,7 +123,7 @@ public class AlarmActivity extends AppCompatActivity {
 
                             //アラームセット
                             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                            pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                            pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             intent.setAction(Intent.ACTION_SEND);
                             Context ct = getApplication();
                             Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
