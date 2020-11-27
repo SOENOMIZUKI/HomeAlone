@@ -126,11 +126,9 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
 
                 //アラームセット
-                calendar.add(Calendar.SECOND,10);
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 intent.setAction(Intent.ACTION_SEND);
-                Context ct = getApplication();
                 Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
 
