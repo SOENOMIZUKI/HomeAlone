@@ -125,6 +125,12 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 //アラームをSQLiteに登録
                 if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
 
+                //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
+                Date date1 = new Date();
+                if (datedata.before(date1)==true){
+                    calendar.add(Calendar.DAY_OF_MONTH,1);
+                }
+
                 //アラームセット
                 calendar.add(Calendar.SECOND,10);
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);

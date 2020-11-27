@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -118,6 +119,7 @@ public class AlarmActivity extends AppCompatActivity {
                             pendingintent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             Alarmmanager.cancel(pendingintent);
                             pendingintent.cancel();
+                            Log.e("1234567", "アラームキャンセル" );
 
                         }
 
