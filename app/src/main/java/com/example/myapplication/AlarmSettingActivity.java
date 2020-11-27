@@ -83,7 +83,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 String data = time.getText().toString();
 
                 //アラーム時刻をString型からDate型に変換
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MM時dd分");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
                 try {
                     datedata = dateFormat.parse(data);
                 } catch (ParseException e) {

@@ -52,5 +52,11 @@
         </activity>
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" />
+
+        <service
+            android:name=".SoundService"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 </manifest>

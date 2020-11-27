@@ -24,9 +24,11 @@ public class alarm_wakeupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
         setContentView(R.layout.activity_alarm_wakeup);
 
-        startService(new Intent(getApplicationContext(), SoundService.class));
+        startService(new Intent(this, SoundService.class));
         AlertDialog.Builder alert = new AlertDialog.Builder(alarm_wakeupActivity.this);
         alert.setCancelable(false);
         alert.setMessage("アラーム停止");
