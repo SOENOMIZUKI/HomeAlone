@@ -117,6 +117,8 @@ public class Ledgerdisp extends AppCompatActivity {
             dbm = new DBManager(this);
             sqlDB = dbm.getWritableDatabase();
 
+
+
                 //押された時間のアラーム情報をSQLiteから取得
                 Kakeibo kakeibo = dbm.selectMoneybook(sqlDB, date.getMonth());
                 //平日繰り返しがONの時の処理
@@ -144,9 +146,7 @@ public class Ledgerdisp extends AppCompatActivity {
             //プルダウンメニュー
             setupPieChart();
 
-            textView =
-
-                    findViewById(R.id.text_view);
+            textView = findViewById(R.id.text_view);
 
             Spinner spinner = findViewById(R.id.spinner);
 
@@ -168,13 +168,36 @@ public class Ledgerdisp extends AppCompatActivity {
                                            View view, int position, long id) {
                     Spinner spinner = (Spinner) parent;
                     String item = (String) spinner.getSelectedItem();
-                    textView.setText(item);
+
+                    try {
+                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
+                        Date date = sdFormat.parse(item);
+
+                        Kakeibo kakeibo = dbm.selectMoneybook(sqlDB, date.getMonth());
+
+                    // ListViewのインスタンスを生成
+                    ListView listView = findViewById(R.id.listView);
+
+                    kakeiboAdapter adapter = (kakeiboAdapter) listView.getAdapter();
+                        adapter.setprice(0,kakeibo.getRent().toString());
+                        adapter.setprice(1,kakeibo.getFood_expenses().toString());
+                        adapter.setprice(2,kakeibo.getWater_costs().toString());
+                        adapter.setprice(3,kakeibo.getUtility_costs().toString());
+                        adapter.setprice(4,kakeibo.getCommunication_costs().toString());
+                        adapter.setprice(5,kakeibo.getHobby().toString());
+                        adapter.setprice(6,kakeibo.getOther().toString());
+
+                        adapter.notifyDataSetInvalidated();
+                }catch(ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 //　アイテムが選択されなかった
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
+
             //家計簿変更画面遷移
             Button changeButton = findViewById(R.id.changebottom);
             changeButton.setOnClickListener(new View.OnClickListener() {

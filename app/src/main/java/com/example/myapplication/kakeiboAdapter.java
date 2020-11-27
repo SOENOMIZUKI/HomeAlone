@@ -83,4 +83,8 @@ public class kakeiboAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+    public void setprice(int idx,String price){
+        pricelist[idx] = price;
+    }
 }
