@@ -3,12 +3,11 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CalendarActivity extends AppCompatActivity {
 
     private boolean undo = false;
     private CaldroidSampleCustomFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
+    public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
+
 
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
@@ -55,8 +54,6 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ArrayList<String> weatherList = (ArrayList<String>) getIntent().getSerializableExtra("param1");
-
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         caldroidFragment = new CaldroidSampleCustomFragment(weatherList);
 
@@ -91,8 +88,10 @@ public class CalendarActivity extends AppCompatActivity {
             //日付をタップした時
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CalendarActivity.this, CalendarComfirmActivity.class);
+                String setDate = formatter.format(date);
+                intent.putExtra("Date",setDate);
+                startActivity(intent);
             }
             //月を変更したとき
             @Override

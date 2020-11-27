@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'com.roomorama:caldroid:3.0.1'

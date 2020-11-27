@@ -124,18 +124,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 		}
 			tv1.setMinHeight(50);
 
-/*		for (int count = 0; count < weather.size(); count++) {
-			for (int day = 1; day < 5; day++) {
-				if (weather.get(count).equals("01n") || weather.get(count).equals("02n")) {
-					img.setImageResource(R.drawable.hare);
-				} else if (weather.get(count).equals("03n") || weather.get(count).equals("04n")) {
-					img.setImageResource(R.drawable.kumori);
-				} else {
-					img.setImageResource(R.drawable.ame);
-				}
-			}
-		}
-*/
+
 			// Somehow after setBackgroundResource, the padding collapse.
 			// This is to recover the padding
 			cellView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);

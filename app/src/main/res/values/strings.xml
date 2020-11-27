@@ -24,4 +24,20 @@
     <string name="hint">半角英数字8文字以上で入力してください</string>
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
+    <string name="予定">plans</string>
+    <string name="plans">予定</string>
+    <string name="memo">メモ</string>
+    <string name="notification">通知</string>
+    <string name="color">色選択</string>
+    <string name="registBtn">登録</string>
+    <string name="startText" />
+    <string name="startDayText">開始時間</string>
+    <string name="endDateText">終了時間</string>
+    <string name="startTimeView" />
+    <string name="startTimeText">開始時間</string>
+    <string name="endTimeText">終了時間</string>
+    <string name="startDayView">開始日</string>
+    <string name="endDateView">終了日</string>
+    <string name="red" />
+    <string name="redBtn">red</string>
 </resources>
