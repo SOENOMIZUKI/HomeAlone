@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +35,22 @@ public class CalendarComfirmActivity extends AppCompatActivity {
         String date = setDate;
         sqlDB = dbm.getWritableDatabase();
         planList = dbm.getplan(sqlDB,date);
+
+        ListView listView = (ListView) findViewById(R.id.PlanList);
+        PlanLisViewAdapter adapter = new PlanLisViewAdapter(getApplicationContext(), R.layout.row_item, planList);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (view.getId()) {
+                    case R.id.edit:
+                        break;
+                    case R.id.delete:
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override

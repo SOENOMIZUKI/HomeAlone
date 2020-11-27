@@ -20,6 +20,7 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <ListView
+        android:id="@+id/PlanList"
         android:layout_width="322dp"
         android:layout_height="338dp"
         app:layout_constraintBottom_toBottomOf="parent"
