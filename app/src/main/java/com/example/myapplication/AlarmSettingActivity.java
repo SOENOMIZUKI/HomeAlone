@@ -121,22 +121,52 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
+                Log.e("12345678", calendar.toString());
 
-                //アラームをSQLiteに登録
-                if (data != null) dbm.insertAlarm(sqlDB, data,repeat);
+                //平日繰り返しがOFFである場合
+                if (repeat==2) {
+                    //アラームをSQLiteに登録
+                    if (data != null) dbm.insertAlarm(sqlDB, data, repeat);
 
-                //アラームセット
-                calendar.add(Calendar.SECOND,10);
-                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-                intent.setAction(Intent.ACTION_SEND);
-                Context ct = getApplication();
-                Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
+                    //アラームセット
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    intent.setType(data);
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    intent.setAction(Intent.ACTION_SEND);
+                    Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Alarmmanager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingintent);
 
-                //アラーム登録完了のトースト表示
-                Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
+                    //アラーム登録完了のトースト表示
+                    Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
 
+                    //平日繰り返しがONである場合
+                }else {
+
+                    //アラームをSQLiteに登録
+                    if (data != null) dbm.insertAlarm(sqlDB, data, repeat);
+
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    intent.setType(data);
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    intent.setAction(Intent.ACTION_SEND);
+                    Log.e("12345678", calendar.toString());
+                    Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    //DAY_OF_WEEK, 1で月曜日のアラーム登録
+                    calendar.set(Calendar.DAY_OF_WEEK, 1);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                    //DAY_OF_WEEK, 1で火曜日のアラーム登録
+                    calendar.set(Calendar.DAY_OF_WEEK, 2);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                    //DAY_OF_WEEK, 1で水曜日のアラーム登録
+                    calendar.set(Calendar.DAY_OF_WEEK, 3);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                    //DAY_OF_WEEK, 1で木曜日のアラーム登録
+                    calendar.set(Calendar.DAY_OF_WEEK, 4);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                    //DAY_OF_WEEK, 1で金曜日のアラーム登録
+                    calendar.set(Calendar.DAY_OF_WEEK, 5);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                }
                 //アラーム一覧画面へ遷移
                 Intent intent1 = new Intent(getApplication(),AlarmActivity.class);
                 startActivity(intent1);
