@@ -66,71 +66,157 @@ public class AlarmActivity extends HeaderActivity {
                             dbm.onAlarm(sqlDB, AlarmList.get(position).getTime());
 
                             String data = AlarmList.get(position).getTime();
+                            Alarm alarm = dbm.selectAlarm(sqlDB, data);
+                            int repeat = alarm.getRepeat();
 
-                            //アラーム時刻をString型からDate型に変換
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
-                            try {
-                                datedata = dateFormat.parse(data);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                            //平日繰り返しがONの時の処理
+                            if (repeat == 1){
+                                //アラーム時刻をString型からDate型に変換
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
+                                try {
+                                    datedata = dateFormat.parse(data);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
 
-                            // 検索文字（時）より前の文字列取り出し
-                            // 時間の部分を取得
-                            int index1 = data.indexOf("時");
-                            String stringhour = (data.substring(0,index1));
-                            int hour = Integer.parseInt(stringhour);
+                                // 検索文字（時）より前の文字列取り出し
+                                // 時間の部分を取得
+                                int index1 = data.indexOf("時");
+                                String stringhour = (data.substring(0,index1));
+                                int hour = Integer.parseInt(stringhour);
 
-                            // 指定した文字（時）より後ろの文字取り出し
-                            // 分の部分を取得
-                            int index2 = data.indexOf("時");
-                            String stringminute1 = (data.substring(index2+1));
-                            //　例:16分の場合,分を取り除き16だけにしてstringminute2に保存する処理
-                            String stringminute2 = "";
-                            if (stringminute1.contains("分")) {
-                                stringminute2 = (stringminute1.substring(0,2));
-                            }
-                            //　例:6分など1桁の場合,分が取り除けていないので取り除く処理
-                            if (stringminute2.length()==2 && stringminute2.contains("分")){
-                                stringminute2 = (stringminute1.substring(0,1));
-                            }
-                            int minute = Integer.parseInt(stringminute2);
+                                // 指定した文字（時）より後ろの文字取り出し
+                                // 分の部分を取得
+                                int index2 = data.indexOf("時");
+                                String stringminute1 = (data.substring(index2+1));
+                                //　例:16分の場合,分を取り除き16だけにしてstringminute2に保存する処理
+                                String stringminute2 = "";
+                                if (stringminute1.contains("分")) {
+                                    stringminute2 = (stringminute1.substring(0,2));
+                                }
+                                //　例:6分など1桁の場合,分が取り除けていないので取り除く処理
+                                if (stringminute2.length()==2 && stringminute2.contains("分")){
+                                    stringminute2 = (stringminute1.substring(0,1));
+                                }
+                                int minute = Integer.parseInt(stringminute2);
 
-                            //アラーム時刻をDate型からCalendar型に変換
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            if(calendar.getTimeInMillis() < System.currentTimeMillis()){
-                                calendar.add(Calendar.DAY_OF_YEAR, 1);
-                            }
-                            calendar.set(Calendar.HOUR_OF_DAY, hour);
-                            calendar.set(Calendar.MINUTE, minute);
-                            calendar.set(Calendar.SECOND, 0);
-                            calendar.set(Calendar.MILLISECOND, 0);
+                                //アラーム時刻をDate型からCalendar型に変換
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTimeInMillis(System.currentTimeMillis());
+                                if(calendar.getTimeInMillis() < System.currentTimeMillis()){
+                                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+                                }
+                                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                                calendar.set(Calendar.MINUTE, minute);
+                                calendar.set(Calendar.SECOND, 0);
+                                calendar.set(Calendar.MILLISECOND, 0);
 
-                            //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
-                            Date date1 = new Date();
-                            String data2 = new SimpleDateFormat("HH時mm分").format(date1);
-                            SimpleDateFormat sdFormat = new SimpleDateFormat("HH時mm分");
-                            Date date3 = null;
-                            try {
-                                date3 = sdFormat.parse(data2);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            if (datedata.before(date3)==true){
-                                calendar.add(Calendar.DAY_OF_MONTH,1);
-                            }
-                            Log.e("9876543", "date3="+date3.toString());
-                            Log.e("12345678", "datedata="+datedata.toString());
-                            //アラームセット
-                            Log.e("33333333", calendar.toString());
+                                //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
+                                Date date1 = new Date();
+                                String data2 = new SimpleDateFormat("HH時mm分").format(date1);
+                                SimpleDateFormat sdFormat = new SimpleDateFormat("HH時mm分");
+                                Date date3 = null;
+                                try {
+                                    date3 = sdFormat.parse(data2);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (datedata.before(date3)==true){
+                                    calendar.add(Calendar.DAY_OF_MONTH,1);
+                                }
+                                //アラームセット
+                                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                intent.setType(data);
+                                intent.setAction(Intent.ACTION_SEND);
 
-                            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                            intent.setType(data);
-                            pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            intent.setAction(Intent.ACTION_SEND);
-                            Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                            Alarmmanager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingintent);
+                                Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                //DAY_OF_WEEK, 1で月曜日のアラーム登録
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                calendar.set(Calendar.DAY_OF_WEEK, 2);
+                                Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                //DAY_OF_WEEK, 1で火曜日のアラーム登録
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 3, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                calendar.set(Calendar.DAY_OF_WEEK, 3);
+                                Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                //DAY_OF_WEEK, 1で水曜日のアラーム登録
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 4, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                calendar.set(Calendar.DAY_OF_WEEK, 4);
+                                Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                //DAY_OF_WEEK, 1で木曜日のアラーム登録
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 5, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                calendar.set(Calendar.DAY_OF_WEEK, 5);
+                                Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                //DAY_OF_WEEK, 1で金曜日のアラーム登録
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 6, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                calendar.set(Calendar.DAY_OF_WEEK, 6);
+                                Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+
+
+                                //平日繰り返しがOFFの時の処理
+                            }else {
+
+                                //アラーム時刻をString型からDate型に変換
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("HH時mm分");
+                                try {
+                                    datedata = dateFormat.parse(data);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                // 検索文字（時）より前の文字列取り出し
+                                // 時間の部分を取得
+                                int index1 = data.indexOf("時");
+                                String stringhour = (data.substring(0, index1));
+                                int hour = Integer.parseInt(stringhour);
+
+                                // 指定した文字（時）より後ろの文字取り出し
+                                // 分の部分を取得
+                                int index2 = data.indexOf("時");
+                                String stringminute1 = (data.substring(index2 + 1));
+                                //　例:16分の場合,分を取り除き16だけにしてstringminute2に保存する処理
+                                String stringminute2 = "";
+                                if (stringminute1.contains("分")) {
+                                    stringminute2 = (stringminute1.substring(0, 2));
+                                }
+                                //　例:6分など1桁の場合,分が取り除けていないので取り除く処理
+                                if (stringminute2.length() == 2 && stringminute2.contains("分")) {
+                                    stringminute2 = (stringminute1.substring(0, 1));
+                                }
+                                int minute = Integer.parseInt(stringminute2);
+
+                                //アラーム時刻をDate型からCalendar型に変換
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTimeInMillis(System.currentTimeMillis());
+                                if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+                                }
+                                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                                calendar.set(Calendar.MINUTE, minute);
+                                calendar.set(Calendar.SECOND, 0);
+                                calendar.set(Calendar.MILLISECOND, 0);
+
+                                //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
+                                Date date1 = new Date();
+                                String data2 = new SimpleDateFormat("HH時mm分").format(date1);
+                                SimpleDateFormat sdFormat = new SimpleDateFormat("HH時mm分");
+                                Date date3 = null;
+                                try {
+                                    date3 = sdFormat.parse(data2);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (datedata.before(date3) == true) {
+                                    calendar.add(Calendar.DAY_OF_MONTH, 1);
+                                }
+                                //アラームセット
+
+                                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                intent.setType(data);
+                                pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                intent.setAction(Intent.ACTION_SEND);
+                                Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                Alarmmanager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingintent);
+                            }
 
                         }else {
                             //アラームのOFFが押されたとき
@@ -218,7 +304,6 @@ public class AlarmActivity extends HeaderActivity {
                                     calendar.set(Calendar.SECOND, 0);
                                     calendar.set(Calendar.MILLISECOND, 0);
 
-                                    Log.e("12345678", calendar.toString());
 
                                     intent.setAction(Intent.ACTION_SEND);
                                     Alarmmanager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -286,26 +371,30 @@ public class AlarmActivity extends HeaderActivity {
                                     calendar.set(Calendar.SECOND, 0);
                                     calendar.set(Calendar.MILLISECOND, 0);
 
-                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    intent.setType(date);
                                     intent.setAction(Intent.ACTION_SEND);
-
 
                                     Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                                     //DAY_OF_WEEK, 1で月曜日のアラーム登録
-                                    calendar.set(Calendar.DAY_OF_WEEK, 1);
-                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                                    //DAY_OF_WEEK, 1で火曜日のアラーム登録
+                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     calendar.set(Calendar.DAY_OF_WEEK, 2);
-                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                                    //DAY_OF_WEEK, 1で水曜日のアラーム登録
+                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                    //DAY_OF_WEEK, 1で火曜日のアラーム登録
+                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 3, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     calendar.set(Calendar.DAY_OF_WEEK, 3);
-                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                                    //DAY_OF_WEEK, 1で木曜日のアラーム登録
+                                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                    //DAY_OF_WEEK, 1で水曜日のアラーム登録
+                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 4, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     calendar.set(Calendar.DAY_OF_WEEK, 4);
-                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                                    //DAY_OF_WEEK, 1で金曜日のアラーム登録
+                                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                    //DAY_OF_WEEK, 1で木曜日のアラーム登録
+                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 5, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     calendar.set(Calendar.DAY_OF_WEEK, 5);
-                                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
+                                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                                    //DAY_OF_WEEK, 1で金曜日のアラーム登録
+                                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 6, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    calendar.set(Calendar.DAY_OF_WEEK, 6);
+                                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
 
                                     Toast.makeText(AlarmActivity.this, "変更しました", Toast.LENGTH_SHORT).show();
                                     Intent intent1 = new Intent(getApplication(),AlarmActivity.class);

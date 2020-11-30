@@ -46,7 +46,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.e("12121212121", ""+isChecked);
                 if (isChecked) {
                     repeat = true;
                 } else {
@@ -72,7 +71,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 int repeat1;
 
                 //平日繰り返しのスイッチボタンがONであればrepeatを１に
-                if (repeat == false){
+                if (repeat == true){
                     repeat1 = 1;
                 }else{
                     repeat1 = 2;
@@ -122,7 +121,6 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
-                Log.e("1111111111", calendar.toString());
 
                 //例:現在12:00、アラームの時間11:00の場合アラームが過去のものになり、アラームがすぐに鳴るので日付を+1する
                 Date date1 = new Date();
@@ -137,17 +135,48 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 if (datedata.before(date3)==true){
                     calendar.add(Calendar.DAY_OF_MONTH,1);
                 }
-                Log.e("22222222", "date3="+date3.toString());
-                Log.e("33333333", "datedata="+datedata.toString());
-                //アラームセット
-                Log.e("44444444", calendar.toString());
 
-
-                //平日繰り返しがOFFである場合
-                if (repeat1==2) {
+                //平日繰り返しがONである場合
+                if (repeat1==1) {
 
                     //アラームをSQLiteに登録
                     if (data != null) dbm.insertAlarm(sqlDB, data, 1);
+
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    intent.setType(data);
+                    intent.setAction(Intent.ACTION_SEND);
+
+                    Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    //DAY_OF_WEEK, 1で月曜日のアラーム登録
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    calendar.set(Calendar.DAY_OF_WEEK, 2);
+                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                    //DAY_OF_WEEK, 1で火曜日のアラーム登録
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 3, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    calendar.set(Calendar.DAY_OF_WEEK, 3);
+                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                    //DAY_OF_WEEK, 1で水曜日のアラーム登録
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 4, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    calendar.set(Calendar.DAY_OF_WEEK, 4);
+                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                    //DAY_OF_WEEK, 1で木曜日のアラーム登録
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 5, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    calendar.set(Calendar.DAY_OF_WEEK, 5);
+                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+                    //DAY_OF_WEEK, 1で金曜日のアラーム登録
+                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 6, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    calendar.set(Calendar.DAY_OF_WEEK, 6);
+                    Alarmmanager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingintent);
+
+                    //平日繰り返しがOFFである場合
+                }else {
+
+                    //アラーム登録完了のトースト表示
+                    Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
+
+                    //平日繰り返しがONである場合
+                    //アラームをSQLiteに登録
+                    if (data != null) dbm.insertAlarm(sqlDB, data, 2);
 
                     //アラームセット
                     Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
@@ -156,44 +185,8 @@ public class AlarmSettingActivity extends AppCompatActivity {
                     intent.setAction(Intent.ACTION_SEND);
                     Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     Alarmmanager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingintent);
-                    Log.e("5555555555", "");
 
 
-                    //平日繰り返しがONである場合
-                }else {
-
-                    //アラームをSQLiteに登録
-                    if (data != null) dbm.insertAlarm(sqlDB, data, 2);
-
-                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                    intent.setType(data);
-                    pendingintent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    intent.setAction(Intent.ACTION_SEND);
-
-                    Log.e("66666666", calendar.toString());
-
-                    Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                    //DAY_OF_WEEK, 1で月曜日のアラーム登録
-                    calendar.set(Calendar.DAY_OF_WEEK, 1);
-                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                    //DAY_OF_WEEK, 1で火曜日のアラーム登録
-                    calendar.set(Calendar.DAY_OF_WEEK, 2);
-                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                    //DAY_OF_WEEK, 1で水曜日のアラーム登録
-                    calendar.set(Calendar.DAY_OF_WEEK, 3);
-                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                    //DAY_OF_WEEK, 1で木曜日のアラーム登録
-                    calendar.set(Calendar.DAY_OF_WEEK, 4);
-                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-                    //DAY_OF_WEEK, 1で金曜日のアラーム登録
-                    calendar.set(Calendar.DAY_OF_WEEK, 5);
-                    Alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingintent);
-
-
-                    //アラーム登録完了のトースト表示
-                    Toast.makeText(AlarmSettingActivity.this, "アラームを登録しました", Toast.LENGTH_SHORT).show();
-
-                    //平日繰り返しがONである場合
                 }
                 //アラーム一覧画面へ遷移
                 Intent intent1 = new Intent(getApplication(),AlarmActivity.class);
