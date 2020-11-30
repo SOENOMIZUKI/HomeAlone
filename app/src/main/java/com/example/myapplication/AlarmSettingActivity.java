@@ -137,6 +137,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
                 }
 
                 //平日繰り返しがONである場合
+                if (repeat1==1) {
 
                     //アラームをSQLiteに登録
                     if (data != null) dbm.insertAlarm(sqlDB, data, 1);
