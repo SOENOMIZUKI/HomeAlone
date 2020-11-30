@@ -94,21 +94,25 @@ public class DBManager extends SQLiteOpenHelper {
     //予定登録
     public void plans(SQLiteDatabase sqLiteDatabase,String date,String plans,String starttime,String finishtime,String notification,String color,String note){
         String sql = "INSERT INTO Plans(calendar_id,date,plans,starttime,finishtime,notification,color,note) VALUES(null,?,?,?,?,?,?,?)";
-        Log.i("aaaa","plans!!!!!!!!!!");
         sqLiteDatabase.execSQL(sql,new String[]{date,plans,starttime,finishtime,notification,color,note});
     }
-    public List<Plan> getplan(SQLiteDatabase sqLiteDatabase,String date){
+    public List<Plan> getPlan(SQLiteDatabase sqLiteDatabase, String date){
         String sql = "SELECT * FROM Plans WHERE date = ?";
         List<Plan> planList = new ArrayList<>();
         SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{date},null);
         while (cursor.moveToNext()) {
             Plan plan = new Plan();
-            plan.setCalendar_id(cursor.getString(cursor.getColumnIndex("calnedar_id")));
+            plan.setCalendar_id(cursor.getString(cursor.getColumnIndex("calendar_id")));
             plan.setDate(cursor.getString(cursor.getColumnIndex("date")));
             plan.setPlans(cursor.getString(cursor.getColumnIndex("plans")));
             plan.setNote(cursor.getString(cursor.getColumnIndex("note")));
             planList.add(plan);
         }
             return planList;
+    }
+    public void delPlan(SQLiteDatabase sqLiteDatabase,String rowNum){
+        String sql = "DELETE FROM Plans WHERE calendar_id = ?";
+        sqLiteDatabase.execSQL(sql,new String[]{rowNum});
+
     }
 }

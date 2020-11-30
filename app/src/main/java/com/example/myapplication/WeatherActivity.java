@@ -28,6 +28,7 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         //sql
+
         String lat = "33.437821";
         String lon = "129.972552";
 

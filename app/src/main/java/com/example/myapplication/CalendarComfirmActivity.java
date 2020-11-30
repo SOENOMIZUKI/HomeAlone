@@ -11,15 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class CalendarComfirmActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     String setDate;
+    String rowNum;
     List<Plan> planList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class CalendarComfirmActivity extends AppCompatActivity {
         dbm = new DBManager(this);
         String date = setDate;
         sqlDB = dbm.getWritableDatabase();
-        planList = dbm.getplan(sqlDB,date);
+        planList = dbm.getPlan(sqlDB,date);
 
         ListView listView = (ListView) findViewById(R.id.PlanList);
         PlanLisViewAdapter adapter = new PlanLisViewAdapter(getApplicationContext(), R.layout.row_item, planList);
@@ -43,9 +42,10 @@ public class CalendarComfirmActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (view.getId()) {
-                    case R.id.edit:
-                        break;
                     case R.id.delete:
+                        Plan num1 = planList.get(position);
+                        rowNum = num1.getCalnedar_id();
+                        dbm.delPlan(sqlDB,rowNum);
                         break;
                 }
             }

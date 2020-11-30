@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ public class CalendarActivity extends AppCompatActivity {
     private CaldroidSampleCustomFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
     public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
+    String setDate;
 
 
     private void setCustomResourceForDates() {
@@ -52,6 +55,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calendar);
         ArrayList<String> weatherList = (ArrayList<String>) getIntent().getSerializableExtra("param1");
 
@@ -89,8 +93,10 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onSelectDate(Date date, View view) {
                 Intent intent = new Intent(CalendarActivity.this, CalendarComfirmActivity.class);
-                String setDate = formatter.format(date);
+                setDate = formatter.format(date);
                 intent.putExtra("Date",setDate);
+                Log.i("tag","setDate="+ setDate);
+                Log.i("tag","date="+ date);
                 startActivity(intent);
             }
             //月を変更したとき
@@ -126,6 +132,7 @@ public class CalendarActivity extends AppCompatActivity {
 
 
     }
+
 
 
     @Override

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ class PlanLisViewAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView planView;
         TextView noteView;
+        ImageView colorView;
         Button deleteButton;
     }
 
@@ -38,12 +40,14 @@ class PlanLisViewAdapter extends BaseAdapter {
             holder.planView = convertView.findViewById(R.id.planView);
             holder.noteView = convertView.findViewById(R.id.noteView);
             holder.deleteButton = convertView.findViewById(R.id.delete);
+            holder.colorView = convertView.findViewById(R.id.colorView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.planView.setText(items.get(0).getPlans() );
+        holder.planView.setText(items.get(0).getPlans());
+        holder.colorView.setImageResource(R.drawable.aka);
         holder.noteView.setText(items.get(0).getNote());
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +57,10 @@ class PlanLisViewAdapter extends BaseAdapter {
             }
         });
 
+
         return convertView;
     }
+
 
     @Override
     public int getCount() {
