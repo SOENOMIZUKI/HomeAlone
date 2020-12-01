@@ -4,13 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,3);
+        super(context,"Alarm.sqlite3",null,7);
     }
     // テーブル作成
     @Override
@@ -20,12 +22,16 @@ public class DBManager extends SQLiteOpenHelper {
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
         //アバターの外部キーを書いてない
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +  
-                " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name,mailaddress,password,street_address,avatar_id INTEGER)");
+                " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
+                " Plans(calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,plans TEXT,starttime TEXT,finishtime TEXT,notification TEXT,color INTEGER,note TEXT)");
+        Log.i("aaaa","onCreate(SQLiteDatabase sqLiteDatabase){");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
-        sqLiteDatabase.execSQL("DROP TABLE User");
+       // sqLiteDatabase.execSQL("DROP TABLE User");
+        sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);
     }
     public void insertAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat){
@@ -93,5 +99,29 @@ public class DBManager extends SQLiteOpenHelper {
         user.setStreet_address(cursor.getString(cursor.getColumnIndex("street_address")));
         user.setAvatar_id(cursor.getInt(cursor.getColumnIndex("avatar_id")));
         return user;
+    }
+    //予定登録
+    public void plans(SQLiteDatabase sqLiteDatabase,String date,String plans,String starttime,String finishtime,String notification,String color,String note){
+        String sql = "INSERT INTO Plans(calendar_id,date,plans,starttime,finishtime,notification,color,note) VALUES(null,?,?,?,?,?,?,?)";
+        sqLiteDatabase.execSQL(sql,new String[]{date,plans,starttime,finishtime,notification,color,note});
+    }
+    public List<Plan> getPlan(SQLiteDatabase sqLiteDatabase, String date){
+        String sql = "SELECT * FROM Plans WHERE date = ?";
+        List<Plan> planList = new ArrayList<>();
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{date},null);
+        while (cursor.moveToNext()) {
+            Plan plan = new Plan();
+            plan.setCalendar_id(cursor.getString(cursor.getColumnIndex("calendar_id")));
+            plan.setDate(cursor.getString(cursor.getColumnIndex("date")));
+            plan.setPlans(cursor.getString(cursor.getColumnIndex("plans")));
+            plan.setNote(cursor.getString(cursor.getColumnIndex("note")));
+            planList.add(plan);
+        }
+            return planList;
+    }
+    public void delPlan(SQLiteDatabase sqLiteDatabase,String rowNum){
+        String sql = "DELETE FROM Plans WHERE calendar_id = ?";
+        sqLiteDatabase.execSQL(sql,new String[]{rowNum});
+
     }
 }

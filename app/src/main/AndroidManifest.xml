@@ -38,6 +38,11 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".MainActivity">
@@ -54,6 +59,10 @@
 
         <activity android:name=".AlarmSettingChangeActivity">
         </activity>
+
+        <activity android:name=".CalendarComfirmActivity"/>
+
+        <activity android:name=".CalendarAddActivity"/>
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" />
 

@@ -28,7 +28,8 @@ public class HeaderActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.item1:
-
+                Intent intent1 = new Intent(getApplication(), AlarmActivity.class);
+                startActivity(intent1);
                 
             case R.id.item2:
                 Intent intent2 = new Intent(getApplication(), AlarmActivity.class);
@@ -36,7 +37,7 @@ public class HeaderActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item3:
-                Intent intent3 = new Intent(getApplication(), Signup.class);
+                Intent intent3 = new Intent(getApplication(), MapActivity.class);
                 startActivity(intent3);
 
                 return true;
