@@ -12,22 +12,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        <activity android:name=".Ledgerchange"></activity>
-        <activity android:name=".Ledgerinput" />
-        <activity android:name=".Ledgerdisp" >
-        </activity>
         android:theme="@style/AppTheme" >
 
-        <activity
-            android:name=".Signup"
-            android:label="アカウント作成">
+        <activity android:name=".Ledgerchange">
+        </activity>
+
+        <activity android:name=".Ledgerinput">
+        </activity>
+
+        <activity android:name=".Ledgerdisp" >
+        </activity>
+
+        <activity android:name=".Signup" android:label="アカウント作成">
         </activity>
 
         <activity android:name=".alarm_wakeupActivity">
         </activity>
 
-        </activity>
         <activity android:name=".HeaderActivity">
+        </activity>
 
         <activity android:name=".MapActivity">
         </activity>
@@ -54,9 +57,11 @@
         <activity android:name=".AlarmSettingChangeActivity">
         </activity>
 
-        <activity android:name=".CalendarComfirmActivity"/>
+        <activity android:name=".CalendarComfirmActivity">
+        </activity>
 
-        <activity android:name=".CalendarAddActivity"/>
+        <activity android:name=".CalendarAddActivity">
+        </activity>
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" />
 
