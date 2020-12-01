@@ -13,7 +13,7 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,3);
+        super(context,"Alarm.sqlite3",null,7);
     }
     // テーブル作成
     @Override
@@ -148,8 +148,8 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql, new Object[]{price,month});
     }
     public void onMoneybookOther(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
         String sql = "UPDATE Moneybook set other = ?   WHERE month = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
     }
     public Kakeibo selectMoneybook(SQLiteDatabase sqLiteDatabase,Integer month) {
         String selectSql = "SELECT * FROM Moneybook WHERE month = ?";

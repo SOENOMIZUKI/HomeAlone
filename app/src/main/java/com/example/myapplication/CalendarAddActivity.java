@@ -20,7 +20,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
-public class CalendarAddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
+public class CalendarAddActivity extends HeaderActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     Calendar calendar ;

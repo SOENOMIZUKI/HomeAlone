@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarComfirmActivity extends AppCompatActivity {
+public class CalendarComfirmActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     String setDate;
