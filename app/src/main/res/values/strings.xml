@@ -32,5 +32,4 @@
     <string name="menu_item5">カレンダー</string>
     <string name="account_update">アカウント情報変更</string>
     <string name="password_update">パスワード変更</string>
-    <string name="logout">ログアウト</string>
 </resources>
