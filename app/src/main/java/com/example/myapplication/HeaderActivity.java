@@ -28,7 +28,7 @@ public class HeaderActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.item1:
-                Intent intent1 = new Intent(getApplication(), AlarmActivity.class);
+                Intent intent1 = new Intent(getApplication(), Ledgerdisp.class);
                 startActivity(intent1);
                 
             case R.id.item2:

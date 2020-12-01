@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends HeaderActivity {
 
     private boolean undo = false;
     private CaldroidSampleCustomFragment caldroidFragment;
