@@ -2,14 +2,16 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccountDispActivity extends AppCompatActivity {
 
@@ -35,6 +37,16 @@ public class AccountDispActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_disp);
 
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+        User user = dbm.getUserSetting(sqlDB);
+
+        date[0] = user.getUser_name();
+        date[1] = user.getMailAddress();
+        date[2] = user.getPassword();
+        date[3] = user.getStreet_address();
+        date[4] = String.valueOf(user.getAvatar_id());
+
         ArrayList list = new ArrayList<>();
 
         // リスト項目とListViewを対応付けるArrayAdapterを用意する
@@ -54,5 +66,26 @@ public class AccountDispActivity extends AppCompatActivity {
 
         // ListViewにadapterをセット
         listView.setAdapter(Kadapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Button button = (Button)findViewById(R.id.account_update);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountDispActivity.this, UserSettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button button2 = (Button)findViewById(R.id.password_update);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountDispActivity.this, PasswordSettingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
