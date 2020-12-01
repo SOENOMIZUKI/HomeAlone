@@ -20,6 +20,10 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, String> {
     public AsyncHttpRequest(Activity activity) {
         this.WeatherActivity = activity;
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 
     @Override
     protected String doInBackground(URL... urls) {
@@ -67,8 +71,19 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, String> {
         }
     }
     @Override
+<<<<<<< HEAD
+    protected void onPostExecute(ArrayList<String> weatherList) {
+        super.onPostExecute(weatherList);
+        Intent intent = new Intent(WeatherActivity,CalendarActivity.class);
+        intent.putExtra("param1",weatherList);
+        WeatherActivity.startActivity(intent);
+
+
+
+=======
     protected void onPostExecute(String weather) {
         TextView tv = WeatherActivity.findViewById(R.id.tv1);
         tv.setText(weather);
+>>>>>>> main
     }
 }

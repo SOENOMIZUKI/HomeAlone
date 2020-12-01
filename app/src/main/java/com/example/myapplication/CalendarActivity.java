@@ -3,11 +3,17 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+<<<<<<< HEAD
+=======
 import android.widget.Button;
+>>>>>>> main
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +30,9 @@ public class CalendarActivity extends AppCompatActivity {
     private boolean undo = false;
     private CaldroidSampleCustomFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
+    public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
+    String setDate;
+
 
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
@@ -50,13 +59,18 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calendar);
 
+<<<<<<< HEAD
+        caldroidFragment = new CaldroidSampleCustomFragment(weatherList);
+=======
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
         caldroidFragment = new CaldroidSampleCustomFragment();
+>>>>>>> main
 
         // //////////////////////////////////////////////////////////////////////
         // **** This is to show customized fragment. If you want customized
@@ -104,8 +118,12 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CalendarActivity.this, CalendarComfirmActivity.class);
+                setDate = formatter.format(date);
+                intent.putExtra("Date",setDate);
+                Log.i("tag","setDate="+ setDate);
+                Log.i("tag","date="+ date);
+                startActivity(intent);
             }
 
             @Override
@@ -219,6 +237,9 @@ public class CalendarActivity extends AppCompatActivity {
                     text += "Disabled Date: " + formatter.format(date) + "\n";
                 }
 
+<<<<<<< HEAD
+
+=======
                 textView.setText(text);
             }
         });
@@ -261,6 +282,7 @@ public class CalendarActivity extends AppCompatActivity {
     /**
      * Save current states of the Caldroid here
      */
+>>>>>>> main
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // TODO Auto-generated method stub

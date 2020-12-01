@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
+    package="com.example.myapplication">
+=======
     package="com.example.myapplication" >
+>>>>>>> main
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
+        android:theme="@style/AppTheme">
+        <activity android:name=".CalendarAddActivity"></activity>
+        <activity android:name=".CalendarComfirmActivity" />
+        
+        <activity android:name=".Signup"
+            android:label="アカウント作成" />
+        <activity android:name=".WeatherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".AlarmActivity">
+=======
         android:theme="@style/AppTheme" >
 
         <activity
@@ -21,9 +43,18 @@
 
         <activity android:name=".alarm_wakeupActivity">
         </activity>
+>>>>>>> main
 
         <activity android:name=".HeaderActivity">
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".AlarmSettingActivity" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:process=":remote" />
+    </application>
+=======
 
         <activity android:name=".MapActivity">
         </activity>
@@ -44,6 +75,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+>>>>>>> main
 
         <activity android:name=".AlarmSettingActivity">
         </activity>
