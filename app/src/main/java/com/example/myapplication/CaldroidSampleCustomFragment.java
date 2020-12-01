@@ -6,7 +6,11 @@ import com.roomorama.caldroid.CaldroidGridAdapter;
 import java.util.ArrayList;
 
 public class CaldroidSampleCustomFragment extends CaldroidFragment {
+<<<<<<< Updated upstream
 	ArrayList<String> weather;
+=======
+		ArrayList<String> weather;
+>>>>>>> Stashed changes
 	public CaldroidSampleCustomFragment(ArrayList<String> weather){
 		this.weather = weather;
 	}

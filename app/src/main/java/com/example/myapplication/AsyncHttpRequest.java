@@ -34,7 +34,11 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
     public AsyncHttpRequest(WeatherActivity activity) {
         this.WeatherActivity = activity;
     }
+<<<<<<< Updated upstream
 
+=======
+    final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+>>>>>>> Stashed changes
 
     @Override
     protected ArrayList<String> doInBackground(URL... urls) {
@@ -93,5 +97,60 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
         Intent intent = new Intent(WeatherActivity,CalendarActivity.class);
         intent.putExtra("param1",weatherList);
         WeatherActivity.startActivity(intent);
+<<<<<<< Updated upstream
+=======
+        /*
+        Bundle args = new Bundle();
+        Calendar cal = Calendar.getInstance();
+        args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
+        args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
+        args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true);
+        args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
+
+        caldroidFragment = new CaldroidSampleCustomFragment();
+
+        caldroidFragment.setArguments(args);
+
+        FragmentTransaction t = WeatherActivity.getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.calendar1, caldroidFragment);
+        t.commit();
+
+        final CaldroidListener listener = new CaldroidListener() {
+
+            //日付をタップした時
+            @Override
+            public void onSelectDate(Date date, View view) {
+                Toast.makeText(WeatherActivity, formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
+            }
+            //月を変更したとき
+            @Override
+            public void onChangeMonth(int month, int year) {
+                String text = "month: " + month + " year: " + year;
+                Toast.makeText(WeatherActivity, text,
+                        Toast.LENGTH_SHORT).show();
+            }
+            //日付を長くタップした時
+            @Override
+            public void onLongClickDate(Date date, View view) {
+                Toast.makeText(WeatherActivity,
+                        "Long click " + formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
+            }
+            //画面を左にスライドしたとき
+            @Override
+            public void onCaldroidViewCreated() {
+                if (caldroidFragment.getLeftArrowButton() != null) {
+                    Toast.makeText(WeatherActivity,
+                            "Caldroid view is created", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+        };
+        caldroidFragment.setCaldroidListener(listener);
+*/
+
+>>>>>>> Stashed changes
     }
 }

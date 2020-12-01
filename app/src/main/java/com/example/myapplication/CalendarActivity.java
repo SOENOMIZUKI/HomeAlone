@@ -3,13 +3,15 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+<<<<<<< Updated upstream
+=======
+import android.widget.Button;
+import android.widget.LinearLayout;
+>>>>>>> Stashed changes
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,15 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CalendarActivity extends HeaderActivity {
 
     private boolean undo = false;
     private CaldroidSampleCustomFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
-    public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
-    String setDate;
-
 
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
@@ -55,12 +56,18 @@ public class CalendarActivity extends HeaderActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_calendar);
         ArrayList<String> weatherList = (ArrayList<String>) getIntent().getSerializableExtra("param1");
 
+<<<<<<< Updated upstream
         caldroidFragment = new CaldroidSampleCustomFragment(weatherList);
 
+=======
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+        caldroidFragment = new CaldroidSampleCustomFragment(weatherList);
+
+>>>>>>> Stashed changes
         if (savedInstanceState != null) {
             caldroidFragment.restoreStatesFromKey(savedInstanceState,
                     "CALDROID_SAVED_STATE");
@@ -92,12 +99,8 @@ public class CalendarActivity extends HeaderActivity {
             //日付をタップした時
             @Override
             public void onSelectDate(Date date, View view) {
-                Intent intent = new Intent(CalendarActivity.this, CalendarComfirmActivity.class);
-                setDate = formatter.format(date);
-                intent.putExtra("Date",setDate);
-                Log.i("tag","setDate="+ setDate);
-                Log.i("tag","date="+ date);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
             }
             //月を変更したとき
             @Override
@@ -134,7 +137,10 @@ public class CalendarActivity extends HeaderActivity {
     }
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // TODO Auto-generated method stub

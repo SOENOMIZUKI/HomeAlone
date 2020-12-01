@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +11,15 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,7);
+        super(context,"Alarm.sqlite3",null,3);
     }
-    // テーブル作成
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
+<<<<<<< Updated upstream
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Moneybook(month INTEGER PRIMARY KEY AUTOINCREMENT,rent INTEGER,food_expenses INTEGER,water_costs INTEGER,utility_costs INTEGER,communication_costs INTEGER,hobby INTEGER,other INTEGER)");
@@ -55,13 +54,18 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Plans(calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,plans TEXT,starttime TEXT,finishtime TEXT,notification TEXT,color INTEGER,note TEXT)");
         Log.i("aaaa","onCreate(SQLiteDatabase sqLiteDatabase){");
+=======
+>>>>>>> Stashed changes
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
+<<<<<<< Updated upstream
         sqLiteDatabase.execSQL("DROP TABLE Moneybook");
         sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
+=======
+>>>>>>> Stashed changes
         onCreate(sqLiteDatabase);
     }
     public void insertAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat){
@@ -113,6 +117,7 @@ public class DBManager extends SQLiteOpenHelper {
         alarm.setSwitch1(cursor.getInt(cursor.getColumnIndex("switch")));
         return alarm;
     }
+<<<<<<< Updated upstream
     //ユーザー登録
     public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
         String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
@@ -201,4 +206,6 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new String[]{rowNum});
 
     }
+=======
+>>>>>>> Stashed changes
 }

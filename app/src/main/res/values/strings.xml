@@ -13,6 +13,7 @@
     <string name="customize">customize</string>
     <string name="show_dialog">show_dialog</string>
     <string name="undo">custumizetion</string>
+<<<<<<< Updated upstream
     <string name="userName">ユーザー名</string>
     <string name="passwordBox1">パスワード</string>
     <string name="passwordBox2">パスワード（確認用）</string>
@@ -48,4 +49,6 @@
     <string name="menu_item3">周辺マップ</string>
     <string name="menu_item4">アバター</string>
     <string name="menu_item5">カレンダー</string>
+=======
+>>>>>>> Stashed changes
 </resources>

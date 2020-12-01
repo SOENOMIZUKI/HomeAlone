@@ -3,7 +3,10 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+<<<<<<< Updated upstream
 import android.content.Intent;
+=======
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -21,14 +24,12 @@ import java.util.Date;
 public class WeatherActivity extends AppCompatActivity {
 
     private CaldroidSampleCustomFragment caldroidFragment;
-    final SimpleDateFormat formatter = new SimpleDateFormat("yyyy MMM dd");
+    final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        //sql
-
         String lat = "33.437821";
         String lon = "129.972552";
 
@@ -65,8 +66,8 @@ public class WeatherActivity extends AppCompatActivity {
             //日付をタップした時
             @Override
             public void onSelectDate(Date date, View view) {
-                Intent intent = new Intent(WeatherActivity.this, CalendarComfirmActivity.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
             }
             //月を変更したとき
             @Override
