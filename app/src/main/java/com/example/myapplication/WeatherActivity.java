@@ -1,20 +1,25 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-=======
->>>>>>> main
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class WeatherActivity extends AppCompatActivity {
 
-<<<<<<< HEAD
     private CaldroidSampleCustomFragment caldroidFragment;
     final SimpleDateFormat formatter = new SimpleDateFormat("yyyy MMM dd");
 
@@ -26,23 +31,16 @@ public class WeatherActivity extends AppCompatActivity {
 
         String lat = "33.437821";
         String lon = "129.972552";
-=======
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
->>>>>>> main
 
         try {
             new AsyncHttpRequest(this)
                     .execute(
-                            new URL("http://api.openweathermap.org/data/2.5/forecast?q=London,uk&APPID=f4ccf014306d1a86f61016ee7bb4a0d2")
+                            new URL("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&APPID=f4ccf014306d1a86f61016ee7bb4a0d2")
                     );
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
 
     public void dispCalender(ArrayList<String> weatherList) {
 
@@ -99,6 +97,4 @@ public class WeatherActivity extends AppCompatActivity {
 
 
     }
-=======
->>>>>>> main
 }
