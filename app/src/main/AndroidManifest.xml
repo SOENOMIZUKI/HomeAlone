@@ -12,6 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        <activity android:name=".Ledgerchange"></activity>
+        <activity android:name=".Ledgerinput" />
+        <activity android:name=".Ledgerdisp" >
+        </activity>
         android:theme="@style/AppTheme" >
 
         <activity
@@ -22,8 +26,8 @@
         <activity android:name=".alarm_wakeupActivity">
         </activity>
 
-        <activity android:name=".HeaderActivity">
         </activity>
+        <activity android:name=".HeaderActivity">
 
         <activity android:name=".MapActivity">
         </activity>
@@ -41,9 +45,7 @@
 
         <activity android:name=".CalendarActivity">
         </activity>
-
         <activity android:name=".AlarmActivity" >
-
         </activity>
 
         <activity android:name=".AlarmSettingActivity">
