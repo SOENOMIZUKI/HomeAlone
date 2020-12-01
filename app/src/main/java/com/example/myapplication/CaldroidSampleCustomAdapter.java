@@ -2,48 +2,41 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< Updated upstream
 import java.util.List;
-=======
-import java.util.Date;
->>>>>>> Stashed changes
 import java.util.Map;
 
 import hirondelle.date4j.DateTime;
 
 public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 	ArrayList<String> weather;
-<<<<<<< Updated upstream
 	public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
 	private SQLiteDatabase sqlDB;
 	DBManager dbm;
 	List<Plan> planList = new ArrayList<>();
-=======
->>>>>>> Stashed changes
 
 	public CaldroidSampleCustomAdapter(Context context, int month, int year,
 									   Map<String, Object> caldroidData,
 									   Map<String, Object> extraData, ArrayList<String> weather) {
 		super(context, month, year, caldroidData, extraData);
 		this.weather = weather;
-<<<<<<< Updated upstream
 		dbm = new DBManager(context);
 		sqlDB = dbm.getWritableDatabase();
 
-=======
->>>>>>> Stashed changes
 	}
 
 	@Override
@@ -71,6 +64,17 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 		// Get dateTime of this cell
 		DateTime dateTime = this.datetimeList.get(position);
 		Resources resources = context.getResources();
+
+
+		String date2 = dateTime.format("YYYY年 MM月 DD日");
+		planList = dbm.getPlan(sqlDB,date2);
+		Log.i("tag",date2);
+		Log.i("tag","planList.size="+planList.size());
+		if(planList.size() > 0){
+			tv2.setText("予定");
+		}else{
+			tv2.setText("");
+		}
 
 		// Set color of the dates in previous / next month
 		if (dateTime.getMonth() != month) {
@@ -123,10 +127,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 		int difference = getToday().numDaysFrom(dateTime);
 
-
 		tv1.setText("" + dateTime.getDay());
-		tv2.setText("");
-		tv2.setVisibility(View.VISIBLE);
 		img.setImageResource(R.drawable.siro);
 
 		if (difference >= 0 && difference < 5) {
@@ -141,45 +142,17 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 		}
 		tv1.setMinHeight(50);
 
-<<<<<<< Updated upstream
 
 		// Somehow after setBackgroundResource, the padding collapse.
 		// This is to recover the padding
 		cellView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
-=======
-/*		for (int count = 0; count < weather.size(); count++) {
-			for (int day = 1; day < 5; day++) {
-				if (weather.get(count).equals("01n") || weather.get(count).equals("02n")) {
-					img.setImageResource(R.drawable.hare);
-				} else if (weather.get(count).equals("03n") || weather.get(count).equals("04n")) {
-					img.setImageResource(R.drawable.kumori);
-				} else {
-					img.setImageResource(R.drawable.ame);
-				}
-			}
-		}
-*/
-			// Somehow after setBackgroundResource, the padding collapse.
-			// This is to recover the padding
-			cellView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
->>>>>>> Stashed changes
 
-			// Set custom color if required
-			setCustomResources(dateTime, cellView, tv1);
+		// Set custom color if required
+		setCustomResources(dateTime, cellView, tv1);
 
 
-<<<<<<< Updated upstream
 		return cellView;
 	}
 
 }
-=======
-			return cellView;
-		}
-	}
-
-
-
-
->>>>>>> Stashed changes
 
