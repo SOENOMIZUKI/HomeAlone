@@ -20,7 +20,7 @@ public class DBManager extends SQLiteOpenHelper {
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
         //アバターの外部キーを書いてない
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +  
-                " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
+                " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name,mailaddress,password,street_address,avatar_id INTEGER)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
@@ -80,9 +80,18 @@ public class DBManager extends SQLiteOpenHelper {
     //ユーザー登録
     public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
         String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
-        sqLiteDatabase.execSQL(sql,new String[]{user_name});
-        sqLiteDatabase.execSQL(sql,new String[]{mailaddress});
-        sqLiteDatabase.execSQL(sql,new String[]{password});
-        sqLiteDatabase.execSQL(sql,new String[]{street_address});
+        sqLiteDatabase.execSQL(sql,new String[]{user_name,mailaddress,password,street_address});
+    }
+    public User getUserSetting(SQLiteDatabase sqLiteDatabase){
+        String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User";
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,null);
+        cursor.moveToNext();
+        User user = new User();
+        user.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
+        user.setMailAddress(cursor.getString(cursor.getColumnIndex("mailaddress")));
+        user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+        user.setStreet_address(cursor.getString(cursor.getColumnIndex("street_address")));
+        user.setAvatar_id(cursor.getInt(cursor.getColumnIndex("avatar_id")));
+        return user;
     }
 }
