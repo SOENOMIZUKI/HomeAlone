@@ -15,29 +15,38 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+=======
+>>>>>>> main
 import java.util.Map;
 
 import hirondelle.date4j.DateTime;
 
 public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
+<<<<<<< HEAD
 	ArrayList<String> weather;
 	public SimpleDateFormat formatter = new SimpleDateFormat("yyyy年 MM月 dd日");
 	private SQLiteDatabase sqlDB;
 	DBManager dbm;
 	List<Plan> planList = new ArrayList<>();
+=======
+>>>>>>> main
 
 	public CaldroidSampleCustomAdapter(Context context, int month, int year,
-									   Map<String, Object> caldroidData,
-									   Map<String, Object> extraData, ArrayList<String> weather) {
+			Map<String, Object> caldroidData,
+			Map<String, Object> extraData) {
 		super(context, month, year, caldroidData, extraData);
+<<<<<<< HEAD
 		this.weather = weather;
 		dbm = new DBManager(context);
 		sqlDB = dbm.getWritableDatabase();
 
+=======
+>>>>>>> main
 	}
 
 	@Override
@@ -58,7 +67,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 		TextView tv1 = (TextView) cellView.findViewById(R.id.tv1);
 		TextView tv2 = (TextView) cellView.findViewById(R.id.tv2);
-		ImageView img = (ImageView) cellView.findViewById(R.id.imageView);
+		ImageView img = (ImageView)cellView.findViewById(R.id.imageView);
 
 		tv1.setTextColor(Color.BLACK);
 
@@ -126,6 +135,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 			}
 		}
 
+<<<<<<< HEAD
 		int difference = getToday().numDaysFrom(dateTime);
 
 		tv1.setText("" + dateTime.getDay());
@@ -147,17 +157,28 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 			// Somehow after setBackgroundResource, the padding collapse.
 			// This is to recover the padding
 			cellView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+=======
+		tv1.setText("" + dateTime.getDay());
+		tv1.setMinHeight(50);
+		tv2.setText("hi");
+		tv2.setVisibility(View.VISIBLE);
+        img.setImageResource(R.drawable.hare);
+		// Somehow after setBackgroundResource, the padding collapse.
+		// This is to recover the padding
+		cellView.setPadding(leftPadding, topPadding, rightPadding,bottomPadding);
+>>>>>>> main
 
-			// Set custom color if required
-			setCustomResources(dateTime, cellView, tv1);
+		// Set custom color if required
+		setCustomResources(dateTime, cellView, tv1);
 
 
+<<<<<<< HEAD
 			return cellView;
 		}
 
+=======
+		return cellView;
+>>>>>>> main
 	}
 
-
-
-
-
+}

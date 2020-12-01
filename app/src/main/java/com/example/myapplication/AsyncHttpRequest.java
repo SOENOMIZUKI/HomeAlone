@@ -1,18 +1,8 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.fragment.app.FragmentTransaction;
-
-import com.roomorama.caldroid.CaldroidFragment;
-import com.roomorama.caldroid.CaldroidListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,21 +13,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
-public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
-    private WeatherActivity WeatherActivity;
-    private CaldroidSampleCustomFragment caldroidFragment;
-    public AsyncHttpRequest(WeatherActivity activity) {
+public class AsyncHttpRequest extends AsyncTask<URL, Void, String> {
+    private Activity WeatherActivity;
+
+    public AsyncHttpRequest(Activity activity) {
         this.WeatherActivity = activity;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 
     @Override
-    protected ArrayList<String> doInBackground(URL... urls) {
+    protected String doInBackground(URL... urls) {
         final URL url = urls[0];
 
         HttpURLConnection con = null;
@@ -56,27 +45,22 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
             }
             final InputStream in = con.getInputStream();
             String encoding = con.getContentEncoding();
-            if (null == encoding) {
+            if(null == encoding){
                 encoding = "UTF-8";
             }
-            final InputStreamReader inReader = new InputStreamReader(in, encoding);
+                 final InputStreamReader inReader = new InputStreamReader(in, encoding);
             final BufferedReader bufReader = new BufferedReader(inReader);
             StringBuilder response = new StringBuilder();
             String line = null;
-            while ((line = bufReader.readLine()) != null) {
+            while((line = bufReader.readLine()) != null) {
                 response.append(line);
             }
             bufReader.close();
             inReader.close();
             in.close();
             JSONObject jsonObject = new JSONObject(response.toString());
-            ArrayList<String> weatherList = new ArrayList<>();
-            weatherList.add(jsonObject.getJSONArray("list").getJSONObject(4).getJSONArray("weather").getJSONObject(0).getString("icon"));
-            weatherList.add(jsonObject.getJSONArray("list").getJSONObject(12).getJSONArray("weather").getJSONObject(0).getString("icon"));
-            weatherList.add(jsonObject.getJSONArray("list").getJSONObject(20).getJSONArray("weather").getJSONObject(0).getString("icon"));
-            weatherList.add(jsonObject.getJSONArray("list").getJSONObject(28).getJSONArray("weather").getJSONObject(0).getString("icon"));
-            weatherList.add(jsonObject.getJSONArray("list").getJSONObject(36).getJSONArray("weather").getJSONObject(0).getString("icon"));
-            return weatherList;
+            String weather = jsonObject.getJSONArray("list").getJSONObject(4).getJSONArray("weather").getJSONObject(0).getString("icon");
+            return weather;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,8 +70,8 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
             return null;
         }
     }
-
     @Override
+<<<<<<< HEAD
     protected void onPostExecute(ArrayList<String> weatherList) {
         super.onPostExecute(weatherList);
         Intent intent = new Intent(WeatherActivity,CalendarActivity.class);
@@ -96,5 +80,10 @@ public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
 
 
 
+=======
+    protected void onPostExecute(String weather) {
+        TextView tv = WeatherActivity.findViewById(R.id.tv1);
+        tv.setText(weather);
+>>>>>>> main
     }
 }

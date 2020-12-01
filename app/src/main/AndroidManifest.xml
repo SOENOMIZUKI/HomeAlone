@@ -28,7 +28,17 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".AlarmActivity">
+        android:theme="@style/AppTheme" >
 
+        <activity
+            android:name=".Signup"
+            android:label="アカウント作成">
+        </activity>
+
+        <activity android:name=".alarm_wakeupActivity">
+        </activity>
+
+        <activity android:name=".HeaderActivity">
         </activity>
         <activity android:name=".AlarmSettingActivity" />
 
@@ -37,4 +47,38 @@
             android:process=":remote" />
     </application>
 
+        <activity android:name=".MapActivity">
+        </activity>
+
+        <activity android:name=".WeatherActivity" >
+        </activity>
+
+        <activity android:name=".MainActivity">
+        </activity>
+
+        <activity android:name=".CalendarActivity">
+        </activity>
+
+        <activity android:name=".AlarmActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".AlarmSettingActivity">
+        </activity>
+
+        <activity android:name=".AlarmSettingChangeActivity">
+        </activity>
+
+        <receiver android:name=".AlarmReceiver" android:process=":remote" />
+
+        <service
+            android:name=".SoundService"
+            android:enabled="true"
+            android:exported="false" />
+
+    </application>
 </manifest>

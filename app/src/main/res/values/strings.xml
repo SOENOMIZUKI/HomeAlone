@@ -24,6 +24,7 @@
     <string name="hint">半角英数字8文字以上で入力してください</string>
     <string name="email">メールアドレス</string>
     <string name="email_box">メールアドレス</string>
+<<<<<<< HEAD
     <string name="予定">plans</string>
     <string name="plans">予定</string>
     <string name="memo">メモ</string>
@@ -40,4 +41,12 @@
     <string name="endDateView">終了日</string>
     <string name="red" />
     <string name="redBtn">red</string>
+=======
+    <string name="kensaku">search</string>
+    <string name="menu_item1">家計簿</string>
+    <string name="menu_item2">アラーム</string>
+    <string name="menu_item3">周辺マップ</string>
+    <string name="menu_item4">アバター</string>
+    <string name="menu_item5">カレンダー</string>
+>>>>>>> main
 </resources>
