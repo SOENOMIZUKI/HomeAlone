@@ -50,4 +50,8 @@
     <string name="menu_item5">カレンダー</string>
     <string name="account_update">アカウント情報変更</string>
     <string name="password_update">パスワード変更</string>
+    <string name="update">変更</string>
+    <string name="before_password">変更前のパスワード</string>
+    <string name="new_password">新しいパスワード</string>
+    <string name="new_password2">新しいパスワード（確認用）</string>
 </resources>
