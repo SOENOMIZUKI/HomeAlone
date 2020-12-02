@@ -204,6 +204,19 @@ public class Ledgerdisp extends AppCompatActivity {
                         adapter.setprice(6,kakeibo.getOther().toString());
 
                         adapter.notifyDataSetInvalidated();
+                        sum = 0;
+                        for (int i = 0; i < price.length; i++) {
+                            ia[i] = adapter.getprice(i);
+                            rainfall[i] = ia[i];
+                        }
+                        // 合計金額の保存
+                        for(int n = 0; n<ia.length; n++){
+                            sum = sum + ia[n];
+                        }
+                        TextView txt1 = (TextView) findViewById(R.id.sumtext);
+                        // テキストビューのテキストを設定します
+                        txt1.setText("" + sum);
+                        setupPieChart();
                     }catch(ParseException e) {
                         e.printStackTrace();
                         }
@@ -296,6 +309,8 @@ public class Ledgerdisp extends AppCompatActivity {
         description.setText("");
         piechart.setDescription(description);
         piechart.getLegend().setEnabled(false);
+        piechart.setDrawHoleEnabled(false);
+        piechart.animateXY(2000,2000);
         piechart.setData(data);
         piechart.invalidate();
     }
