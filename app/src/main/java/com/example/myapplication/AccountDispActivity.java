@@ -43,7 +43,7 @@ public class AccountDispActivity extends AppCompatActivity {
 
         date[0] = user.getUser_name();
         date[1] = user.getMailAddress();
-        date[2] = user.getPassword();
+        date[2] = "●●●●●●●●";
         date[3] = user.getStreet_address();
         date[4] = String.valueOf(user.getAvatar_id());
 
@@ -71,19 +71,27 @@ public class AccountDispActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Button button = (Button)findViewById(R.id.account_update);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button account_update = (Button)findViewById(R.id.account_update);
+        account_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AccountDispActivity.this, UserSettingActivity.class);
                 startActivity(intent);
             }
         });
-        Button button2 = (Button)findViewById(R.id.password_update);
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button password_update = (Button)findViewById(R.id.password_update);
+        password_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AccountDispActivity.this, PasswordSettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button return_button = (Button)findViewById(R.id.return_button);
+        return_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountDispActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
