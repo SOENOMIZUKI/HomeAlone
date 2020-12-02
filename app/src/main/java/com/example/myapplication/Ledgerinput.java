@@ -102,21 +102,22 @@ public class Ledgerinput extends AppCompatActivity {
             }
         });
         //入力チェック
-        final EditText editText = findViewById(R.id.editTextTextPersonName3);
+//        final EditText editText = findViewById(R.id.editTextTextPersonName3);
 
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean flag) {
-                if(!flag){
-                    String str = editText.getText().toString().trim();
-                    if(str.matches("")){
-                        Toast toast = Toast.makeText(Ledgerinput.this,"入力されていません",Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
-            }
 
-        });
+//        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean flag) {
+//                if(!flag){
+//                    String str = editText.getText().toString().trim();
+//                    if(str.matches("")){
+//                        Toast toast = Toast.makeText(Ledgerinput.this,"入力されていません",Toast.LENGTH_LONG);
+//                        toast.show();
+//                    }
+//                }
+//            }
+//
+//        });
 
 
         //戻るボタン遷移

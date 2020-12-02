@@ -61,25 +61,24 @@
         android:id="@+id/back_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="戻る"
         android:background="@drawable/kakeibobackbottom"
+        android:text="戻る"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/inputfinish"
-        app:layout_constraintHorizontal_bias="0.608"
+        app:layout_constraintHorizontal_bias="0.598"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.54" />
 
     <Button
         android:id="@+id/inputfinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="追加"
         android:background="@drawable/kakeiboinsertbottom"
+        android:text="追加"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
