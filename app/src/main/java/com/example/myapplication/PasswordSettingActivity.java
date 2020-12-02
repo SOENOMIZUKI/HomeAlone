@@ -28,19 +28,29 @@ public class PasswordSettingActivity extends AppCompatActivity {
         dbm = new DBManager(this);
         sqlDB = dbm.getWritableDatabase();
 
-        Button button = (Button)findViewById(R.id.user_insert_button);
+        Button button = (Button)findViewById(R.id.password_update_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                EditText bpw = (EditText) findViewById(R.id.before_password);
                 EditText pw1 = (EditText) findViewById(R.id.password1);
                 EditText pw2 = (EditText) findViewById(R.id.password2);
 
-
+                String before_password = bpw.getText().toString();
                 String user_password1 = pw1.getText().toString();
                 String user_password2 = pw2.getText().toString();
 
+                User user = dbm.getUserSetting(sqlDB);
 
+                if(before_password.equals("")){
+                    bpw.setError("入力してください");
+                    repeat = false;
+                }
+                if(!before_password.equals(user.getPassword())){
+                    bpw.setError("パスワードが正しくありません");
+                    repeat = false;
+                }
                 if(!checkLogic(user_password1)){
                     pw1.setError("半角英数字で入力してください");
                     repeat = false;
@@ -55,29 +65,20 @@ public class PasswordSettingActivity extends AppCompatActivity {
                 }
 
                 if(repeat){
-
-                    //dbm.signUp(sqlDB, user_password1);
-                    //Intent intent = new Intent(Signup.this, CalendarActivity.class);
-                    //Intent intent = new Intent(Signup.this, AccountDispActivity.class);
-                    //startActivity(intent);
-
+                    dbm.setUserPassword(sqlDB, user_password1);
+                    Intent intent = new Intent(PasswordSettingActivity.this, AccountDispActivity.class);
+                    startActivity(intent);
                 }
             }
         });
-    }
-
-    //メールアドレス判定
-    public static boolean emailValidator(final String mailAddress) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(mailAddress);
-        return matcher.matches();
-
+        Button return_button3 = (Button)findViewById(R.id.return_button3);
+        return_button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PasswordSettingActivity.this, AccountDispActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //半角英数字判定

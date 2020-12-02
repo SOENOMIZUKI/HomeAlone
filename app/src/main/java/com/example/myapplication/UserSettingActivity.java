@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,15 +21,24 @@ public class UserSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
+
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+
+        User user = dbm.getUserSetting(sqlDB);
+        TextView u_name = findViewById(R.id.user_name);
+        u_name.setText(user.getUser_name());
+        TextView u_mail = findViewById(R.id.mailaddress);
+        u_mail.setText(user.getMailAddress());
+        TextView u_address = findViewById(R.id.street_address);
+        u_address.setText(user.getStreet_address());
+
     }
     @Override
     protected void onResume() {
         super.onResume();
 
-        dbm = new DBManager(this);
-        sqlDB = dbm.getWritableDatabase();
-
-        Button button = (Button)findViewById(R.id.user_insert_button);
+        Button button = (Button)findViewById(R.id.user_update_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,13 +65,18 @@ public class UserSettingActivity extends AppCompatActivity {
                     repeat = false;
                 }
                 if(repeat){
-
-                    //dbm.signUp(sqlDB, user_name, user_mailaddress, user_street_address);
-                    //Intent intent = new Intent(Signup.this, CalendarActivity.class);
-                    //Intent intent = new Intent(Signup.this, AccountDispActivity.class);
-                    //startActivity(intent);
-
+                    dbm.setUserSetting(sqlDB, user_name, user_mailaddress, user_street_address);
+                    Intent intent = new Intent(UserSettingActivity.this, AccountDispActivity.class);
+                    startActivity(intent);
                 }
+            }
+        });
+        Button return_button2 = (Button)findViewById(R.id.return_button2);
+        return_button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserSettingActivity.this, AccountDispActivity.class);
+                startActivity(intent);
             }
         });
     }

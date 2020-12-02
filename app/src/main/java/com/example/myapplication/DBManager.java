@@ -210,4 +210,13 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new String[]{rowNum});
 
     }
+
+    public void setUserSetting(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String street_address){
+        String sql = "UPDATE User set user_name = ?, mailaddress = ? ,street_address = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{user_name,mailaddress,street_address});
+    }
+    public void setUserPassword(SQLiteDatabase sqLiteDatabase, String password){
+        String sql = "UPDATE User set password = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{password});
+    }
 }
