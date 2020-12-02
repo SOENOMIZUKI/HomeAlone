@@ -214,25 +214,25 @@ public class Ledgerdisp extends AppCompatActivity {
                 }
             });
 
-            //家計簿変更画面遷移
-            Button changeButton = findViewById(R.id.changebottom);
-            changeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplication(), Ledgerchange.class);
-                    try {
-                        Spinner spinner = findViewById(R.id.spinner);
-                        String item = (String) spinner.getSelectedItem();
-
-                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
-                        Date date = sdFormat.parse(item);
-                        intent.putExtra("Month", date);
-                        }  catch (ParseException e) {
-                        e.printStackTrace();
-                            }
-                    startActivity(intent);
-                }
-            });
+//            //家計簿変更画面遷移
+//            Button changeButton = findViewById(R.id.changebottom);
+//            changeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(getApplication(), Ledgerchange.class);
+//                    try {
+//                        Spinner spinner = findViewById(R.id.spinner);
+//                        String item = (String) spinner.getSelectedItem();
+//
+//                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
+//                        Date date = sdFormat.parse(item);
+//                        intent.putExtra("Month", date);
+//                        }  catch (ParseException e) {
+//                        e.printStackTrace();
+//                            }
+//                    startActivity(intent);
+//                }
+//            });
             //家計簿追加画面遷移
             Button inputButton = findViewById(R.id.inputbottom);
             inputButton.setOnClickListener(new View.OnClickListener() {
