@@ -77,7 +77,7 @@ public class Signup extends AppCompatActivity {
                 if(repeat){
 
                     dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
-                    Intent intent = new Intent(Signup.this, CalendarActivity.class);
+                    Intent intent = new Intent(Signup.this, WeatherActivity.class);
                     startActivity(intent);
                     
                 }

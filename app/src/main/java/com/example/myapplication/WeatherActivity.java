@@ -32,7 +32,7 @@ public class WeatherActivity extends AppCompatActivity {
         try {
             new GetAddress(this)
                     .execute(
-                            new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"components=country:JP&key=AIzaSyDx9BUrLDJuZ6tNds4Ibxn0kV7YeRqy_Ns")
+                            new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"components=country:JP&key=AIzaSyCe8iC-25jYIh9H6XijaTysl974CcNe8bU")
                     );
         } catch (MalformedURLException e) {
             e.printStackTrace();

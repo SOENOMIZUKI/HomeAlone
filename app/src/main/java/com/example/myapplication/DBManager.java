@@ -59,7 +59,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
-        sqLiteDatabase.execSQL("DROP TABLE Moneybook");
+        //sqLiteDatabase.execSQL("DROP TABLE Moneybook");
         sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);

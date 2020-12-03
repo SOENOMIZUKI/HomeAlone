@@ -16,11 +16,6 @@
         <activity android:name=".PasswordSettingActivity"></activity>
         <activity android:name=".UserSettingActivity" />
         <activity android:name=".AccountDispActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity android:name=".Ledgerchange">
@@ -33,6 +28,11 @@
         </activity>
 
         <activity android:name=".Signup" android:label="アカウント作成">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity android:name=".alarm_wakeupActivity">
