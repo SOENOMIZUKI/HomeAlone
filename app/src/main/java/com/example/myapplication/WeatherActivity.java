@@ -43,17 +43,28 @@ public class WeatherActivity extends AppCompatActivity {
         sqlDB = dbm.getWritableDatabase();
         address = dbm.getAddress(sqlDB);
         Log.i("tag","住所は"+ address);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
         try {
             new GetAddress(this)
                     .execute(
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                             new URL("http://api.openweathermap.org/data/2.5/forecast?q=London,uk&APPID=f4ccf014306d1a86f61016ee7bb4a0d2")
                     );
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+=======
+                            new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"components=country:JP&key=AIzaSyCe8iC-25jYIh9H6XijaTysl974CcNe8bU")
+                    );
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+       }
+>>>>>>> Stashed changes
 =======
                             new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"components=country:JP&key=AIzaSyCe8iC-25jYIh9H6XijaTysl974CcNe8bU")
                     );

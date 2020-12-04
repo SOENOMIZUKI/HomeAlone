@@ -11,7 +11,11 @@ public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         super(context,"Alarm.sqlite3",null,3);
+=======
+        super(context,"Alarm.sqlite3",null,8);
+>>>>>>> Stashed changes
 =======
         super(context,"Alarm.sqlite3",null,8);
 >>>>>>> Stashed changes
@@ -85,6 +89,21 @@ public class DBManager extends SQLiteOpenHelper {
     public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
         String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
         sqLiteDatabase.execSQL(sql,new String[]{user_name,mailaddress,password,street_address});
+<<<<<<< Updated upstream
+=======
+    }
+    public User getUserSetting(SQLiteDatabase sqLiteDatabase){
+        String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User WHERE user_id = 1";
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,null);
+        cursor.moveToNext();
+        User user = new User();
+        user.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
+        user.setMailAddress(cursor.getString(cursor.getColumnIndex("mailaddress")));
+        user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+        user.setStreet_address(cursor.getString(cursor.getColumnIndex("street_address")));
+        user.setAvatar_id(cursor.getInt(cursor.getColumnIndex("avatar_id")));
+        return user;
+>>>>>>> Stashed changes
     }
     public User getUserSetting(SQLiteDatabase sqLiteDatabase){
         String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User WHERE user_id = 1";
@@ -196,5 +215,8 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

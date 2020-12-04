@@ -35,6 +35,9 @@ public class HeaderActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplication(), Ledgerdisp.class);
                 startActivity(intent1);
                 return true;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             case R.id.item2:
                 Intent intent2 = new Intent(getApplication(), AlarmActivity.class);

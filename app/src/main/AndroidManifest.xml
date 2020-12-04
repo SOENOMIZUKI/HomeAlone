@@ -43,6 +43,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         </activity>
 
@@ -57,9 +60,12 @@
 
         <activity android:name=".WeatherActivity" >
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         </activity>
 
         <activity android:name=".MainActivity">
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         </activity>
@@ -79,8 +85,11 @@
         </activity>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <activity android:name=".AlarmSettingChangeActivity">
 =======
+=======
+>>>>>>> Stashed changes
         <activity android:name=".CalendarComfirmActivity">
         </activity>
 
