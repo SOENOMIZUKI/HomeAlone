@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AlarmSettingActivity extends AppCompatActivity {
+public class AlarmSettingActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = false;
