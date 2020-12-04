@@ -18,17 +18,10 @@
         <activity android:name=".AccountDispActivity">
         </activity>
 
-        <activity android:name=".Ledgerchange">
-        </activity>
-
         <activity android:name=".Ledgerinput">
         </activity>
 
         <activity android:name=".Ledgerdisp" >
-<<<<<<< HEAD
-=======
-
->>>>>>> get_address
         </activity>
 
         <activity android:name=".Signup" android:label="HOMEALONE">
@@ -51,24 +44,15 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
-<<<<<<< HEAD
-=======
-
->>>>>>> get_address
-        </activity>
-
-        <activity android:name=".MainActivity">
         </activity>
 
         <activity android:name=".CalendarActivity">
         </activity>
+
         <activity android:name=".AlarmActivity" >
         </activity>
 
         <activity android:name=".AlarmSettingActivity">
-        </activity>
-
-        <activity android:name=".AlarmSettingChangeActivity">
         </activity>
 
         <activity android:name=".CalendarComfirmActivity">

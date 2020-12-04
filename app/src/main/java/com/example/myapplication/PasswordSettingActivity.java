@@ -12,7 +12,7 @@ import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PasswordSettingActivity extends AppCompatActivity {
+public class PasswordSettingActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = true;

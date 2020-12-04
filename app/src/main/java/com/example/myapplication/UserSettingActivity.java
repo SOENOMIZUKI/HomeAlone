@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserSettingActivity extends AppCompatActivity {
+public class UserSettingActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = true;

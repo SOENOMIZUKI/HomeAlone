@@ -55,7 +55,7 @@ import static android.nfc.NfcAdapter.EXTRA_DATA;
 
 
 
-public class Ledgerdisp extends AppCompatActivity {
+public class Ledgerdisp extends HeaderActivity {
 
     private SQLiteDatabase sqlDB;
     DBManager dbm;

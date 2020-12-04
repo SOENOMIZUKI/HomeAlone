@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 
-public class Ledgerinput extends AppCompatActivity {
+public class Ledgerinput extends HeaderActivity {
 
     int post = 0;
     private SQLiteDatabase sqlDB;
