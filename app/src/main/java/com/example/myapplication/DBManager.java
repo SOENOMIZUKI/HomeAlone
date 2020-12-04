@@ -59,7 +59,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
-        //sqLiteDatabase.execSQL("DROP TABLE Moneybook");
+        sqLiteDatabase.execSQL("DROP TABLE Moneybook");
         sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);
@@ -210,7 +210,6 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new String[]{rowNum});
 
     }
-<<<<<<< HEAD
     public String getAddress(SQLiteDatabase sqLiteDatabase){
         String sql = "SELECT street_address FROM User";
         SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{},null);
@@ -218,8 +217,6 @@ public class DBManager extends SQLiteOpenHelper {
         String address = (cursor.getString(cursor.getColumnIndex("street_address")));
         return address;
     }
-
-=======
 
     public void setUserSetting(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String street_address){
         String sql = "UPDATE User set user_name = ?, mailaddress = ? ,street_address = ?";
@@ -229,5 +226,4 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
->>>>>>> main
 }
