@@ -151,11 +151,13 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-        startdate =Year + "年" + Month + "月" + Day + "日";
+        int MonthPuls = Month + 1;
+        startdate =Year + "年" + MonthPuls + "月" + Day + "日";
         TextView start = (TextView)findViewById(R.id.startText);
         start.setText(startdate);
 
-        enddate = year + "年" + monthOfYear + "月" + dayOfMonth + "日";
+        int monthEnd = monthOfYear + 1;
+        enddate = year + "年" + monthEnd + "月" + dayOfMonth + "日";
         TextView end = (TextView)findViewById(R.id.endText);
         end.setText(enddate);
 
