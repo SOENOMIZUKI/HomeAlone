@@ -25,13 +25,19 @@
         </activity>
 
         <activity android:name=".Ledgerdisp" >
+<<<<<<< HEAD
+=======
+
+>>>>>>> get_address
         </activity>
 
-        <activity android:name=".Signup" android:label="アカウント作成">
+        <activity android:name=".Signup" android:label="HOMEALONE">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
 
@@ -45,6 +51,10 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
+<<<<<<< HEAD
+=======
+
+>>>>>>> get_address
         </activity>
 
         <activity android:name=".MainActivity">

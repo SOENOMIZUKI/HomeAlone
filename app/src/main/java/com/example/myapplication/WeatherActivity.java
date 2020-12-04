@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,13 +24,20 @@ public class WeatherActivity extends AppCompatActivity {
 
     private CaldroidSampleCustomFragment caldroidFragment;
     final SimpleDateFormat formatter = new SimpleDateFormat("yyyy MMM dd");
+    String address;
+    private SQLiteDatabase sqlDB;
+    DBManager dbm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        //sql
-        String address = "新宮市";
+
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+        address = dbm.getAddress(sqlDB);
+        Log.i("tag","住所は"+ address);
+
         try {
             new GetAddress(this)
                     .execute(
