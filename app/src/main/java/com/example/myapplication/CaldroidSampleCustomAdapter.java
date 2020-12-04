@@ -68,8 +68,6 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 		String date2 = dateTime.format("YYYY年 MM月 DD日");
 		planList = dbm.getPlan(sqlDB,date2);
-		Log.i("tag",date2);
-		Log.i("tag","planList.size="+planList.size());
 		if(planList.size() > 0){
 			tv2.setText("予定");
 		}else{

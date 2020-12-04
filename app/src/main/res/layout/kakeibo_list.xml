@@ -13,7 +13,6 @@
         android:layout_margin="5dp"
         android:contentDescription="@string/description"
         android:scaleType="centerCrop"/>
-<!--        android:background="@drawable/customizedbackground"/>-->
 
     <LinearLayout
         android:layout_width="332dp"
