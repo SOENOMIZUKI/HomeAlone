@@ -24,6 +24,11 @@
         </activity>
 
         <activity android:name=".Signup" android:label="アカウント作成">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".alarm_wakeupActivity">
@@ -36,11 +41,7 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".MainActivity">
