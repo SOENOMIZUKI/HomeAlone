@@ -36,6 +36,9 @@ public class HeaderActivity extends AppCompatActivity {
                 startActivity(intent1);
                 return true;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
