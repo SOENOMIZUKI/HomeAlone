@@ -13,7 +13,7 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,7);
+        super(context,"Alarm.sqlite3",null,8);
     }
     // テーブル作成
     @Override
