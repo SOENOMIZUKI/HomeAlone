@@ -28,8 +28,14 @@ public class HeaderActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.item1:
+<<<<<<< Updated upstream
 
                 
+=======
+                Intent intent1 = new Intent(getApplication(), Ledgerdisp.class);
+                startActivity(intent1);
+                return true;
+>>>>>>> Stashed changes
             case R.id.item2:
                 Intent intent2 = new Intent(getApplication(), AlarmActivity.class);
                 startActivity(intent2);
@@ -46,7 +52,7 @@ public class HeaderActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item5:
-                Intent intent5 = new Intent(getApplication(), CalendarActivity.class);
+                Intent intent5 = new Intent(getApplication(), WeatherActivity.class);
                 startActivity(intent5);
 
                 return true;

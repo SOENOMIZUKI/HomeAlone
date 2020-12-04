@@ -14,10 +14,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+<<<<<<< Updated upstream
 public class AsyncHttpRequest extends AsyncTask<URL, Void, String> {
     private Activity WeatherActivity;
 
     public AsyncHttpRequest(Activity activity) {
+=======
+public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
+    private WeatherActivity WeatherActivity;
+    private CaldroidSampleCustomFragment caldroidFragment;
+
+    public AsyncHttpRequest(WeatherActivity activity) {
+>>>>>>> Stashed changes
         this.WeatherActivity = activity;
     }
 

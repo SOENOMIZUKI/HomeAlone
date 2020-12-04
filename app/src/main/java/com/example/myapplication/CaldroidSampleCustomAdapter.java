@@ -50,6 +50,18 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 		DateTime dateTime = this.datetimeList.get(position);
 		Resources resources = context.getResources();
 
+<<<<<<< Updated upstream
+=======
+
+		String date2 = dateTime.format("YYYY年 MM月 DD日");
+		planList = dbm.getPlan(sqlDB,date2);
+		if(planList.size() > 0){
+			tv2.setText("予定");
+		}else{
+			tv2.setText("");
+		}
+
+>>>>>>> Stashed changes
 		// Set color of the dates in previous / next month
 		if (dateTime.getMonth() != month) {
 			tv1.setTextColor(resources

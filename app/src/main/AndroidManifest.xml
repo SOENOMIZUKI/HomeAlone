@@ -12,11 +12,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
             android:theme="@style/AppTheme" >
 
+<<<<<<< Updated upstream
         <activity
             android:name=".Signup"
             android:label="アカウント作成">
+=======
+        <activity android:name=".Ledgerchange">
+=======
+        android:theme="@style/AppTheme">
+        <activity android:name=".PasswordSettingActivity"></activity>
+        <activity android:name=".UserSettingActivity" />
+        <activity android:name=".AccountDispActivity">
+>>>>>>> main
+        </activity>
+
+        <activity android:name=".Ledgerinput">
+        </activity>
+
+        <activity android:name=".Ledgerdisp" >
+        </activity>
+
+        <activity android:name=".Signup" android:label="HOMEALONE">
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+>>>>>>> Stashed changes
         </activity>
 
         <activity android:name=".alarm_wakeupActivity">
@@ -29,9 +56,12 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
+<<<<<<< Updated upstream
         </activity>
 
         <activity android:name=".MainActivity">
+=======
+>>>>>>> Stashed changes
         </activity>
 
         <activity android:name=".CalendarActivity">
@@ -48,7 +78,14 @@
         <activity android:name=".AlarmSettingActivity">
         </activity>
 
+<<<<<<< Updated upstream
         <activity android:name=".AlarmSettingChangeActivity">
+=======
+        <activity android:name=".CalendarComfirmActivity">
+        </activity>
+
+        <activity android:name=".CalendarAddActivity">
+>>>>>>> Stashed changes
         </activity>
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" />
