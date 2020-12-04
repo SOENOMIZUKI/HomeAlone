@@ -12,63 +12,43 @@ import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-public class Signup extends AppCompatActivity {
-
+public class PasswordSettingActivity extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = true;
-    User user;
-    boolean sign = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-        dbm = new DBManager(this);
-        sqlDB = dbm.getWritableDatabase();
-        try{
-            user = dbm.getUserSetting(sqlDB);
-        }catch (Exception e) {
-            sign = false;
-        }finally {
-            if(sign){
-                Intent intent = new Intent(Signup.this, WeatherActivity.class);
-                startActivity(intent);
-            }
-        }
+        setContentView(R.layout.activity_password_setting);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
 
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
 
-
-        Button button = (Button)findViewById(R.id.user_insert_button);
+        Button button = (Button)findViewById(R.id.password_update_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = (EditText) findViewById(R.id.user_name) ;
-                EditText mail = (EditText) findViewById(R.id.mailaddress);
+
+                EditText bpw = (EditText) findViewById(R.id.before_password);
                 EditText pw1 = (EditText) findViewById(R.id.password1);
                 EditText pw2 = (EditText) findViewById(R.id.password2);
-                EditText address = (EditText) findViewById(R.id.street_address) ;
-                String user_name = name.getText().toString();
-                String user_mailaddress = mail.getText().toString();
+
+                String before_password = bpw.getText().toString();
                 String user_password1 = pw1.getText().toString();
                 String user_password2 = pw2.getText().toString();
-                String user_street_address = address.getText().toString();
-                if(user_name.equals("")){
-                    name.setError("入力してください");
+
+                User user = dbm.getUserSetting(sqlDB);
+
+                if(before_password.equals("")){
+                    bpw.setError("入力してください");
                     repeat = false;
                 }
-                if(user_mailaddress.equals("")){
-                    mail.setError("入力してください");
-                    repeat = false;
-                }
-                if(!emailValidator(user_mailaddress)){
-                    mail.setError("正しいメールアドレスではありません");
+                if(!before_password.equals(user.getPassword())){
+                    bpw.setError("パスワードが正しくありません");
                     repeat = false;
                 }
                 if(!checkLogic(user_password1)){
@@ -83,33 +63,22 @@ public class Signup extends AppCompatActivity {
                     pw2.setError("上のパスワードと一致しません");
                     repeat = false;
                 }
-                if(user_street_address.equals("")){
-                    address.setError("入力してください");
-                    repeat = false;
-                }
-                if(repeat){
 
-                    dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
-                    Intent intent = new Intent(Signup.this, WeatherActivity.class);
+                if(repeat){
+                    dbm.setUserPassword(sqlDB, user_password1);
+                    Intent intent = new Intent(PasswordSettingActivity.this, AccountDispActivity.class);
                     startActivity(intent);
-                    
                 }
             }
         });
-    }
-
-    //メールアドレス判定
-    public static boolean emailValidator(final String mailAddress) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(mailAddress);
-        return matcher.matches();
-
+        Button return_button3 = (Button)findViewById(R.id.return_button3);
+        return_button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PasswordSettingActivity.this, AccountDispActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //半角英数字判定

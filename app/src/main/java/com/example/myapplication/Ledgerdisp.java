@@ -204,6 +204,19 @@ public class Ledgerdisp extends AppCompatActivity {
                         adapter.setprice(6,kakeibo.getOther().toString());
 
                         adapter.notifyDataSetInvalidated();
+                        sum = 0;
+                        for (int i = 0; i < price.length; i++) {
+                            ia[i] = adapter.getprice(i);
+                            rainfall[i] = ia[i];
+                        }
+                        // 合計金額の保存
+                        for(int n = 0; n<ia.length; n++){
+                            sum = sum + ia[n];
+                        }
+                        TextView txt1 = (TextView) findViewById(R.id.sumtext);
+                        // テキストビューのテキストを設定します
+                        txt1.setText("" + sum);
+                        setupPieChart();
                     }catch(ParseException e) {
                         e.printStackTrace();
                         }
@@ -213,26 +226,15 @@ public class Ledgerdisp extends AppCompatActivity {
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
-
-            //家計簿変更画面遷移
-            Button changeButton = findViewById(R.id.changebottom);
-            changeButton.setOnClickListener(new View.OnClickListener() {
+            //戻る
+            Button backButton = findViewById(R.id.bottom);
+            backButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplication(), Ledgerchange.class);
-                    try {
-                        Spinner spinner = findViewById(R.id.spinner);
-                        String item = (String) spinner.getSelectedItem();
-
-                        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM");
-                        Date date = sdFormat.parse(item);
-                        intent.putExtra("Month", date);
-                        }  catch (ParseException e) {
-                        e.printStackTrace();
-                            }
-                    startActivity(intent);
-                }
-            });
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
             //家計簿追加画面遷移
             Button inputButton = findViewById(R.id.inputbottom);
             inputButton.setOnClickListener(new View.OnClickListener() {
@@ -296,6 +298,8 @@ public class Ledgerdisp extends AppCompatActivity {
         description.setText("");
         piechart.setDescription(description);
         piechart.getLegend().setEnabled(false);
+        piechart.setDrawHoleEnabled(false);
+        piechart.animateXY(2000,2000);
         piechart.setData(data);
         piechart.invalidate();
     }

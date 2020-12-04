@@ -116,10 +116,19 @@ public class DBManager extends SQLiteOpenHelper {
     //ユーザー登録
     public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
         String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
-        sqLiteDatabase.execSQL(sql,new String[]{user_name});
-        sqLiteDatabase.execSQL(sql,new String[]{mailaddress});
-        sqLiteDatabase.execSQL(sql,new String[]{password});
-        sqLiteDatabase.execSQL(sql,new String[]{street_address});
+        sqLiteDatabase.execSQL(sql,new String[]{user_name,mailaddress,password,street_address});
+    }
+    public User getUserSetting(SQLiteDatabase sqLiteDatabase){
+        String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User WHERE user_id = 1";
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,null);
+        cursor.moveToNext();
+        User user = new User();
+        user.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
+        user.setMailAddress(cursor.getString(cursor.getColumnIndex("mailaddress")));
+        user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+        user.setStreet_address(cursor.getString(cursor.getColumnIndex("street_address")));
+        user.setAvatar_id(cursor.getInt(cursor.getColumnIndex("avatar_id")));
+        return user;
     }
     //家計簿
     public void onMoneybookRent(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
@@ -201,6 +210,7 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql,new String[]{rowNum});
 
     }
+<<<<<<< HEAD
     public String getAddress(SQLiteDatabase sqLiteDatabase){
         String sql = "SELECT street_address FROM User";
         SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{},null);
@@ -209,4 +219,15 @@ public class DBManager extends SQLiteOpenHelper {
         return address;
     }
 
+=======
+
+    public void setUserSetting(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String street_address){
+        String sql = "UPDATE User set user_name = ?, mailaddress = ? ,street_address = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{user_name,mailaddress,street_address});
+    }
+    public void setUserPassword(SQLiteDatabase sqLiteDatabase, String password){
+        String sql = "UPDATE User set password = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{password});
+    }
+>>>>>>> main
 }
