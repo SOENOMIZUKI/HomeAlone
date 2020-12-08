@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,14 +22,13 @@ public class AvatarActivity extends HeaderActivity {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avatar);
-        findViewById(R.id.btn).setOnContextClickListener((View.OnContextClickListener) this);
         basicReadWrite();
     }
+
 
     public void basicReadWrite() {
 
@@ -47,33 +47,43 @@ public class AvatarActivity extends HeaderActivity {
         myRef.addValueEventListener(new ValueEventListener() {
 
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    //画像を表示する
+                //画像を表示する
 
-                    imageView =(ImageView)findViewById(R.id.imageView);
-                    String fileName = "slide";
-                    int picId = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    imageView.setImageResource(picId);
+                imageView = (ImageView) findViewById(R.id.imageView);
+                String fileName = "slide";
+                int picId = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                imageView.setImageResource(picId);
 
 
-                }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                }
+            }
 
-                });
+        });
 
-        }
-
-        public void onClick(View view){
-
-        Intent intent = new Intent(this,CalendarActivity.class);
-        startActivity(intent);
-        }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Button button = (Button)findViewById(R.id.btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent intent = new Intent(AvatarActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
 
 
