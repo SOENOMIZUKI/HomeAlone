@@ -148,6 +148,7 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
             @Override
             public void onClick(View v) {
                 Intent intent3 = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
+                intent3.putExtra("Date",setDate);
                 startActivity(intent3);
             }
         });
@@ -183,7 +184,7 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
     }
 
     public void onRegist(View view) {
-            Toast.makeText(getApplicationContext(), "登録しました。", Toast.LENGTH_SHORT).show();
+
             EditText editText1 = (EditText) findViewById(R.id.plans);
             EditText editText2 = (EditText) findViewById(R.id.note);
             plans = editText1.getText().toString();
@@ -207,16 +208,30 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
                 }
             });
 
-            if (startTime.equals("") || endtime.equals("") || startdate.equals("") || enddate.equals("") || plans.equals("") || note.equals("") || color.equals("")) {
-                Toast.makeText(getApplicationContext(), "入力漏れがあります。確認してください", Toast.LENGTH_SHORT).show();
-            } else {
-                String starttime = startTime + startdate;
-                String finishtime = endtime + enddate;
-                String date = setDate;
+        if(startTime.equals("")){
+            Toast.makeText(getApplicationContext(), "開始時間を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(startdate.equals("")){
+            Toast.makeText(getApplicationContext(), "開始日を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(endtime.equals("")){
+            Toast.makeText(getApplicationContext(), "終了時間を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(enddate.equals("")){
+            Toast.makeText(getApplicationContext(), "終了日を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(color.equals("")){
+            Toast.makeText(getApplicationContext(), "色を選択してください", Toast.LENGTH_SHORT).show();
+        }else if(note.equals("")){
+            Toast.makeText(getApplicationContext(), "予定詳細を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(plans.equals("")){
+            Toast.makeText(getApplicationContext(), "予定を入力してください", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "登録しました。", Toast.LENGTH_SHORT).show();
+            String starttime = startTime + startdate;
+            String finishtime = endtime + enddate;
+            String date = setDate;
 
-                dbm.plans(sqlDB, date, plans, starttime, finishtime, notification, color, note);
-                Intent intent = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
-                startActivity(intent);
-            }
+            dbm.plans(sqlDB, date, plans, starttime, finishtime, notification, color, note);
+            Intent intent = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
+            startActivity(intent);
+        }
+
     }
 }
