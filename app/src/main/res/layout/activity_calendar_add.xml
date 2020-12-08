@@ -24,9 +24,8 @@
         android:layout_width="284dp"
         android:layout_height="54dp"
         android:ems="10"
-        android:hint="@string/予定"
+        android:hint="@string/plansNew"
         android:inputType="textPersonName"
-        android:text="@string/plans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -40,7 +39,7 @@
         android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/memo"
+        android:hint="メモ(30文字以内)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -187,6 +186,7 @@
             android:id="@+id/aka"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:checked="true"
             android:text="@string/redBtn" />
     </RadioGroup>
 
