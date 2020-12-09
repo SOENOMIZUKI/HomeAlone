@@ -16,7 +16,11 @@ public class WeatherActivity extends AppCompatActivity {
         try {
             new AsyncHttpRequest(this)
                     .execute(
+<<<<<<< HEAD
                             new URL("http://api.openweathermap.org/data/2.5/forecast?q=London,uk&APPID=f4ccf014306d1a86f61016ee7bb4a0d2")
+=======
+                            new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&components=country:JP&key=APIKey")
+>>>>>>> main
                     );
         } catch (MalformedURLException e) {
             e.printStackTrace();
