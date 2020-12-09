@@ -17,7 +17,6 @@ public class Signup extends AppCompatActivity {
 
     private SQLiteDatabase sqlDB;
     DBManager dbm;
-    boolean repeat = true;
     User user;
     boolean sign = true;
     @Override
@@ -49,6 +48,7 @@ public class Signup extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean repeat = true;
                 EditText name = (EditText) findViewById(R.id.user_name) ;
                 EditText mail = (EditText) findViewById(R.id.mailaddress);
                 EditText pw1 = (EditText) findViewById(R.id.password1);
