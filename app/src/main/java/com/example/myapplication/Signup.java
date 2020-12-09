@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,10 +20,15 @@ public class Signup extends AppCompatActivity {
     DBManager dbm;
     User user;
     boolean sign = true;
+    String errorMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        errorMsg = null;
+        Intent intent2 = getIntent();
+        errorMsg = intent2.getStringExtra("errorMsg");
 
         dbm = new DBManager(this);
         sqlDB = dbm.getWritableDatabase();
@@ -93,6 +99,9 @@ public class Signup extends AppCompatActivity {
                     Intent intent = new Intent(Signup.this, WeatherActivity.class);
                     startActivity(intent);
                     
+                }
+                if (errorMsg != null){
+                    Toast.makeText(getApplicationContext(),errorMsg,Toast.LENGTH_SHORT).show();
                 }
             }
         });
