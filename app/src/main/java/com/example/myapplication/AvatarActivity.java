@@ -78,7 +78,7 @@ public class AvatarActivity extends HeaderActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                Intent intent = new Intent(AvatarActivity.this, CalendarActivity.class);
+                Intent intent = new Intent(AvatarActivity.this, WeatherActivity.class);
                 startActivity(intent);
             }
         });
