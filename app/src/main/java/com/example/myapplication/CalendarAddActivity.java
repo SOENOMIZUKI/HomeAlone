@@ -1,12 +1,10 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,15 +16,17 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class CalendarAddActivity extends HeaderActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
+public class CalendarAddActivity extends HeaderActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
-    Calendar calendar ;
-    DatePickerDialog datePickerDialog ;
+    Calendar calendar;
+    DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
-    int Year, Month, Day ;
+    int Year, Month, Day;
     int hour, minute;
     String plans;
     String note;
@@ -37,12 +37,18 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
     String endtime;
     String color;
     String notification;
+    List<Plan> planList = new ArrayList<>();
     boolean Frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_add);
+
+        Intent intent = getIntent();
+        setDate = intent.getStringExtra("Date");
+
+
 
         calendar = Calendar.getInstance();
 
@@ -130,33 +136,35 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
     protected void onResume() {
         super.onResume();
 
-        Intent intent = getIntent();
-        setDate = intent.getStringExtra("Date");
-        TextView text = (TextView)findViewById(R.id.dateText);
+        TextView text = (TextView) findViewById(R.id.dateText);
         text.setText(setDate + "の予定");
 
         String Yotei = "開始終了時間";
-        TextView text1 = (TextView)findViewById(R.id.Text1);
-                text1.setText(Yotei);
+        TextView text1 = (TextView) findViewById(R.id.Text1);
+        text1.setText(Yotei);
 
         ImageButton back = (ImageButton) findViewById(R.id.backBtn2);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent3 = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
-                startActivity(intent3); }
+                intent3.putExtra("Date",setDate);
+                startActivity(intent3);
+            }
         });
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-        startdate =Year + "年" + Month + "月" + Day + "日";
-        TextView start = (TextView)findViewById(R.id.startText);
+        int MonthPuls = Month + 1;
+        startdate = Year + "年" + MonthPuls + "月" + Day + "日";
+        TextView start = (TextView) findViewById(R.id.startText);
         start.setText(startdate);
 
-        enddate = year + "年" + monthOfYear + "月" + dayOfMonth + "日";
-        TextView end = (TextView)findViewById(R.id.endText);
+        int monthEnd = monthOfYear + 1;
+        enddate = year + "年" + monthEnd + "月" + dayOfMonth + "日";
+        TextView end = (TextView) findViewById(R.id.endText);
         end.setText(enddate);
 
     }
@@ -164,46 +172,66 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
 
-        if(Frag == true){
+        if (Frag == true) {
             startTime = hourOfDay + "時" + minute + "分";
-            TextView start = (TextView)findViewById(R.id.startTimeView);
+            TextView start = (TextView) findViewById(R.id.startTimeView);
             start.setText(startTime);
-        }else{
+        } else {
             endtime = hourOfDay + "時" + minute + "分";
-            TextView end = (TextView)findViewById(R.id.endTimeView);
+            TextView end = (TextView) findViewById(R.id.endTimeView);
             end.setText(endtime);
         }
     }
-    public void onRegist(View view){
-        Toast.makeText(getApplicationContext(), "登録しました。", Toast.LENGTH_SHORT).show();
-        EditText editText1 = (EditText)findViewById(R.id.plans);
-        EditText editText2 = (EditText)findViewById(R.id.note);
-        String plans = editText1.getText().toString();
-        String note = editText2.getText().toString();
-        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
-        int checkId = radioGroup.getCheckedRadioButtonId();
-        if( checkId == R.id.aka ){
-            color = "aka";
-        }
 
-        CompoundButton toggle = (CompoundButton) findViewById(R.id.notification);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                   notification = "0";
-                } else {
-                    notification  = "1";
-                }
+    public void onRegist(View view) {
+
+            EditText editText1 = (EditText) findViewById(R.id.plans);
+            EditText editText2 = (EditText) findViewById(R.id.note);
+            plans = editText1.getText().toString();
+            note = editText2.getText().toString();
+            RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+            int checkId = radioGroup.getCheckedRadioButtonId();
+            if (checkId == R.id.aka) {
+                color = "aka";
+
             }
-        });
-        String starttime = startTime + startdate;
-        String finishtime = endtime + enddate;
-        String date = setDate;
 
-        dbm.plans(sqlDB,date,plans,starttime,finishtime,notification,color,note);
-        Intent intent = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
-        startActivity(intent);
+            CompoundButton toggle = (CompoundButton) findViewById(R.id.notification);
+            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        notification = "0";
+                    } else {
+                        notification = "1";
+                    }
+                }
+            });
+
+        if(startTime == null){
+            Toast.makeText(getApplicationContext(), "開始時間を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(startdate == null){
+            Toast.makeText(getApplicationContext(), "開始日を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(endtime == null){
+            Toast.makeText(getApplicationContext(), "終了時間を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(enddate == null){
+            Toast.makeText(getApplicationContext(), "終了日を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(color.equals("")){
+            Toast.makeText(getApplicationContext(), "色を選択してください", Toast.LENGTH_SHORT).show();
+        }else if(note.equals("")){
+            Toast.makeText(getApplicationContext(), "予定詳細を入力してください", Toast.LENGTH_SHORT).show();
+        }else if(plans.equals("")){
+            Toast.makeText(getApplicationContext(), "予定を入力してください", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "登録しました。", Toast.LENGTH_SHORT).show();
+            String starttime = startTime + startdate;
+            String finishtime = endtime + enddate;
+            String date = setDate;
+
+            dbm.plans(sqlDB, date, plans, starttime, finishtime, notification, color, note);
+            Intent intent = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
+            startActivity(intent);
+        }
 
     }
 }

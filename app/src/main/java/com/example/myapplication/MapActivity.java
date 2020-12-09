@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends HeaderActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
     }
 
     @Override
