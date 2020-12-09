@@ -25,13 +25,13 @@
         </activity>
 
         <activity android:name=".Signup" android:label="HOMEALONE">
-            <intent-filter>
+            <intent-filter>-->
 
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />-->
 
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".alarm_wakeupActivity">
@@ -44,6 +44,9 @@
         </activity>
 
         <activity android:name=".WeatherActivity" >
+        </activity>
+
+        <activity android:name=".AvatarActivity" >
         </activity>
 
         <activity android:name=".CalendarActivity">
