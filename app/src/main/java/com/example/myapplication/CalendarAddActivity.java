@@ -208,13 +208,13 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
                 }
             });
 
-        if(startTime.equals("")){
+        if(startTime == null){
             Toast.makeText(getApplicationContext(), "開始時間を入力してください", Toast.LENGTH_SHORT).show();
-        }else if(startdate.equals("")){
+        }else if(startdate == null){
             Toast.makeText(getApplicationContext(), "開始日を入力してください", Toast.LENGTH_SHORT).show();
-        }else if(endtime.equals("")){
+        }else if(endtime == null){
             Toast.makeText(getApplicationContext(), "終了時間を入力してください", Toast.LENGTH_SHORT).show();
-        }else if(enddate.equals("")){
+        }else if(enddate == null){
             Toast.makeText(getApplicationContext(), "終了日を入力してください", Toast.LENGTH_SHORT).show();
         }else if(color.equals("")){
             Toast.makeText(getApplicationContext(), "色を選択してください", Toast.LENGTH_SHORT).show();
