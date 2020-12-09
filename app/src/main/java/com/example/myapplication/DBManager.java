@@ -226,4 +226,7 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
+    public void delUser(SQLiteDatabase sqLiteDatabase){
+        sqLiteDatabase.execSQL("DROP TABLE User");
+    }
 }
