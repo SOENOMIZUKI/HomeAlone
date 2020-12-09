@@ -230,6 +230,7 @@ public class CalendarAddActivity extends HeaderActivity implements DatePickerDia
 
             dbm.plans(sqlDB, date, plans, starttime, finishtime, notification, color, note);
             Intent intent = new Intent(CalendarAddActivity.this, CalendarComfirmActivity.class);
+            intent.putExtra("Date",setDate);
             startActivity(intent);
         }
 

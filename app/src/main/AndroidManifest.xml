@@ -46,6 +46,9 @@
         <activity android:name=".WeatherActivity" >
         </activity>
 
+        <activity android:name=".AvatarActivity" >
+        </activity>
+
         <activity android:name=".CalendarActivity">
         </activity>
 
