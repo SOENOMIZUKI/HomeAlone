@@ -42,7 +42,7 @@ public class HeaderActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item4:
-                Intent intent4 = new Intent(getApplication(), AlarmSettingActivity.class);
+                Intent intent4 = new Intent(getApplication(), AvatarActivity.class);
                 startActivity(intent4);
 
                 return true;
