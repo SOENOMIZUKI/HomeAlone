@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@drawable/kakeibo_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/img_item"
+        android:layout_width="64dp"
+        android:layout_height="62dp"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/description"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="332dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="81dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#000"
+            />
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:text="TextView"
+            android:textSize="14sp" />
+
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

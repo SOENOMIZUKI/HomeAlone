@@ -24,9 +24,11 @@ public class alarm_wakeupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
         setContentView(R.layout.activity_alarm_wakeup);
 
-        startService(new Intent(getApplicationContext(), SoundService.class));
+        startService(new Intent(this, SoundService.class));
         AlertDialog.Builder alert = new AlertDialog.Builder(alarm_wakeupActivity.this);
         alert.setCancelable(false);
         alert.setMessage("アラーム停止");
@@ -38,22 +40,37 @@ public class alarm_wakeupActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 //アラーム停止が押された時の処理
-                AlarmManager Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                PendingIntent pendingintent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                if (Alarmmanager != null) {
+                Alarm alarm = dbm.selectAlarm(sqlDB, date);
+                int repeat = alarm.getRepeat();
 
-                    //アラームを止める処理
-                    Alarmmanager.cancel(pendingintent);
-                    pendingintent.cancel();
+                //平日繰り返しがONの時の処理
+                if (repeat == 1) {
 
-                    //アラーム音を止める処理
                     stopService(new Intent(getApplicationContext(), SoundService.class));
                     Toast.makeText(alarm_wakeupActivity.this, "アラームを停止しました", Toast.LENGTH_LONG).show();
                     Intent intent1 = new Intent(getApplication(), AlarmActivity.class);
                     startActivity(intent1);
 
-                    dbm.offAlarm(sqlDB, date);
+                    //平日繰り返しがOFFの時の処理
+                } else {
+                    AlarmManager Alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    intent.setType(date);
+                    PendingIntent pendingintent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    if (Alarmmanager != null) {
+
+                        //アラームを止める処理
+                        Alarmmanager.cancel(pendingintent);
+                        pendingintent.cancel();
+
+                        //アラーム音を止める処理
+                        stopService(new Intent(getApplicationContext(), SoundService.class));
+                        Toast.makeText(alarm_wakeupActivity.this, "アラームを停止しました", Toast.LENGTH_LONG).show();
+                        Intent intent1 = new Intent(getApplication(), AlarmActivity.class);
+                        startActivity(intent1);
+
+                        dbm.offAlarm(sqlDB, date);
+                    }
                 }
             }
         });
