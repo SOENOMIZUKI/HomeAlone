@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ledgerinput">
+    tools:context=".Ledgerchange">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -25,10 +25,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@android:color/transparent"
+            android:listSelector="@drawable/listitem_selector"
             android:dividerHeight="4dp" />
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/back_bottom"
+        android:layout_width="96dp"
+        android:layout_height="36dp"
+        android:text="戻る"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
 
     <TextView
         android:id="@+id/textView2"
@@ -57,28 +69,15 @@
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"
         app:layout_constraintVertical_bias="0.73" />
 
-
     <Button
-        android:id="@+id/back_bottom"
+        android:id="@+id/changefinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="戻る"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/inputfinish"
-        app:layout_constraintHorizontal_bias="0.608"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
-
-    <Button
-        android:id="@+id/inputfinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="追加"
+        android:text="変更"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.951" />
 </androidx.constraintlayout.widget.ConstraintLayout>

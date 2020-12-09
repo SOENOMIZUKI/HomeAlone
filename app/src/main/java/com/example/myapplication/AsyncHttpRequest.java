@@ -31,7 +31,6 @@ import java.util.Date;
 public class AsyncHttpRequest extends AsyncTask<URL, Void, ArrayList<String>> {
     private WeatherActivity WeatherActivity;
     private CaldroidSampleCustomFragment caldroidFragment;
-
     public AsyncHttpRequest(WeatherActivity activity) {
         this.WeatherActivity = activity;
     }

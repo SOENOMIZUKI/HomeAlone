@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +46,6 @@ public class CalendarComfirmActivity extends HeaderActivity {
                         Plan num1 = planList.get(position);
                         rowNum = num1.getCalnedar_id();
                         dbm.delPlan(sqlDB,rowNum);
-                        Intent kousin = new Intent(getApplication(),CalendarComfirmActivity.class);
-                        kousin.putExtra("Date",setDate);
-                        startActivity(kousin);
                         break;
                 }
             }
@@ -66,16 +62,9 @@ public class CalendarComfirmActivity extends HeaderActivity {
         puls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int size = 1;
-                if (size == planList.size()) {
-                    Toast.makeText(getApplicationContext(), "登録できる予定の数は一つです。", Toast.LENGTH_SHORT).show();
-
-                } else{
-                    Intent intent2 = new Intent(CalendarComfirmActivity.this,CalendarAddActivity.class);
-                    intent2.putExtra("Date",setDate);
-                    startActivity(intent2);
-                }
-
+                Intent intent2 = new Intent(CalendarComfirmActivity.this,CalendarAddActivity.class);
+                intent2.putExtra("Date",setDate);
+                startActivity(intent2);
             }
         });
 

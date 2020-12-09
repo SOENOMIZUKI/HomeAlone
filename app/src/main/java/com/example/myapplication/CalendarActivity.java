@@ -127,7 +127,10 @@ public class CalendarActivity extends HeaderActivity {
 
         // Setup Caldroid
         caldroidFragment.setCaldroidListener(listener);
-        
+
+        final TextView textView = (TextView) findViewById(R.id.textview);
+
+
     }
 
 

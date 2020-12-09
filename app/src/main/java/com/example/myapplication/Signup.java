@@ -18,32 +18,19 @@ public class Signup extends AppCompatActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
     boolean repeat = true;
-    User user;
-    boolean sign = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
-        dbm = new DBManager(this);
-        sqlDB = dbm.getWritableDatabase();
-        try{
-            user = dbm.getUserSetting(sqlDB);
-        }catch (Exception e) {
-            sign = false;
-        }finally {
-            if(sign){
-                Intent intent = new Intent(Signup.this, WeatherActivity.class);
-                startActivity(intent);
-            }
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
 
         Button button = (Button)findViewById(R.id.user_insert_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +77,7 @@ public class Signup extends AppCompatActivity {
                 if(repeat){
 
                     dbm.signUp(sqlDB, user_name, user_mailaddress, user_password1, user_street_address);
-                    Intent intent = new Intent(Signup.this, WeatherActivity.class);
+                    Intent intent = new Intent(Signup.this, CalendarActivity.class);
                     startActivity(intent);
                     
                 }
