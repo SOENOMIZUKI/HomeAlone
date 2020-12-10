@@ -13,7 +13,7 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,8);
+        super(context,"Alarm.sqlite3",null,10);
     }
     // テーブル作成
     @Override
@@ -60,7 +60,7 @@ public class DBManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
         sqLiteDatabase.execSQL("DROP TABLE Moneybook");
-        sqLiteDatabase.execSQL("DROP TABLE User");
+        //sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);
     }
@@ -227,6 +227,6 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
     public void delUser(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("DROP TABLE User");
+        sqLiteDatabase.execSQL("DELETE FROM User");
     }
 }

@@ -85,7 +85,7 @@ public class GetAddress extends AsyncTask<URL, Void, latlag> {
     protected void onPostExecute(latlag address) {
         super.onPostExecute(address);
 
-        if(address.lat == null){
+        if(address == null){
             String errorMsg = "その住所は正確ではありません";
             dbm = new DBManager(weatherActivity);
             sqlDB = dbm.getWritableDatabase();

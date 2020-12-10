@@ -26,9 +26,6 @@ public class Signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        errorMsg = null;
-        Intent intent2 = getIntent();
-        errorMsg = intent2.getStringExtra("errorMsg");
 
         dbm = new DBManager(this);
         sqlDB = dbm.getWritableDatabase();
@@ -47,8 +44,9 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
+        errorMsg = null;
+        Intent intent2 = getIntent();
+        errorMsg = intent2.getStringExtra("errorMsg");
 
         Button button = (Button)findViewById(R.id.user_insert_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -100,11 +98,11 @@ public class Signup extends AppCompatActivity {
                     startActivity(intent);
                     
                 }
-                if (errorMsg != null){
-                    Toast.makeText(getApplicationContext(),errorMsg,Toast.LENGTH_SHORT).show();
-                }
             }
         });
+        if (errorMsg != null){
+            Toast.makeText(getApplicationContext(),errorMsg,Toast.LENGTH_SHORT).show();
+        }
     }
 
     //メールアドレス判定
