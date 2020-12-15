@@ -166,6 +166,7 @@ public class Ledgerdisp extends HeaderActivity {
 
             Spinner spinner = findViewById(R.id.spinner);
 
+
             // ArrayAdapter
             ArrayAdapter<String> adapter
                     = new ArrayAdapter<>(this,
@@ -175,7 +176,7 @@ public class Ledgerdisp extends HeaderActivity {
 
             // spinner に adapter をセット
             spinner.setAdapter(adapter);
-
+            spinner.setSelection(2, false);
             // リスナーを登録
             spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
                 //　アイテムが選択された時
@@ -231,7 +232,7 @@ public class Ledgerdisp extends HeaderActivity {
             backButton.setOnClickListener(new View.OnClickListener() {
                 @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), CalendarActivity.class);
+                Intent intent = new Intent(getApplication(), WeatherActivity.class);
                 startActivity(intent);
             }
         });
