@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class UserSettingActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
-    boolean repeat = true;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class UserSettingActivity extends HeaderActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean repeat = true;
                 EditText name = (EditText) findViewById(R.id.user_name) ;
                 EditText mail = (EditText) findViewById(R.id.mailaddress);
                 EditText address = (EditText) findViewById(R.id.street_address) ;
