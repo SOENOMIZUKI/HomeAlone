@@ -2,9 +2,12 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,16 +20,47 @@ public class AvatarActivity extends HeaderActivity {
 
     private ImageView imageView;
 
-    public static class Avatar {
-        public String image;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avatar);
         basicReadWrite();
+        final RadioGroup gr = (RadioGroup) findViewById(R.id.radioGroup);
+        RadioGroup group = (RadioGroup) findViewById(R.id.radioGroup);
+        group.check(R.id.radiobtn);
+
+
+        /*gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup arg0, int arg1) {
+                if (arg0 == gr) {
+                    switch (arg1) {
+                        //ラジオボタン1が押されたとき
+                        case R.id.radiobtn:
+                            // (() findViewById(R.id.icon)).setImageResource(R.drawable.gabon);
+                            break;
+                        //ラジオボタン2が押されたとき
+                        case R.id.radiobtn2:
+                            ((ImageView) findViewById(R.id.add_button)).setImageResource(R.drawable.soraziro);
+                            break;
+                        //ラジオボタン3が押されたとき
+                        case R.id.radiobtn3:
+                            ((ImageView) findViewById(R.id.add_button)).setImageResource(R.drawable.tanaka);
+                            break;
+                        //ラジオボタン4が押されたとき
+                        case R.id.radiobtn4:
+                            ((ImageView) findViewById(R.id.add_button)).setImageResource(R.drawable.totoro);
+                            break;
+                        //ラジオボタン5が押されたとき
+                        case R.id.radiobtn5:
+                            ((ImageView) findViewById(R.id.add_button)).setImageResource(R.drawable.doeryuga);
+                            break;
+
+                    }
+
+                }
+            }
+        });*/
     }
 
 
@@ -74,7 +108,7 @@ public class AvatarActivity extends HeaderActivity {
     protected void onResume() {
         super.onResume();
 
-        Button button = (Button)findViewById(R.id.btn);
+        Button button = (Button) findViewById(R.id.btn);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 

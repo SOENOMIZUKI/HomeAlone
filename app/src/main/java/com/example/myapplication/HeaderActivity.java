@@ -1,12 +1,12 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 public class HeaderActivity extends AppCompatActivity {
 
@@ -15,16 +15,20 @@ public class HeaderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header);
     }
+
     // アクションバーを表示するメソッド
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        MenuItem item = menu.findItem(R.id.add_button);
+        item.setIcon(R.drawable.gabon);
         return true;
     }
+
     // オプションメニューのアイテムが選択されたときに呼び出されるメソッド
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.item1:
@@ -58,8 +62,14 @@ public class HeaderActivity extends AppCompatActivity {
 
                 return true;
 
+            case R.id.add_button:
+                int id = item.getItemId();
+                if (id == R.id.add_button) {
+                    Intent intent = new Intent(getApplication(), AccountDispActivity.class);
+                    startActivity(intent);
 
+                }
         }
-        return super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
+        }
     }
-}
