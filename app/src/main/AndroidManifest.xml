@@ -64,6 +64,9 @@
         <activity android:name=".CalendarAddActivity">
         </activity>
 
+        <activity android:name=".AvatarActivity">
+        </activity>
+
         <receiver android:name=".AlarmReceiver" android:process=":remote" />
 
         <service
