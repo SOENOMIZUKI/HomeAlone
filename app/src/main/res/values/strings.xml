@@ -44,11 +44,10 @@
     <string name="redBtn">red</string>
     <string name="kensaku">search</string>
     <string name="menu_item1">家計簿</string>
-    <string name="menu_item2">アカウント情報</string>
-    <string name="menu_item3">アラーム</string>
-    <string name="menu_item4">周辺マップ</string>
-    <string name="menu_item5">アバター</string>
-    <string name="menu_item6">カレンダー</string>
+    <string name="menu_item2">アラーム</string>
+    <string name="menu_item3">周辺マップ</string>
+    <string name="menu_item4">アバター</string>
+    <string name="menu_item5">カレンダー</string>
     <string name="account_update">アカウント情報変更</string>
     <string name="password_update">パスワード変更</string>
     <string name="update">変更</string>

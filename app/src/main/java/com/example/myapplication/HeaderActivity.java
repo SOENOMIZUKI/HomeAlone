@@ -69,28 +69,23 @@ public class HeaderActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item2:
-                Intent intent2 = new Intent(getApplication(), AccountDispActivity.class);
+                Intent intent2 = new Intent(getApplication(), AlarmActivity.class);
                 startActivity(intent2);
 
                 return true;
             case R.id.item3:
-                Intent intent3 = new Intent(getApplication(), AlarmActivity.class);
+                Intent intent3 = new Intent(getApplication(), MapActivity.class);
                 startActivity(intent3);
 
                 return true;
             case R.id.item4:
-                Intent intent4 = new Intent(getApplication(), MapActivity.class);
+                Intent intent4 = new Intent(getApplication(), AvatarActivity.class);
                 startActivity(intent4);
 
                 return true;
             case R.id.item5:
-                Intent intent5 = new Intent(getApplication(), AvatarActivity.class);
+                Intent intent5 = new Intent(getApplication(), WeatherActivity.class);
                 startActivity(intent5);
-
-                return true;
-            case R.id.item6:
-                Intent intent6 = new Intent(getApplication(), WeatherActivity.class);
-                startActivity(intent6);
 
                 return true;
 

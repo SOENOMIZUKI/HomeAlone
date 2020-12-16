@@ -131,7 +131,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public User getUserSetting(SQLiteDatabase sqLiteDatabase) {
-        String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User WHERE user_id = 1";
+        String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User ORDER BY user_id DESC";
         SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(selectSql, null);
         cursor.moveToNext();
         User user = new User();
