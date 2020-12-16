@@ -91,7 +91,7 @@ public class AccountDispActivity extends HeaderActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountDispActivity.this, CalendarActivity.class);
+                Intent intent = new Intent(AccountDispActivity.this, WeatherActivity.class);
                 startActivity(intent);
             }
         });

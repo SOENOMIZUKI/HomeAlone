@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class PasswordSettingActivity extends HeaderActivity {
     private SQLiteDatabase sqlDB;
     DBManager dbm;
-    boolean repeat = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +32,8 @@ public class PasswordSettingActivity extends HeaderActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                boolean repeat = true;
 
                 EditText bpw = (EditText) findViewById(R.id.before_password);
                 EditText pw1 = (EditText) findViewById(R.id.password1);
