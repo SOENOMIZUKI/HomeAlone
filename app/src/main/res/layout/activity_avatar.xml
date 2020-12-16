@@ -7,116 +7,100 @@
     tools:context=".AvatarActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="360dp"
-        android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/gabon" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="411dp"
-        android:layout_height="81dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.100000024"
-        app:srcCompat="@drawable/tanaka" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="416dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.12"
-        app:srcCompat="@drawable/totoro" />
-
     <Button
         android:id="@+id/btn"
         android:layout_width="142dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="645dp"
+        android:layout_marginBottom="250dp"
         android:text="登録"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.58000004" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.060000002"
-        app:srcCompat="@drawable/soraziro" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="42dp">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="409dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.18"
-        app:srcCompat="@drawable/doeryuga" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="181dp"
+            android:layout_height="match_parent">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="297dp"
-        android:layout_height="548dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0">
+            <RadioButton
+                android:id="@+id/radiobtn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="ガボン" />
 
-        <RadioButton
-            android:id="@+id/radiobtn"
+            <RadioButton
+                android:id="@+id/radiobtn2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="そらジロー" />
+
+            <RadioButton
+                android:id="@+id/radiobtn3"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="田中のおっさん" />
+
+            <RadioButton
+                android:id="@+id/radiobtn4"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="トトロ" />
+
+            <RadioButton
+                android:id="@+id/radiobtn5"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="堂江竜河" />
+        </RadioGroup>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:text="ガボン" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radiobtn2"
-            android:layout_width="match_parent"
-            android:layout_height="117dp"
-            android:text="そらジロー" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/gabon" />
 
-        <RadioButton
-            android:id="@+id/radiobtn3"
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:text="田中のおっさん" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/soraziro" />
 
-        <RadioButton
-            android:id="@+id/radiobtn4"
-            android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:text="トトロ" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/tanaka" />
 
-        <RadioButton
-            android:id="@+id/radiobtn5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="堂江竜河" />
-    </RadioGroup>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/totoro" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/doeryuga" />
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

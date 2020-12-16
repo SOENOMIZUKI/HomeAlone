@@ -2,18 +2,24 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class HeaderActivity extends AppCompatActivity {
-
+    private SQLiteDatabase sqlDB;
+    DBManager dbm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header);
+        dbm = new DBManager(this);
+        sqlDB = dbm.getWritableDatabase();
+
     }
 
     // アクションバーを表示するメソッド
@@ -21,12 +27,38 @@ public class HeaderActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        int avatar = dbm.getSelectAvatarId(sqlDB);
         MenuItem item = menu.findItem(R.id.add_button);
-        item.setIcon(R.drawable.gabon);
+
+        switch (avatar){
+            case R.id.radiobtn:
+                item.setIcon(R.drawable.gabon);
+
+                return true;
+            case R.id.radiobtn2:
+                item.setIcon(R.drawable.soraziro);
+
+                return true;
+            case R.id.radiobtn3:
+                item.setIcon(R.drawable.tanaka);
+
+                return true;
+            case R.id.radiobtn4:
+                item.setIcon(R.drawable.totoro);
+                return true;
+            case R.id.radiobtn5:
+                item.setIcon(R.drawable.doeryuga);
+
+                return true;
+
+        }
         return true;
+
+
     }
 
     // オプションメニューのアイテムが選択されたときに呼び出されるメソッド
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

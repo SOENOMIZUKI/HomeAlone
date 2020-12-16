@@ -226,4 +226,17 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
+
+    public void setAvatarId(SQLiteDatabase sqLiteDatabase, Integer avatar_id) {
+        String sql = "UPDATE User set avatar_id = ?";
+        sqLiteDatabase.execSQL(sql, new Object[]{avatar_id});
+    }
+
+    public Integer getSelectAvatarId(SQLiteDatabase sqLiteDatabase) {
+        String sql = "SELECT avatar_id FROM User";
+        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{},null);
+        cursor.moveToNext();
+        Integer avatar = (cursor.getInt(cursor.getColumnIndex("avatar_id")));
+        return avatar;
+    }
 }
