@@ -12,12 +12,13 @@ import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper {
 
-    public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,10);
+    public DBManager(Context context) {
+        super(context, "Alarm.sqlite3", null, 10);
     }
+
     // テーブル作成
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase){
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Alarm(alarm_id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT,repeat INTEGER,switch INTEGER)");
@@ -50,49 +51,57 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO Moneybook(month,rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) " +
                 "values(11,0,0,0,0,0,0,0)");
         //アバターの外部キーを書いてない
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +  
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " User(user_id INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,mailaddress TEXT,password TEXT,street_address TEXT,avatar_id INTEGER)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS" +
                 " Plans(calendar_id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,plans TEXT,starttime TEXT,finishtime TEXT,notification TEXT,color INTEGER,note TEXT)");
-        Log.i("aaaa","onCreate(SQLiteDatabase sqLiteDatabase){");
+        Log.i("aaaa", "onCreate(SQLiteDatabase sqLiteDatabase){");
     }
+
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
         sqLiteDatabase.execSQL("DROP TABLE Moneybook");
         //sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);
     }
-    public void insertAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat){
+
+    public void insertAlarm(SQLiteDatabase sqLiteDatabase, String data, Integer repeat) {
         String sql = "INSERT INTO Alarm(data,repeat,switch) VALUES(?,?,1)";
-        sqLiteDatabase.execSQL(sql,new Object[]{data,repeat});
+        sqLiteDatabase.execSQL(sql, new Object[]{data, repeat});
     }
-    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, String data){
+
+    public void deleteAlarm(SQLiteDatabase sqLiteDatabase, String data) {
         String sql = "DELETE from Alarm where data = ?";
-        sqLiteDatabase.execSQL(sql,new String[]{data});
+        sqLiteDatabase.execSQL(sql, new String[]{data});
     }
-    public void onAlarm(SQLiteDatabase sqLiteDatabase, String data){
+
+    public void onAlarm(SQLiteDatabase sqLiteDatabase, String data) {
         String sql = "UPDATE Alarm set switch=1 WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data});
+        sqLiteDatabase.execSQL(sql, new Object[]{data});
     }
-    public void offAlarm(SQLiteDatabase sqLiteDatabase, String data){
+
+    public void offAlarm(SQLiteDatabase sqLiteDatabase, String data) {
         String sql = "UPDATE Alarm set switch=2 WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data});
+        sqLiteDatabase.execSQL(sql, new Object[]{data});
     }
-    public void onRepeat(SQLiteDatabase sqLiteDatabase, String data){
+
+    public void onRepeat(SQLiteDatabase sqLiteDatabase, String data) {
         String sql = "UPDATE Alarm set repeat=1 WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data});
+        sqLiteDatabase.execSQL(sql, new Object[]{data});
     }
-    public void offRepeat(SQLiteDatabase sqLiteDatabase, String data){
+
+    public void offRepeat(SQLiteDatabase sqLiteDatabase, String data) {
         String sql = "UPDATE Alarm set repeat=2 WHERE data = ?";
-        sqLiteDatabase.execSQL(sql,new Object[]{data});
+        sqLiteDatabase.execSQL(sql, new Object[]{data});
     }
-    public List<Alarm> selectAlarmList(SQLiteDatabase sqLiteDatabase){
+
+    public List<Alarm> selectAlarmList(SQLiteDatabase sqLiteDatabase) {
         List<Alarm> AlarmList = new ArrayList<>();
         String selectSql = "SELECT * FROM Alarm ORDER BY alarm_id";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,null);
-        while (cursor.moveToNext()){
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(selectSql, null);
+        while (cursor.moveToNext()) {
             Alarm alarm = new Alarm();
             alarm.setAlarm_id(cursor.getInt(cursor.getColumnIndex("alarm_id")));
             alarm.setTime(cursor.getString(cursor.getColumnIndex("data")));
@@ -102,9 +111,10 @@ public class DBManager extends SQLiteOpenHelper {
         }
         return AlarmList;
     }
-    public Alarm selectAlarm(SQLiteDatabase sqLiteDatabase,String data) {
+
+    public Alarm selectAlarm(SQLiteDatabase sqLiteDatabase, String data) {
         String selectSql = "SELECT * FROM Alarm WHERE data = ?";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,new String[]{data},null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(selectSql, new String[]{data}, null);
         cursor.moveToNext();
         Alarm alarm = new Alarm();
         alarm.setAlarm_id(cursor.getInt(cursor.getColumnIndex("alarm_id")));
@@ -113,14 +123,16 @@ public class DBManager extends SQLiteOpenHelper {
         alarm.setSwitch1(cursor.getInt(cursor.getColumnIndex("switch")));
         return alarm;
     }
+
     //ユーザー登録
-    public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password,String street_address){
+    public void signUp(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String password, String street_address) {
         String sql = "INSERT INTO User(user_name,mailaddress,password,street_address,avatar_id) VALUES(?,?,?,?,1)";
-        sqLiteDatabase.execSQL(sql,new String[]{user_name,mailaddress,password,street_address});
+        sqLiteDatabase.execSQL(sql, new String[]{user_name, mailaddress, password, street_address});
     }
-    public User getUserSetting(SQLiteDatabase sqLiteDatabase){
+
+    public User getUserSetting(SQLiteDatabase sqLiteDatabase) {
         String selectSql = "SELECT user_name,mailaddress,password,street_address,avatar_id FROM User WHERE user_id = 1";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(selectSql, null);
         cursor.moveToNext();
         User user = new User();
         user.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
@@ -130,41 +142,49 @@ public class DBManager extends SQLiteOpenHelper {
         user.setAvatar_id(cursor.getInt(cursor.getColumnIndex("avatar_id")));
         return user;
     }
+
     //家計簿
-    public void onMoneybookRent(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+    public void onMoneybookRent(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set rent = ?   WHERE month = ?";
-        Log.i("bbbbbbbbb","month="+month+" price="+  price);
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        Log.i("bbbbbbbbb", "month=" + month + " price=" + price);
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookFood(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookFood(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set food_expenses = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookWater(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookWater(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set water_costs = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookUtility(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookUtility(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set utility_costs = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookCommunication(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookCommunication(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set communication_costs = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookHobby(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookHobby(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set hobby = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public void onMoneybookOther(SQLiteDatabase sqLiteDatabase, Integer month, Integer price  ) {
+
+    public void onMoneybookOther(SQLiteDatabase sqLiteDatabase, Integer month, Integer price) {
         String sql = "UPDATE Moneybook set other = ?   WHERE month = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{price,month});
+        sqLiteDatabase.execSQL(sql, new Object[]{price, month});
     }
-    public Kakeibo selectMoneybook(SQLiteDatabase sqLiteDatabase,Integer month) {
+
+    public Kakeibo selectMoneybook(SQLiteDatabase sqLiteDatabase, Integer month) {
         String selectSql = "SELECT * FROM Moneybook WHERE month = ?";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(selectSql,new String[]{month.toString()},null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(selectSql, new String[]{month.toString()}, null);
         Kakeibo kakeibo = new Kakeibo();
-        if(cursor.moveToNext()) {
+        if (cursor.moveToNext()) {
             kakeibo.setMonth(cursor.getInt(cursor.getColumnIndex("month")));
             kakeibo.setRent(cursor.getInt(cursor.getColumnIndex("rent")));
             kakeibo.setFood_expenses(cursor.getInt(cursor.getColumnIndex("food_expenses")));
@@ -173,28 +193,31 @@ public class DBManager extends SQLiteOpenHelper {
             kakeibo.setCommunication_costs(cursor.getInt(cursor.getColumnIndex("communication_costs")));
             kakeibo.setHobby(cursor.getInt(cursor.getColumnIndex("hobby")));
         }
-            kakeibo.setOther(cursor.getInt(cursor.getColumnIndex("other")));
-            return kakeibo;
+        kakeibo.setOther(cursor.getInt(cursor.getColumnIndex("other")));
+        return kakeibo;
     }
-    public void insertMoneybook(SQLiteDatabase sqLiteDatabase,Integer rent,Integer food_expenses, Integer water_costs,Integer utility_costs,Integer communication_costs,Integer hobby,Integer other){
+
+    public void insertMoneybook(SQLiteDatabase sqLiteDatabase, Integer rent, Integer food_expenses, Integer water_costs, Integer utility_costs, Integer communication_costs, Integer hobby, Integer other) {
         String sql = "INSERT INTO Price(rent,food_expenses,water_costs,utility_costs,communication_costs,hobby,other) VALUES(?,?,?,?,?,?,?)";
-        sqLiteDatabase.execSQL(sql,new Integer[]{rent});
-        sqLiteDatabase.execSQL(sql,new Integer[]{food_expenses});
-        sqLiteDatabase.execSQL(sql,new Integer[]{water_costs});
-        sqLiteDatabase.execSQL(sql,new Integer[]{utility_costs});
-        sqLiteDatabase.execSQL(sql,new Integer[]{communication_costs});
-        sqLiteDatabase.execSQL(sql,new Integer[]{hobby});
-        sqLiteDatabase.execSQL(sql,new Integer[]{other});
+        sqLiteDatabase.execSQL(sql, new Integer[]{rent});
+        sqLiteDatabase.execSQL(sql, new Integer[]{food_expenses});
+        sqLiteDatabase.execSQL(sql, new Integer[]{water_costs});
+        sqLiteDatabase.execSQL(sql, new Integer[]{utility_costs});
+        sqLiteDatabase.execSQL(sql, new Integer[]{communication_costs});
+        sqLiteDatabase.execSQL(sql, new Integer[]{hobby});
+        sqLiteDatabase.execSQL(sql, new Integer[]{other});
     }
+
     //予定登録
-    public void plans(SQLiteDatabase sqLiteDatabase,String date,String plans,String starttime,String finishtime,String notification,String color,String note){
+    public void plans(SQLiteDatabase sqLiteDatabase, String date, String plans, String starttime, String finishtime, String notification, String color, String note) {
         String sql = "INSERT INTO Plans(calendar_id,date,plans,starttime,finishtime,notification,color,note) VALUES(null,?,?,?,?,?,?,?)";
-        sqLiteDatabase.execSQL(sql,new String[]{date,plans,starttime,finishtime,notification,color,note});
+        sqLiteDatabase.execSQL(sql, new String[]{date, plans, starttime, finishtime, notification, color, note});
     }
-    public List<Plan> getPlan(SQLiteDatabase sqLiteDatabase, String date){
+
+    public List<Plan> getPlan(SQLiteDatabase sqLiteDatabase, String date) {
         String sql = "SELECT * FROM Plans WHERE date = ?";
         List<Plan> planList = new ArrayList<>();
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{date},null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(sql, new String[]{date}, null);
         while (cursor.moveToNext()) {
             Plan plan = new Plan();
             plan.setCalendar_id(cursor.getString(cursor.getColumnIndex("calendar_id")));
@@ -203,30 +226,33 @@ public class DBManager extends SQLiteOpenHelper {
             plan.setNote(cursor.getString(cursor.getColumnIndex("note")));
             planList.add(plan);
         }
-            return planList;
+        return planList;
     }
-    public void delPlan(SQLiteDatabase sqLiteDatabase,String rowNum){
+
+    public void delPlan(SQLiteDatabase sqLiteDatabase, String rowNum) {
         String sql = "DELETE FROM Plans WHERE calendar_id = ?";
-        sqLiteDatabase.execSQL(sql,new String[]{rowNum});
+        sqLiteDatabase.execSQL(sql, new String[]{rowNum});
 
     }
-    public String getAddress(SQLiteDatabase sqLiteDatabase){
+
+    public String getAddress(SQLiteDatabase sqLiteDatabase) {
         String sql = "SELECT street_address FROM User";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{},null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(sql, new String[]{}, null);
         cursor.moveToNext();
         String address = (cursor.getString(cursor.getColumnIndex("street_address")));
         return address;
     }
 
-    public void setUserSetting(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String street_address){
+    public void setUserSetting(SQLiteDatabase sqLiteDatabase, String user_name, String mailaddress, String street_address) {
         String sql = "UPDATE User set user_name = ?, mailaddress = ? ,street_address = ?";
-        sqLiteDatabase.execSQL(sql, new Object[]{user_name,mailaddress,street_address});
+        sqLiteDatabase.execSQL(sql, new Object[]{user_name, mailaddress, street_address});
     }
-    public void setUserPassword(SQLiteDatabase sqLiteDatabase, String password){
+
+    public void setUserPassword(SQLiteDatabase sqLiteDatabase, String password) {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
-<<<<<<< HEAD
+
 
     public void setAvatarId(SQLiteDatabase sqLiteDatabase, Integer avatar_id) {
         String sql = "UPDATE User set avatar_id = ?";
@@ -235,13 +261,15 @@ public class DBManager extends SQLiteOpenHelper {
 
     public Integer getSelectAvatarId(SQLiteDatabase sqLiteDatabase) {
         String sql = "SELECT avatar_id FROM User";
-        SQLiteCursor cursor = (SQLiteCursor)sqLiteDatabase.rawQuery(sql,new String[]{},null);
+        SQLiteCursor cursor = (SQLiteCursor) sqLiteDatabase.rawQuery(sql, new String[]{}, null);
         cursor.moveToNext();
         Integer avatar = (cursor.getInt(cursor.getColumnIndex("avatar_id")));
         return avatar;
-=======
-    public void delUser(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("DELETE FROM User");
->>>>>>> main
+
     }
+        public void delUser (SQLiteDatabase sqLiteDatabase){
+            sqLiteDatabase.execSQL("DELETE FROM User");
+
+        }
 }
+
