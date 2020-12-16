@@ -23,10 +23,8 @@ public class AccountDispActivity extends HeaderActivity {
             "メールアドレス",
             "パスワード",
             "住所",
-            "アバター",
     };
     String[] date = {
-            "",
             "",
             "",
             "",
@@ -45,7 +43,6 @@ public class AccountDispActivity extends HeaderActivity {
         date[1] = user.getMailAddress();
         date[2] = "●●●●●●●●";
         date[3] = user.getStreet_address();
-        date[4] = String.valueOf(user.getAvatar_id());
 
         ArrayList list = new ArrayList<>();
 
