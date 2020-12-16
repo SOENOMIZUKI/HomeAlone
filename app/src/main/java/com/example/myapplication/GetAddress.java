@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,6 +17,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class GetAddress extends AsyncTask<URL, Void, latlag> {
+    private SQLiteDatabase sqlDB;
+    DBManager dbm;
     private WeatherActivity weatherActivity;
     latlag address;
 
@@ -80,6 +84,17 @@ public class GetAddress extends AsyncTask<URL, Void, latlag> {
     @Override
     protected void onPostExecute(latlag address) {
         super.onPostExecute(address);
+
+        if(address == null){
+            String errorMsg = "その住所は正確ではありません";
+            dbm = new DBManager(weatherActivity);
+            sqlDB = dbm.getWritableDatabase();
+            dbm.delUser(sqlDB);
+            Intent intent  = new Intent(weatherActivity,Signup.class);
+            intent.putExtra("errorMsg",errorMsg);
+            weatherActivity.startActivity(intent);
+            return;
+        }
         String lat = address.lat;
         String lon = address.lag;
 

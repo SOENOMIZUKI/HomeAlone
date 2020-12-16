@@ -13,7 +13,7 @@ import java.util.List;
 public class DBManager extends SQLiteOpenHelper {
 
     public DBManager(Context context){
-        super(context,"Alarm.sqlite3",null,8);
+        super(context,"Alarm.sqlite3",null,10);
     }
     // テーブル作成
     @Override
@@ -60,7 +60,7 @@ public class DBManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase,int i,int i1){
         sqLiteDatabase.execSQL("DROP TABLE Alarm");
         sqLiteDatabase.execSQL("DROP TABLE Moneybook");
-        sqLiteDatabase.execSQL("DROP TABLE User");
+        //sqLiteDatabase.execSQL("DROP TABLE User");
         sqLiteDatabase.execSQL("DROP TABLE Plans");
         onCreate(sqLiteDatabase);
     }
@@ -226,6 +226,7 @@ public class DBManager extends SQLiteOpenHelper {
         String sql = "UPDATE User set password = ?";
         sqLiteDatabase.execSQL(sql, new Object[]{password});
     }
+<<<<<<< HEAD
 
     public void setAvatarId(SQLiteDatabase sqLiteDatabase, Integer avatar_id) {
         String sql = "UPDATE User set avatar_id = ?";
@@ -238,5 +239,9 @@ public class DBManager extends SQLiteOpenHelper {
         cursor.moveToNext();
         Integer avatar = (cursor.getInt(cursor.getColumnIndex("avatar_id")));
         return avatar;
+=======
+    public void delUser(SQLiteDatabase sqLiteDatabase){
+        sqLiteDatabase.execSQL("DELETE FROM User");
+>>>>>>> main
     }
 }

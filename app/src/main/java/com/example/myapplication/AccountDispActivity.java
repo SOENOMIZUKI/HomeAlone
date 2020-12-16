@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class AccountDispActivity extends AppCompatActivity {
+public class AccountDispActivity extends HeaderActivity {
 
     private SQLiteDatabase sqlDB;
     DBManager dbm;

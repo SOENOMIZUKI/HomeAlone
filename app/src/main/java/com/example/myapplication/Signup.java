@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +20,8 @@ public class Signup extends AppCompatActivity {
     DBManager dbm;
     User user;
     boolean sign = true;
+    String errorMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,9 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
+        errorMsg = null;
+        Intent intent2 = getIntent();
+        errorMsg = intent2.getStringExtra("errorMsg");
 
         Button button = (Button)findViewById(R.id.user_insert_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +100,9 @@ public class Signup extends AppCompatActivity {
                 }
             }
         });
+        if (errorMsg != null){
+            Toast.makeText(getApplicationContext(),errorMsg,Toast.LENGTH_SHORT).show();
+        }
     }
 
     //メールアドレス判定
